@@ -17,6 +17,7 @@ struct gate_desc idt_table[IDT_ENTRIES] = { 0, };
 void debug_trap (void)
 {
   early_kdebug ("trap test\n", 50);
+  __asm__ ("hlt\n");
 }
 
 # define EXCEPT_DEF(X) void _exception_##X(void)
