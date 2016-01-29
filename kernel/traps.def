@@ -1,0 +1,25 @@
+/*
+ * File: traps.def
+ * Author: Fabien Siron <fabien.siron@epita.fr>
+ *
+ * Description: define the exceptions
+ */
+
+EXCEPT_DEF(0);
+EXCEPT_DEF(1);
+EXCEPT_DEF(2);
+EXCEPT_DEF(3);
+EXCEPT_DEF(4);
+EXCEPT_DEF(5);
+EXCEPT_DEF(6);
+EXCEPT_DEF(7);
+EXCEPT_DEF(8);
+EXCEPT_DEF(9);
+EXCEPT_DEF(10);
+EXCEPT_DEF(11);
+EXCEPT_DEF(12);
+EXCEPT_DEF(13);
+EXCEPT_DEF(14);
+EXCEPT_DEF(15);
+EXCEPT_DEF(16);
+EXCEPT_DEF(17);
