@@ -15,6 +15,7 @@ OBJS		=boot/crt0.o 			\
 		boot/setup.o 			\
 		kernel/sys_call.o		\
 		kernel/traps.o 			\
+		kernel/irq.o 			\
 		init/main.o # kernel/kernel.o mm/mm.o lib/lib.a
 
 all: atomos.img

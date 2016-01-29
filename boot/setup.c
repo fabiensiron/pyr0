@@ -13,6 +13,7 @@
 #define klog(str)    early_kdebug (str, LOG_BUFF_LEN)
 
 extern void trap_init ();
+extern void init_IRQ ();
 
 void setup_kernel ()
 { 
@@ -29,10 +30,10 @@ void setup_kernel ()
 
   trap_init ();
 
-  //  __asm__ volatile ("sti\n");
-  
-  /* irq */
+  init_IRQ ();
 
+  __asm__ volatile ("sti\n");
+  
   /* init physmem */
 
   /* init paging */

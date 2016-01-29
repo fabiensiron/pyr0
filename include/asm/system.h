@@ -51,4 +51,7 @@ void set_gate (void *gate_addr, u8 type, u8 dpl, void *addr)
 # define set_system_gate(n, addr) \
   set_gate (&idt_table[n], 15, 3, addr)
 
+# define set_intr_gate(n, addr) \
+  set_gate (&idt_table[n], 15, 3, addr)
+
 #endif /* !_SYSTEM_H_ */
