@@ -15,7 +15,7 @@
 	pushw %ds
 	pushw %es
 	pushw %fs
-	pushw %ebx
+	pushl %ebx
 	mov $0x10, %bx
 	mov %bx, %ds
 	mov %bx, %es
