@@ -14,6 +14,7 @@
 
 extern void trap_init ();
 extern void init_IRQ ();
+extern void mem_init (void);
 
 void setup_kernel ()
 { 
@@ -41,6 +42,8 @@ void setup_kernel ()
   /* keyboard -> chr_dev_init*/ 
 
   /* video -> chr_dev_init */
+
+  mem_init ();
 
   return start_kernel ();
 }

@@ -7,7 +7,7 @@ CFLAGS		+=-fno-stack-protector -std=c99
 LDSCRIPT	=boot/atomos.lds
 MAKE 		=make
 QEMU		=qemu-system-i386
-SUBDIRS 	=boot init kernel # drivers mm fs lib
+SUBDIRS 	=boot init kernel mm lib # drivers fs
 OBJS		=boot/crt0.o 			\
 		boot/early_log.o 		\
 		boot/cpu.o 			\
@@ -16,6 +16,8 @@ OBJS		=boot/crt0.o 			\
 		kernel/sys_call.o		\
 		kernel/traps.o 			\
 		kernel/irq.o 			\
+		lib/string.o			\
+		mm/frame.o			\
 		init/main.o # kernel/kernel.o mm/mm.o lib/lib.a
 
 all: atomos.img
