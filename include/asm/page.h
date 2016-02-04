@@ -13,7 +13,7 @@
 # define PAGE_MASK     (~(PAGE_SIZE-1))
 
 
-# define PAGE_ALIGN_UP         (((addr)+PAGE_SIZE-1)& PAGE_MASK)
-# define PAGE_ALIGN_DOWN       (((addr) & PAGE_MASK)
+# define PAGE_ALIGN_UP(addr)         (((addr)+PAGE_SIZE-1)& PAGE_MASK)
+# define PAGE_ALIGN_DOWN(addr)       ((addr) & PAGE_MASK)
 
 #endif /* !_PAGE_H_ */

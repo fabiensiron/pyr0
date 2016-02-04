@@ -8,12 +8,13 @@
 # include <atomos/kernel.h>
 # include <atomos/string.h>
 
+# include <asm/page.h>
+# include <asm/pgtable.h>
 
-# define PAGE(addr) (addr >> 12)
+# define PAGE(addr) PAGE_ALIGN_DOWN(addr)
 # define MAX_RAM (128 * 1024 * 1024) // 128MB
-# define NR_FRAMES (MAX_RAM / 0x1000)
+# define NR_FRAMES (MAX_RAM / PAGE_SIZE)
 # define BITMAP_LEN (NR_FRAMES / 8)
-
 
 u8 mem_bitmap[BITMAP_LEN];
 
@@ -25,7 +26,7 @@ set_frame(u32 frame)
 
 void release_frame(u32 paddr)
 {
-  mem_bitmap[paddr / 0x1000 /8] &= ~(1 << ((paddr/0x1000)% 8));
+  mem_bitmap[paddr / PAGE_SIZE /8] &= ~(1 << ((paddr/PAGE_SIZE)% 8));
 }
 
 u32 get_frame()
@@ -40,7 +41,7 @@ u32 get_frame()
 	    {
 	      page = 8 * i + j;
 	      set_frame(page);
-	      return page * 0x1000;
+	      return page * PAGE_SIZE;
 	    }
       }
 
@@ -54,9 +55,9 @@ u32 mem_init()
   memset(&mem_bitmap, 0, BITMAP_LEN);
 
   /* set the 4 first MB used (kernel) */
-  for (it = 0; it < 0x400000; it+= 0x1000)
+  for (it = 0; it < 0x400000; it+= PAGE_SIZE)
     set_frame(PAGE(it));
 
   /* return numb pages avail */
-  return NR_FRAMES - 1024;
+  return NR_FRAMES - PT_SIZE;
 }
