@@ -54,4 +54,21 @@ void set_gate (void *gate_addr, u8 type, u8 dpl, void *addr)
 # define set_intr_gate(n, addr) \
   set_gate (&idt_table[n], 15, 3, addr)
 
+# define CR0_PG (1 << 31)
+# define CR0_WP (1 << 16)
+
+static inline
+void set_cr0(unsigned long val)
+{
+  __asm__ volatile ("mov %0,%%cr0\n\t": : "r" (val): "memory");
+}
+
+static inline
+unsigned long get_cr0(void)
+{
+  unsigned long val;
+  __asm__ volatile ("mov %%cr0,%0\n\t":"=&r" (val):);
+  return val;
+}
+
 #endif /* !_SYSTEM_H_ */
