@@ -14,6 +14,7 @@ OBJS		=boot/crt0.o 			\
 		boot/early_pagination.o 	\
 		boot/setup.o 			\
 		kernel/sys_call.o		\
+		kernel/isr.o			\
 		kernel/traps.o 			\
 		kernel/irq.o 			\
 		kernel/vsprintf.o		\
