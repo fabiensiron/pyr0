@@ -71,4 +71,7 @@ unsigned long get_cr0(void)
   return val;
 }
 
+# define sti() __asm__ volatile ("sti": : :"memory")
+# define cli() __asm__ volatile ("cli": : :"memory")
+
 #endif /* !_SYSTEM_H_ */

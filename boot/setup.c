@@ -7,7 +7,9 @@
 
 #include <atomos/kernel.h>
 #include <atomos/console.h>
+
 #include <asm/processor.h>
+#include <asm/system.h>
 
 extern int sprintf(char *buf, const char *fmt, ...);
 extern void trap_init ();
@@ -43,7 +45,7 @@ void setup_kernel ()
 
   init_IRQ ();
 
-  __asm__ volatile ("sti\n");
+  sti();
 
    /* init paging */
   
