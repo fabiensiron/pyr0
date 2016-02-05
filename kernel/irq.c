@@ -8,10 +8,30 @@
 # include <asm/io.h>
 # include <asm/system.h>
 # include <asm/desc.h>
+# include <asm/irq.h>
 
 # include <atomos/kernel.h>
 
 extern struct gate_desc idt_table[IDT_ENTRIES];
+
+static void (*bad_interrupt[16])(void) =
+{
+  _bad_1_interrupt,  _bad_1_interrupt,
+  _bad_1_interrupt,  _bad_1_interrupt,
+  _bad_1_interrupt,  _bad_1_interrupt,
+  _bad_1_interrupt,  _bad_1_interrupt,
+  _bad_2_interrupt,  _bad_2_interrupt,  
+  _bad_2_interrupt,  _bad_2_interrupt,    
+  _bad_2_interrupt,  _bad_2_interrupt,    
+  _bad_2_interrupt,  _bad_2_interrupt
+};
+
+int setup_irq(int irq)
+{
+  /* TODO */
+  
+  return 0;
+}
 
 # define PIC_MASTER 0x20
 # define PIC_SLAVE  0xa0
@@ -46,5 +66,5 @@ void init_IRQ(void)
   pic_init ();
 
   for (i = 0; i< 16; i++)
-    set_intr_gate(0x20+i, NULL);
+    set_intr_gate(0x20+i, bad_interrupt[i]);
 }
