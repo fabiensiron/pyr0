@@ -47,4 +47,9 @@ void load_stack_info (void)
   reset_bp;
 }
 
+# define load_stack_info2			\
+  load_sp(MAIN_KERNEL_STACK);			\
+  reset_bp
+
+
 #endif /* !_PROCESSOR_H_ */

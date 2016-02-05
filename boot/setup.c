@@ -9,41 +9,53 @@
 #include <atomos/console.h>
 #include <asm/processor.h>
 
-#define LOG_BUFF_LEN 80
-#define klog(str)    early_kdebug (str, LOG_BUFF_LEN)
-
+extern int sprintf(char *buf, const char *fmt, ...);
 extern void trap_init ();
 extern void init_IRQ ();
 extern void mem_init (void);
+
+
+/* little printf for boot */
+#define LOG_BUFF_LEN 80
+char log_buf[LOG_BUFF_LEN];
+
+#define klog(str)    early_kdebug (str, LOG_BUFF_LEN)
+
+# define early_printf(fmt, ...)			\
+  do {						\
+    sprintf(log_buf, fmt, ##__VA_ARGS__);	\
+    klog(log_buf);				\
+  } while(0)
+
 
 void setup_kernel ()
 { 
   early_console_init ();
 
-  klog ("Welcome in ATOMOS ! \n");
-  klog ("boot sequence...\n");
+  early_printf ("Welcome in ATOMOS !\n");
+  early_printf ("boot sequence ...");
   
   init_early_pagination ();
   
   cpu_init ();
   
-  load_stack_info ();
-
   trap_init ();
 
   init_IRQ ();
 
   __asm__ volatile ("sti\n");
-  
-  /* init physmem */
 
-  /* init paging */
+   /* init paging */
   
   /* keyboard -> chr_dev_init*/ 
 
   /* video -> chr_dev_init */
 
   mem_init ();
+
+  load_stack_info();
+
+  /* NOTE: stack reset, do nothing here */
 
   return start_kernel ();
 }

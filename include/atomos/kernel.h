@@ -10,8 +10,8 @@
 
 # include <atomos/types.h>
 # include <atomos/panic.h>
+# include <atomos/stddef.h>
 
-# define NULL ((void *)0)
 
 void start_kernel (void);
 

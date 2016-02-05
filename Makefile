@@ -16,6 +16,7 @@ OBJS		=boot/crt0.o 			\
 		kernel/sys_call.o		\
 		kernel/traps.o 			\
 		kernel/irq.o 			\
+		kernel/vsprintf.o		\
 		lib/string.o			\
 		mm/frame.o			\
 		init/main.o # kernel/kernel.o mm/mm.o lib/lib.a
