@@ -2,7 +2,7 @@ CC		=gcc-5.3.0
 RM		=rm
 CFLAGS		=-Wall -Wextra -nostdinc -fno-builtin -g3 -gdwarf-2 -m32 -I ../include/
 CFLAGS		+=-fno-stack-protector -std=c99
-SRC		=frame.c
+SRC		=frame.c memory.c
 OBJS		= $(SRC:.c=.o)
 
 %.o: %.c

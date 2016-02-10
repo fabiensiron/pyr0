@@ -1,63 +1,175 @@
 /*
- * File: frame.c
+ * File: memory.c
  * Author: Fabien Siron <fabien.siron@epita.fr>
  *
- * Description: physical memory manager
+ * Description: table management, page allocation, page_fault
+ */
+#include <atomos/types.h>
+#include <atomos/string.h>
+#include <atomos/mm.h>
+#include <atomos/page.h>
+
+#include <bsd/queue.h>
+
+/*
+ * frame allocator: a simple array with linked lists elements
+ * TODO: check counters
  */
 
-# include <atomos/kernel.h>
-# include <atomos/string.h>
+#define FRAME_DESCR_ARRAY_ADDR PAGE_ALIGN_UP((u32)_end_kernel)
 
-# include <asm/page.h>
-# include <asm/pgtable.h>
-
-# define PAGE(addr) PAGE_ALIGN_DOWN(addr)
-# define MAX_RAM (128 * 1024 * 1024) // 128MB
-# define NR_FRAMES (MAX_RAM / PAGE_SIZE)
-# define BITMAP_LEN (NR_FRAMES / 8)
-
-u8 mem_bitmap[BITMAP_LEN];
-
-static inline void
-set_frame(u32 frame)
+struct frame_descr
 {
-  mem_bitmap[frame/8] |= 1 << (frame % 8);
-}
+  u32 paddr;
+  u32 ref_count;
+  LIST_ENTRY(frame_descr) links;
+};
 
-void release_frame(u32 paddr)
-{
-  mem_bitmap[paddr / PAGE_SIZE /8] &= ~(1 << ((paddr/PAGE_SIZE)% 8));
-}
+LIST_HEAD(frame_descr_head, frame_descr);
 
-u32 get_frame()
+static struct frame_descr_head free_frames =
+  LIST_HEAD_INITIALIZER(free_frames);
+
+static struct frame_descr_head nonfree_frames =
+  LIST_HEAD_INITIALIZER(nonfree_frames);
+
+static struct frame_descr *frame_descr_array;
+
+static u32 mem_base, mem_top, k_top;
+static u32 nr_frames, nr_nonfree_frames, nr_free_frames;
+
+int frame_allocator_init(u32 mem_limit)
 {
-  unsigned i, j, page;
+  struct frame_descr *descr_it;
+  u32 addr_it;
   
-  for(i = 0; i < BITMAP_LEN; i++)
-    if (mem_bitmap[i] != 0xff)
-      {
-	for (j = 0; j < 8; j++)
-	  if (!(mem_bitmap[i] & (1 << j)))
-	    {
-	      page = 8 * i + j;
-	      set_frame(page);
-	      return page * PAGE_SIZE;
-	    }
-      }
+  /* the size of the mem must be aligned */
+  u32 mem_upper = PAGE_ALIGN_DOWN(mem_limit);
+  
+  /* init the lists */
+  LIST_INIT(&free_frames);
+  LIST_INIT(&nonfree_frames);
 
-  return -1;
+  /* and the counters */
+  nr_frames = 0;
+  nr_nonfree_frames = 0;
+  nr_free_frames = 0;
+
+  /* calculate the end of the kernel AND the frame array */
+  k_top =
+    FRAME_DESCR_ARRAY_ADDR +
+    PAGE_ALIGN_UP((mem_upper >> PAGE_SHIFT)*sizeof(struct frame_descr));
+
+  if (k_top >= mem_upper)
+    return -1;
+
+  /* set boundaries */
+  mem_base = PAGE_SIZE;
+  mem_top = mem_upper;
+
+  /* init array */
+  frame_descr_array = (struct frame_descr*)FRAME_DESCR_ARRAY_ADDR;
+
+  for (addr_it = 0, descr_it = frame_descr_array;
+       addr_it < mem_top;
+       addr_it += PAGE_SIZE, descr_it++)
+    {
+      memset (descr_it, 0, sizeof(struct frame_descr));
+      descr_it->paddr = addr_it;
+	
+      /* null frame */
+      if (addr_it < mem_base)
+	{
+	  continue;
+	}
+      /* kernel big page */
+      else if (addr_it < k_top)
+	{
+	  descr_it->ref_count = 1;
+	  LIST_INSERT_HEAD(&nonfree_frames, descr_it, links);
+	  nr_nonfree_frames++;
+	}
+      /* free */
+      else
+	{
+	  descr_it->ref_count = 0;
+	  LIST_INSERT_HEAD(&free_frames, descr_it, links);
+	  nr_free_frames++;
+	}
+    }
+  return nr_free_frames;
 }
 
-u32 mem_init()
+int frame_ref (u32 paddr)
 {
-  int it;
+  struct frame_descr *frame_descr;
   
-  memset(&mem_bitmap, 0, BITMAP_LEN);
+  if (paddr & ~PAGE_MASK || (paddr < mem_base) || paddr > mem_top)
+    return -1;
 
-  /* set the 4 first MB used (kernel) */
-  for (it = 0; it < 0x400000; it+= PAGE_SIZE)
-    set_frame(PAGE(it));
+  frame_descr = frame_descr_array + (paddr >> PAGE_SHIFT);
 
-  /* return numb pages avail */
-  return NR_FRAMES - PT_SIZE;
+  frame_descr->ref_count++;
+
+  if (frame_descr->ref_count == 1)
+    {
+      LIST_REMOVE(frame_descr, links);
+      LIST_INSERT_HEAD(&nonfree_frames, frame_descr, links);
+      
+      nr_free_frames--;
+      nr_nonfree_frames++;
+
+      return 0;
+    }
+  return 1;
+}
+
+int frame_unref(u32 paddr)
+{
+  struct frame_descr *frame_descr;
+  
+  if (paddr & ~PAGE_MASK || (paddr < mem_base) || paddr > mem_top)
+    return -1;
+
+  frame_descr = frame_descr_array + (paddr >> PAGE_SHIFT);
+
+  if (frame_descr->ref_count <= 0)
+    return -1;
+
+  frame_descr->ref_count--;
+
+  if (frame_descr->ref_count == 0)
+    {
+      LIST_REMOVE(frame_descr, links);
+      LIST_INSERT_HEAD(&free_frames, frame_descr, links);
+      
+      nr_nonfree_frames--;
+      nr_free_frames++;
+
+      return 1;
+    }
+
+  return 0;
+}
+
+void *frame_get ()
+{
+  struct frame_descr *frame_descr;
+  if (LIST_EMPTY(&free_frames))
+    return NULL;
+
+  frame_descr = LIST_FIRST(&free_frames);
+  LIST_REMOVE(frame_descr, links);
+
+  nr_free_frames--;
+
+  if (frame_descr->ref_count != 0)
+    return NULL;
+
+  frame_descr->ref_count++;
+
+  LIST_INSERT_HEAD(&nonfree_frames, frame_descr, links);
+  nr_nonfree_frames++;
+
+  return (void *)frame_descr->paddr;
 }

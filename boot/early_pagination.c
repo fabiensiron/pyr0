@@ -7,18 +7,17 @@
  */
 
 #include <atomos/types.h>
-#include <asm/pgtable.h>
-#include <asm/page.h>
-#include <asm/system.h>
+#include <atomos/mm.h>
+#include <atomos/page.h>
 
-# define PD0_ADDR 0x1000
-# define PT0_ADDR 0x2000
+#include <asm/pgtable.h>
+#include <asm/system.h>
 
 void init_early_pagination (void)
 {
   unsigned i;
   u32 *pd0;
-  u32 *pt0;
+  u32 *pt0, *pt1;
   u32 page_it;
 
   pd0 = (u32*)PD0_ADDR;
@@ -26,14 +25,22 @@ void init_early_pagination (void)
   for (i = 0; i < PD_SIZE; i++)
     pd0[i] = P_NULL;
   
+  pd0[1] = PT1_ADDR | P_PRESENT | P_WRITABLE;
   pd0[0] = PT0_ADDR | P_PRESENT | P_WRITABLE;
 
   pt0 = (u32*)PT0_ADDR;
+  pt1 = (u32*)PT1_ADDR;
 
   page_it = 0;
   for (i = 0; i < PT_SIZE; i++)
     {
       pt0[i] = page_it | P_PRESENT | P_WRITABLE;
+      page_it += PAGE_SIZE;
+    }
+
+  for (i = 0; i < PT_SIZE; i++)
+    {
+      pt1[i] = page_it | P_PRESENT | P_WRITABLE;
       page_it += PAGE_SIZE;
     }
 

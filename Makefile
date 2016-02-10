@@ -20,6 +20,7 @@ OBJS		=boot/crt0.o 			\
 		kernel/vsprintf.o		\
 		lib/string.o			\
 		mm/frame.o			\
+		mm/memory.o			\
 		init/main.o # kernel/kernel.o mm/mm.o lib/lib.a
 
 all: atomos.img
@@ -33,7 +34,7 @@ atomos.img: subdirs
 
 .PHONY: boot
 boot: atomos.img
-	$(QEMU) -kernel $^
+	$(QEMU) -kernel $^ 
 
 .PHONY: debug
 debug: atomos.img
