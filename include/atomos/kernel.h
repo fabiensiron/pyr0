@@ -12,7 +12,9 @@
 # include <atomos/panic.h>
 # include <atomos/stddef.h>
 
+# include "../../boot/multiboot.h"
 
-void start_kernel (void);
+
+void start_kernel (multiboot_info_t *);
 
 #endif /* !_KERNEL_H_ */

@@ -11,10 +11,15 @@
 #include <asm/processor.h>
 #include <asm/system.h>
 
+#include <atomos/mm.h>
+#include <atomos/page.h>
+#include <asm/pgtable.h>
+
+#include "multiboot.h"
+
 extern int sprintf(char *buf, const char *fmt, ...);
 extern void trap_init ();
 extern void init_IRQ ();
-extern void mem_init (void);
 
 
 /* little printf for boot */
@@ -29,14 +34,29 @@ char log_buf[LOG_BUFF_LEN];
     klog(log_buf);				\
   } while(0)
 
+/* til' we don't have a real printk, we can't call panic */
+static 
+void die (const char *msg)
+{
+  early_printf ("\n#########################\n");
+  early_printf ("######### PANIC #########\n");
+  early_printf ("#########################\n\n");
+  early_printf ("  Error: %s\n", msg);
+  early_printf ("  Halt processor...\n");
 
-void setup_kernel ()
+  hlt();
+}
+
+void setup_kernel (unsigned long magic, multiboot_info_t *info)
 { 
   early_console_init ();
 
+  if (magic != MULTIBOOT_BOOTLOADER_MAGIC)
+    die ("Wrong bootloader");
+
   early_printf ("Welcome in ATOMOS !\n");
-  early_printf ("boot sequence ...");
-  
+  early_printf ("boot sequence ...\n");
+
   init_early_pagination ();
   
   cpu_init ();
@@ -46,18 +66,18 @@ void setup_kernel ()
   init_IRQ ();
 
   sti();
+  /* here we should maybe switch to start_kernel */
 
-   /* init paging */
-  
-  /* keyboard -> chr_dev_init*/ 
+  if (!(info->flags & (1 << 6)))
+      die ("Memory map unavailable !\n");
 
-  /* video -> chr_dev_init */
+  u32 nr_frames = frame_allocator_init(info->mem_upper * 1024);
 
-  mem_init ();
+  early_printf("Memory init %x frames\n", nr_frames);
 
-  load_stack_info();
+  //  load_stack_info(); // FIXME
 
   /* NOTE: stack reset, do nothing here */
 
-  return start_kernel ();
+  return start_kernel (info);
 }

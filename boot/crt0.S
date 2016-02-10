@@ -15,7 +15,6 @@ multiboot_header:
 	.long __begin_kernel
 	.long __end_load
 	.long __end_kernel
-	.long kernel_entry
 
 .global kernel_entry
 kernel_entry:
