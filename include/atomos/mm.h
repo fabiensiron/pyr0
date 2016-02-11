@@ -9,6 +9,7 @@
 # define _MM_H_
 
 # include <atomos/types.h>
+# include <atomos/page.h>
 
 # define PD0_ADDR        0x1000
 # define PT0_ADDR        0x2000
@@ -43,6 +44,13 @@ int frame_allocator_init(u32 mem_limit);
  * @return: -1 if error, 1 if allocate, 0 if just inc the ref count
  */
 int frame_ref(u32 paddr);
+/**
+ * frame_ref_once - reference a frame once (allocate or do nothing)
+ * @param paddr: physical address, must be aligned
+ *
+ * @return: -1 if error, 1 if allocate, 0 if nothing
+ */
+int frame_ref_once(u32 paddr);
 /**
  * frame_unref - unreference a frame (decrement reference counter or deallocate)
  * @param paddr: physical address, must be aligned

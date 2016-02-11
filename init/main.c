@@ -7,6 +7,7 @@
  */
 #include <atomos/kernel.h>
 #include <atomos/console.h>
+#include <atomos/mm.h>
 
 #include <asm/system.h>
 
@@ -15,6 +16,8 @@
 
 void start_kernel(multiboot_info_t *info)
 {
+  unsigned long long int i;
+  
   early_kdebug("start kernel ...\n", 20);
   
   if (!(info->flags & (1 << 6)))
@@ -27,10 +30,13 @@ void start_kernel(multiboot_info_t *info)
     {
       if (mmap->type == 2)
 	{
-	  // TODO: ref_frames that are marked "reserved" by the bootloader
-	  //	  if (!mmap->base_addr_low > 0) continue;
+	  for (i = 0; i < mmap->length_low; i += 0x1000)
+	    {
+	      if (mmap->base_addr_high > 0) continue;
+	      frame_ref_once ((mmap->base_addr_low + i) & PAGE_MASK);
 	  //	  early_printf ("reserved at %x with %x %x len\n",
 	  //			mmap->base_addr_low, mmap->length_low, mmap->length_high);
+	    }
 	}
       mmap = (memory_map_t *)((u32)mmap + mmap->size + sizeof(u32));
     }

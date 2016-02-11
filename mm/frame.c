@@ -1,8 +1,8 @@
 /*
- * File: memory.c
+ * File: frame.c
  * Author: Fabien Siron <fabien.siron@epita.fr>
  *
- * Description: table management, page allocation, page_fault
+ * Description: frame (physical pages) management
  */
 #include <atomos/types.h>
 #include <atomos/string.h>
@@ -14,6 +14,8 @@
 /*
  * frame allocator: a simple array with linked lists elements
  * TODO: check counters
+ * TODO: try to invert frame in list (first at the beginning -> invert or double linked list)
+ * TODO: debug function
  */
 
 #define FRAME_DESCR_ARRAY_ADDR PAGE_ALIGN_UP((u32)_end_kernel)
@@ -121,6 +123,29 @@ int frame_ref (u32 paddr)
 
       return 0;
     }
+  return 1;
+}
+
+int frame_ref_once (u32 paddr)
+{
+  struct frame_descr *frame_descr;
+
+  if (paddr & ~PAGE_MASK || (paddr < mem_base) || paddr > mem_top)
+    return -1;
+
+  frame_descr = frame_descr_array + (paddr >> PAGE_SHIFT);
+
+  if (frame_descr != 0)
+    return 0;
+
+  frame_descr->ref_count++;
+
+  LIST_REMOVE(frame_descr, links);
+  LIST_INSERT_HEAD(&nonfree_frames, frame_descr, links);
+
+  nr_free_frames--;
+  nr_nonfree_frames++;
+
   return 1;
 }
 
