@@ -20,7 +20,7 @@ OBJS		=boot/crt0.o 			\
 		kernel/vsprintf.o		\
 		lib/string.o			\
 		mm/frame.o			\
-		mm/memory.o			\
+		mm/paging.o			\
 		init/main.o # kernel/kernel.o mm/mm.o lib/lib.a
 
 all: atomos.img

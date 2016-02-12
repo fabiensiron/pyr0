@@ -37,7 +37,7 @@ static struct frame_descr_head nonfree_frames =
 
 static struct frame_descr *frame_descr_array;
 
-static u32 mem_base, mem_top, k_top;
+u32 mem_base, mem_top, k_top;
 static u32 nr_frames, nr_nonfree_frames, nr_free_frames;
 
 int frame_allocator_init(u32 mem_limit)
@@ -121,9 +121,9 @@ int frame_ref (u32 paddr)
       nr_free_frames--;
       nr_nonfree_frames++;
 
-      return 0;
+      return 1;
     }
-  return 1;
+  return 0;
 }
 
 int frame_ref_once (u32 paddr)

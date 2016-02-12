@@ -16,4 +16,9 @@
 # define PAGE_ALIGN_UP(addr)         (((addr)+PAGE_SIZE-1)& PAGE_MASK)
 # define PAGE_ALIGN_DOWN(addr)       ((addr) & PAGE_MASK)
 
+# define PDIR(P)       (((u32)P) >> 22)
+# define PTABLE(P)     ((((u32)P) >> 12) & 0x3ff)
+# define POFFSET(P)    (((u32)P) & 0xfff)
+
+
 #endif /* !_PAGE_H_ */

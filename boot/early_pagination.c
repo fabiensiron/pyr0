@@ -17,19 +17,17 @@ void init_early_pagination (void)
 {
   unsigned i;
   u32 *pd0;
-  u32 *pt0, *pt1;
+  u32 *pt0;
   u32 page_it;
 
-  pd0 = (u32*)PD0_ADDR;
+  pd0 = (u32*)PDBOOT_ADDR;
   
   for (i = 0; i < PD_SIZE; i++)
     pd0[i] = P_NULL;
   
-  pd0[1] = PT1_ADDR | P_PRESENT | P_WRITABLE;
-  pd0[0] = PT0_ADDR | P_PRESENT | P_WRITABLE;
+  pd0[0] = PTBOOT_ADDR | P_PRESENT | P_WRITABLE;
 
-  pt0 = (u32*)PT0_ADDR;
-  pt1 = (u32*)PT1_ADDR;
+  pt0 = (u32*)PTBOOT_ADDR;
 
   page_it = 0;
   for (i = 0; i < PT_SIZE; i++)
@@ -38,13 +36,7 @@ void init_early_pagination (void)
       page_it += PAGE_SIZE;
     }
 
-  for (i = 0; i < PT_SIZE; i++)
-    {
-      pt1[i] = page_it | P_PRESENT | P_WRITABLE;
-      page_it += PAGE_SIZE;
-    }
-
-  SET_PAGE_DIR(PD0_ADDR);
+  SET_PAGE_DIR(PDBOOT_ADDR);
 
   set_cr0(get_cr0() | CR0_PG | CR0_WP);
 }

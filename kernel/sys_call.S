@@ -8,6 +8,7 @@
 	.irp 	id,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
 	.globl _exception_\id
 	.endr	
+
 	
 /* Macros to handle context saving */	
 	.macro SAVE_ALL
@@ -77,3 +78,11 @@ error_code:
 	addl $8,%esp
 	RESTORE_ALL
 	iret
+
+.extern  do_page_fault
+.globl  _page_fault
+
+_page_fault:
+	pushl $do_page_fault
+	pushl $42
+	jmp error_code

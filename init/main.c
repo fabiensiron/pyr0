@@ -13,7 +13,6 @@
 
 #include "../boot/multiboot.h"
 
-
 void start_kernel(multiboot_info_t *info)
 {
   unsigned long long int i;
@@ -34,33 +33,14 @@ void start_kernel(multiboot_info_t *info)
 	    {
 	      if (mmap->base_addr_high > 0) continue;
 	      frame_ref_once ((mmap->base_addr_low + i) & PAGE_MASK);
-	  //	  early_printf ("reserved at %x with %x %x len\n",
-	  //			mmap->base_addr_low, mmap->length_low, mmap->length_high);
 	    }
 	}
       mmap = (memory_map_t *)((u32)mmap + mmap->size + sizeof(u32));
     }
 
   /* mem/paging */
-  
-  /* traps */
-
-  /* irq */
-
-  /* sched */
-  
-  /* command-line */
-
-  /* buffer ? */
-
-  /* time */
-
-  /* move to user */
-  /*
-    if (!fork())
-      init();
-
-   */
+  if (paging_init())
+    early_kdebug("Fatal error: memory cannot be mapped\n", 80);
 
   for (;;)
     ;
@@ -68,22 +48,4 @@ void start_kernel(multiboot_info_t *info)
 
 void init(void)
 {
-  /* setup video stuff and open tty1 */
-
-  /* exec etc/init bin/init sbin/init */
-
-  /* exec /bin/sh */
-
-  /*
-    if (!(pid=fork())) {
-      close(0);
-      execve("/bin/sh", _, _);
-      _exit(2);
-    }
-    else if (pid>0)
-      __wait__
-    else
-     error 
-  _exit(0);
-   */
 }

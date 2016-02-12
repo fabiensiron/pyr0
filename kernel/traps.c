@@ -24,6 +24,8 @@ void debug_trap (void)
 #  include "traps.def"
 # undef EXCEPT_DEF
 
+extern void _page_fault(void);
+
 void trap_init (void)
 {
   int i;
@@ -42,7 +44,7 @@ void trap_init (void)
   set_trap_gate (11, &_exception_11);
   set_trap_gate (12, &_exception_12);
   set_trap_gate (13, &_exception_13);
-  set_trap_gate (14, &_exception_14);
+  set_trap_gate (14, &_page_fault);
   set_trap_gate (15, &_exception_15);
   set_trap_gate (16, &_exception_16);  
   for (i = 17; i < 32; i++)
