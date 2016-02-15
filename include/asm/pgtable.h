@@ -37,6 +37,6 @@
 # define P_ISUSER(P)              P_ISFLAG((P), P_USER)
 
 # define PD_SIZE                  1024
-# define PT_SIZE                  1024
+# define PT_SIZE                  1025
 
 #endif /* !_PGTABLE_H_ */

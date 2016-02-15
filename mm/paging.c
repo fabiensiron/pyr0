@@ -18,6 +18,7 @@ void *_end_kernel = &__end_kernel;
 void *_end_load = &__end_load;
 
 extern u32 k_top;
+extern int sprintf(char *buf, const char *fmt, ...);
 
 /*
  * Paging
@@ -214,7 +215,10 @@ u32 paging_get_paddr(u32 vaddr)
   u32 *pd = get_mirrored_pd();
   u32 *pt = get_mirrored_pt(pdir_index);
 
-  if (!P_ISPRESENT(pd[pdir_index]) || !(P_ISPRESENT(pt[ptab_index])))
+  if (!P_ISPRESENT(pd[pdir_index]))
+    return 0;
+
+  if (!P_ISPRESENT(pt[ptab_index]))
     return 0;
 
   return (pt[ptab_index] & PAGE_MASK) + offset;
