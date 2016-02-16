@@ -17,4 +17,7 @@
 
 void start_kernel (multiboot_info_t *);
 
+int early_printk(const char *fmt, ...);
+int printk(const char *fmt, ...);
+
 #endif /* !_KERNEL_H_ */

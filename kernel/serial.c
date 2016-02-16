@@ -64,7 +64,7 @@ void serial_putchar(u16 port, char c)
   outb(port, c);
 }
 
-size_t serial_write(u8 index, const char *buf, size_t len)
+size_t serial_write(int index, const char *buf, size_t len)
 {
   unsigned i;
 

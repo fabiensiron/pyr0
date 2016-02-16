@@ -18,6 +18,7 @@ OBJS		=boot/crt0.o 			\
 		kernel/traps.o 			\
 		kernel/irq.o 			\
 		kernel/serial.o			\
+		kernel/printk.o			\
 		kernel/vsprintf.o		\
 		lib/string.o			\
 		mm/frame.o			\
@@ -35,7 +36,7 @@ atomos.img: subdirs
 
 .PHONY: boot
 boot: atomos.img
-	$(QEMU) -kernel $^ -serial stdio
+	$(QEMU) -kernel $^ -nographic -serial mon:stdio 
 
 .PHONY: debug
 debug: atomos.img

@@ -16,8 +16,8 @@ void* memset (void* p, int c, size_t n) {
 }
 
 int memcmp (const void* p1, const void* p2, size_t n) {
-  const int* i1 = NULL;
-  const int* i2 = NULL;
+  const char* i1 = NULL;
+  const char* i2 = NULL;
 
   for (i1 = p1, i2 = p2; (*i1 == *i2) && n>0; n--, i1++, i2++)
     continue;

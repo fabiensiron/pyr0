@@ -22,6 +22,6 @@ void serial_init();
  *
  * @return: len of the sent string
  */
-ssize_t serial_write(u8 index, const char *buf, size_t len);
+ssize_t serial_write(int index, const char *buf, size_t len);
 
 #endif /*!_SERIAL_H_*/
