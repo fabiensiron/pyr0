@@ -226,7 +226,7 @@ u32 paging_get_paddr(u32 vaddr)
 
 void do_page_fault()
 {
-  early_kdebug("Page fault !\n", 80);
+  early_printk("Page fault !\n", 80);
 
   for (;;)
     ;

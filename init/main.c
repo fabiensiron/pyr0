@@ -8,16 +8,58 @@
 #include <atomos/kernel.h>
 #include <atomos/console.h>
 #include <atomos/mm.h>
+#include <atomos/mman.h>
+#include <atomos/string.h>
+#include <atomos/serial.h>
+#include <atomos/tty.h>
 
 #include <asm/system.h>
+#include <asm/pgtable.h>
 
 #include "../boot/multiboot.h"
+
+extern int sprintf(char *buf, const char *fmt, ...);
+extern u32 k_top;
+
+void test_paging()
+{
+  u32 new_frame;
+  u32 vaddr = PAGE_ALIGN_DOWN((u32)test_paging);
+
+  u32 tmp_vaddr = (k_top + PAGE_SIZE);
+  
+  new_frame = (u32)frame_get();
+
+  if (!new_frame)
+    early_printk("Fatal error");
+
+
+
+  paging_map(new_frame, tmp_vaddr, P_WRITABLE);
+  
+  frame_unref(new_frame);
+
+
+  memcpy((void *)tmp_vaddr, (void *)vaddr, PAGE_SIZE);
+
+  paging_map(new_frame, vaddr, P_WRITABLE);
+
+  paging_unmap(tmp_vaddr);
+
+  early_printk("first test okay\n", 40);
+
+
+  for(;;)
+    ;
+}
 
 void start_kernel(multiboot_info_t *info)
 {
   unsigned long long int i;
   
-  early_kdebug("start kernel ...\n", 20);
+  tty_init();
+  
+  early_printk("start kernel ...\n");
   
   if (!(info->flags & (1 << 6)))
     hlt();
@@ -40,7 +82,10 @@ void start_kernel(multiboot_info_t *info)
 
   /* mem/paging */
   if (paging_init())
-    early_kdebug("Fatal error: memory cannot be mapped\n", 80);
+    early_printk("Fatal error: memory cannot be mapped\n", 80);
+
+
+
 
   for (;;)
     ;

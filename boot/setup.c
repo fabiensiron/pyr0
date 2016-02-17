@@ -34,8 +34,8 @@ void die (const char *msg)
 
 void setup_kernel (unsigned long magic, multiboot_info_t *info)
 { 
-  serial_init();
-  early_console_init ();
+  serial_early_init();
+  //  early_console_init ();
 
   if (magic != MULTIBOOT_BOOTLOADER_MAGIC)
     die ("Wrong bootloader");

@@ -9,7 +9,12 @@
 # define _SERIAL_H_
 
 /**
- * serial_init - init serial 1 and 2 at baudrate 38400
+ * serial_early_init - init serial 1 at baudrate 38400
+ */
+void serial_early_init();
+
+/**
+ * serial_init - init serial 2,3 and 4 at baudrate 38400
  */
 void serial_init();
 

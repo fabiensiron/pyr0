@@ -49,10 +49,17 @@ void init (u16 port, u16 rate)
   outb(port+4, 0xb);
 }
 
-void serial_init()
+void serial_early_init()
 {
   init(COM1, 38400);
+}
+
+void serial_init()
+{
+  /* serial_early_init must be called first */
   init(COM2, 38400);
+  init(COM3, 38400);
+  init(COM4, 38400);
 }
 
 static

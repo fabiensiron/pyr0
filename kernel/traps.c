@@ -10,13 +10,13 @@
 # include <asm/system.h>
 # include <asm/desc.h>
 
-# include <atomos/console.h>
+# include <atomos/kernel.h>
 
 struct gate_desc idt_table[IDT_ENTRIES] = { 0, };
 
 void debug_trap (void)
 {
-  early_kdebug ("trap test\n", 50);
+  early_printk ("trap test\n", 50);
   __asm__ ("hlt\n");
 }
 

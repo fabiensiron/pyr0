@@ -9,7 +9,6 @@ MAKE 		=make
 QEMU		=qemu-system-i386
 SUBDIRS 	=boot init kernel mm lib # drivers fs
 OBJS		=boot/crt0.o 			\
-		boot/early_log.o 		\
 		boot/cpu.o 			\
 		boot/early_pagination.o 	\
 		boot/setup.o 			\
@@ -19,6 +18,7 @@ OBJS		=boot/crt0.o 			\
 		kernel/irq.o 			\
 		kernel/serial.o			\
 		kernel/printk.o			\
+		kernel/tty.o			\
 		kernel/vsprintf.o		\
 		lib/string.o			\
 		mm/frame.o			\
