@@ -1,4 +1,4 @@
-CC		=gcc-5.3.0
+CC		=gcc
 RM		=rm
 LIB		=include/
 LDFLAGS		=-nostdlib -m32 -Wl,--build-id=none -L $(LIB)
@@ -18,6 +18,7 @@ OBJS		=boot/crt0.o 			\
 		kernel/irq.o 			\
 		kernel/serial.o			\
 		kernel/printk.o			\
+		kernel/panic.o			\
 		kernel/tty.o			\
 		kernel/vsprintf.o		\
 		lib/string.o			\
@@ -36,7 +37,7 @@ atomos.img: subdirs
 
 .PHONY: boot
 boot: atomos.img
-	$(QEMU) -kernel $^ -nographic -serial mon:stdio 
+	$(QEMU) -monitor pty -kernel $^ -nographic
 
 .PHONY: debug
 debug: atomos.img

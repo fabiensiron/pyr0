@@ -2,7 +2,7 @@ CC		=gcc-5.3.0
 RM		=rm
 CFLAGS		=-Wall -Wextra -nostdinc -fno-builtin -g3 -gdwarf-2 -m32 -I ../include/
 CFLAGS		+=-fno-stack-protector -std=c99
-SRC		=traps.c irq.c vsprintf.c serial.c printk.c tty.c
+SRC		=traps.c irq.c vsprintf.c serial.c printk.c tty.c panic.c
 ASM		=sys_call.S isr.S
 OBJS		= $(ASM:.S=.o) $(SRC:.c=.o)
 

@@ -7,9 +7,10 @@
 #include <atomos/serial.h>
 #include <atomos/tty.h>
  
- void rs_write(struct tty*);
+int tty_is_init = 0;
+void rs_write(struct tty*);
 
- struct tty tty_table[] = {
+struct tty tty_table[] = {
    {
      /* COM1 */
      rs_write,
@@ -70,5 +71,6 @@ void rs_write(struct tty *tty)
 
 void tty_init()
 {
+  tty_is_init = 1;
   serial_init();
 }

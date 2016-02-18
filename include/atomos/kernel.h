@@ -25,4 +25,6 @@ void start_kernel (multiboot_info_t *);
 int early_printk(const char *fmt, ...);
 int printk(int level, const char *fmt, ...);
 
+void panic(const char *s);
+
 #endif /* !_KERNEL_H_ */

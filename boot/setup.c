@@ -18,47 +18,40 @@
 
 #include "multiboot.h"
 
-extern int sprintf(char *buf, const char *fmt, ...);
 extern void trap_init ();
 extern void init_IRQ ();
-
-static 
-void die (const char *msg)
-{
-  early_printk ("######### PANIC #########\n");
-  early_printk ("  Error: %s\n", msg);
-  early_printk ("  Halt processor...\n");
-
-  hlt();
-}
 
 void setup_kernel (unsigned long magic, multiboot_info_t *info)
 { 
   serial_early_init();
-  //  early_console_init ();
 
   if (magic != MULTIBOOT_BOOTLOADER_MAGIC)
-    die ("Wrong bootloader");
+    panic("Wrong bootloader\n");
 
-  early_printk ("Welcome in ATOMOS !\n");
+  early_printk ("This is ATOMOS booting pyr0\n");
   early_printk ("boot sequence ...\n");
 
   init_early_pagination ();
+  early_printk ("early paging init\n");
   
   cpu_init ();
+  early_printk ("cpu init\n");
   
   trap_init ();
+  early_printk ("traps init\n");
 
   init_IRQ ();
+  early_printk ("irq init\n");
 
   sti();
+  early_printk ("interrupts enabled !\n");
 
   if (!(info->flags & (1 << 6)))
-      die ("Memory map unavailable !\n");
+      panic ("Memory map unavailable !\n");
 
   u32 nr_frames = frame_allocator_init(info->mem_upper * 1024);
 
-  early_printk("Memory init %x frames\n", nr_frames);
+  early_printk("Memory init %i frames\n", nr_frames);
 
   //  load_stack_info(); // FIXME
 
