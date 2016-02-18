@@ -25,6 +25,16 @@ void start_kernel (multiboot_info_t *);
 int early_printk(const char *fmt, ...);
 int printk(int level, const char *fmt, ...);
 
+/* assert */
+
+# define TOSTRING_(x) #x
+# define TOSTRING(x) TOSTRING_(x)
+
+# define assert(exp)				     \
+  (exp) ? (void)0 : panic("Fail assert in " __FILE__ " at l." \
+			  TOSTRING(__LINE__) " : \'"   \
+			  TOSTRING(exp) " \'\n")
+
 void panic(const char *s);
 
 #endif /* !_KERNEL_H_ */

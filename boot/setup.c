@@ -25,10 +25,9 @@ void setup_kernel (unsigned long magic, multiboot_info_t *info)
 { 
   serial_early_init();
 
-  if (magic != MULTIBOOT_BOOTLOADER_MAGIC)
-    panic("Wrong bootloader\n");
+  assert(magic == MULTIBOOT_BOOTLOADER_MAGIC);
 
-  early_printk ("This is ATOMOS booting pyr0\n");
+  early_printk ("\n\nThis is ATOMOS booting pyr0\n");
   early_printk ("boot sequence ...\n");
 
   init_early_pagination ();
@@ -45,9 +44,6 @@ void setup_kernel (unsigned long magic, multiboot_info_t *info)
 
   sti();
   early_printk ("interrupts enabled !\n");
-
-  if (!(info->flags & (1 << 6)))
-      panic ("Memory map unavailable !\n");
 
   u32 nr_frames = frame_allocator_init(info->mem_upper * 1024);
 

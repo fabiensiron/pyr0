@@ -28,8 +28,7 @@ void start_kernel(multiboot_info_t *info)
   
   printk(KERN_INFO, "start kernel ...\n");
   
-  if (!(info->flags & (1 << 6)))
-    hlt();
+  assert(info->flags & (1 << 6));
 
   memory_map_t *mmap = (void *)info->mmap_addr;
   
@@ -50,12 +49,12 @@ void start_kernel(multiboot_info_t *info)
     }
 
   printk(KERN_INFO, "paging init...\n");
+  
   /* mem/paging */
   if (paging_init())
     panic("Fatal error: memory cannot be mapped\n");
 
   printk(KERN_INFO, "Atomos boot process done\n");
-
 
   for (;;)
     ;
