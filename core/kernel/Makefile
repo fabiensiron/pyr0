@@ -1,23 +1,15 @@
-CC		=gcc-5.3.0
-RM		=rm
-CFLAGS		=-Wall -Wextra -nostdinc -fno-builtin -g3 -gdwarf-2 -m32 -I ../include/
-CFLAGS		+=-fno-stack-protector -std=c99
-SRC		=traps.c irq.c vsprintf.c serial.c printk.c tty.c panic.c
-ASM		=sys_call.S isr.S
-OBJS		= $(ASM:.S=.o) $(SRC:.c=.o)
+CUR_DIR		:= core/kernel/
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+OBJS		:=	irq.o 		\
+			isr.o		\
+			panic.o		\
+			printk.o	\
+			sys_call.o	\
+			traps.o		\
+			tty.o		\
+			serial.o	\
+			vsprintf.o
 
-%.o: %.S
-	$(CC) $(CFLAGS) -c $< -o $@
+PROGSUBDIRS	:=
 
-all: $(OBJS)
-
-.PHONY:clean
-clean:
-	$(RM) *.o
-
-.PHONY:distclean
-distclean: clean
-
+include $Omk/progsubdirs.mk

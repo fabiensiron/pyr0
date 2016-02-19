@@ -1,6 +1,6 @@
-CUR_DIR		:= core/lib/
+CUR_DIR := runtime/
 
-OBJS		:= string.o
+OBJS 	:= runtime-entry.o
 
 PROGSUBDIRS	:=
 

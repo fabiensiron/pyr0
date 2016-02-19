@@ -1,0 +1,12 @@
+* http://osxbook.com/book/bonus/ancient/whatismacosx/arch_xnu.html : XNU (Mac OSX operating system) is composed of two kernels (BSD and Mach)
+* https://www.iup.edu/WorkArea/DownloadAsset.aspx?id=81143 : can be an a good introduction to the project
+SINGULARITY :
+* https://channel9.msdn.com/Shows/Going+Deep/Singularity-A-research-OS-written-in-C : introductive video
+* http://research.microsoft.com/en-us/projects/singularity/
+
+You have to take a look to these Researchers/Engineers:
+* Linus Torvalds (... in fact, not that much)
+* Andrew Tanenbaum (of course)
+* Galen Hunt (Microsoft)
+* Jim Larus (Microsoft)
+* Richard Rashid (Mach - Microsoft)

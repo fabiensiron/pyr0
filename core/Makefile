@@ -1,53 +1,7 @@
-CC		=gcc
-RM		=rm
-LIB		=include/
-LDFLAGS		=-nostdlib -m32 -Wl,--build-id=none -L $(LIB)
-CFLAGS		=-Wall -Wextra -nostdinc -fno-builtin -g3 -gdwarf-2 -m32 -I $(LIB)
-CFLAGS		+=-fno-stack-protector -std=c99
-LDSCRIPT	=boot/atomos.lds
-MAKE 		=make
-QEMU		=qemu-system-i386
-SUBDIRS 	=boot init kernel mm lib # drivers fs
-OBJS		=boot/crt0.o 			\
-		boot/cpu.o 			\
-		boot/early_pagination.o 	\
-		boot/setup.o 			\
-		kernel/sys_call.o		\
-		kernel/isr.o			\
-		kernel/traps.o 			\
-		kernel/irq.o 			\
-		kernel/serial.o			\
-		kernel/printk.o			\
-		kernel/panic.o			\
-		kernel/tty.o			\
-		kernel/vsprintf.o		\
-		lib/string.o			\
-		mm/frame.o			\
-		mm/paging.o			\
-		init/main.o # kernel/kernel.o mm/mm.o lib/lib.a
+CUR_DIR	:= core/
 
-all: atomos.img
+OBJS :=
 
-subdirs:
-	set -e
-	for i in $(SUBDIRS); do $(MAKE) -C $$i || exit 1; done
+PROGSUBDIRS := boot/ init/ kernel/ lib/ mm/
 
-atomos.img: subdirs
-	$(CC) $(OBJS) -o $@ $(LDFLAGS) -T $(LDSCRIPT)
-
-.PHONY: boot
-boot: atomos.img
-	$(QEMU) -monitor pty -kernel $^ -nographic
-
-.PHONY: debug
-debug: atomos.img
-	$(QEMU) -kernel $^ -s -S -serial
-
-.PHONY: clean
-clean:
-	for i in $(SUBDIRS); do $(MAKE) -C $$i $@ || exit 1; done
-
-mrproper: clean
-	$(RM) -rf atomos.img	
-
-distclean: mrproper
+include $Omk/progsubdirs.mk

@@ -1,23 +1,13 @@
-CC		=gcc-5.3.0
-RM		=rm
-CFLAGS		=-Wall -Wextra -nostdinc -fno-builtin -g3 -gdwarf-2 -m32 -I ../include/
-CFLAGS		+=-fno-stack-protector -std=c99
-ASM		=crt0.S
-SRC		=cpu.c early_pagination.c setup.c 
-OBJS		= $(ASM:.S=.o) $(SRC:.c=.o)
+CUR_DIR		:= core/boot/
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+OBJS		:= 	cpu.o 			\
+			crt0.o 			\
+			early_pagination.o	\
+			setup.o
+PROGSUBDIRS	:=
 
-%.o: %.S
-	$(CC) $(CFLAGS) -c $< -o $@
+include $Omk/progsubdirs.mk
 
-all: $(OBJS)
+pyr0_LDFLAGS	:= $(pyr0_LDFLAGS) -Wl,-T$O$(CUR_DIR)/atomos.lds
 
-.PHONY:clean
-clean:
-	$(RM) *.o
-
-.PHONY:distclean
-distclean: clean
-
+# pyr0: $O$(CUR_DIR)atomos.lds

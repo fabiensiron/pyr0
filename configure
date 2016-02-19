@@ -1,0 +1,57 @@
+#!/bin/bash
+
+realpath()
+{
+    cd "$1"
+    echo "$PWD/"
+    cd - >/dev/null
+}
+SRCDIR=$(realpath $SRCDIR)
+
+CC="gcc -m32"
+
+cat <<EOF > Makefile
+ifeq (\$(MAKELEVEL),0)
+# Make is quite dumb, -rR options in MAKEFLAGS are only examined
+# *before* parsing any Makefile, thus, we need to do a recursive make in
+# order to enable those flags.
+MAKEFLAGS	:= -rR --warn-undefined-variables --no-print-directory
+ifeq ("\$(origin V)", "undefined")
+	V := 0
+endif
+ifneq (\$V, 1)
+	MAKEFLAGS += -s
+endif
+export MAKEFLAGS
+
+all:
+
+%:
+	\$(MAKE) -C . \$@
+else
+
+
+HOST_CC		:= gcc
+HOST_LD		:= gcc
+
+HOST_CFLAGS	:=
+HOST_ASFLAGS	:=
+
+CC		:= $CC
+LD		:= $CC
+DEFAULT_CFLAGS	:= 
+DEFAULT_ASFLAGS	:= 
+DEFAULT_LDFLAGS	:= -nostdlib -Wl,--build-id=none
+O		:= $SRCDIR
+VPATH		:= $SRCDIR
+
+include ${SRCDIR}Makefile.pyr0
+
+Makefile: ${SRCDIR}configure
+	CC="$CC" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" ASFLAGS="$ASFLAGS" \\
+	${SRCDIR}configure --arch=i386 --mach=i386
+
+\$(DEPS:.d=.o): Makefile
+endif
+
+EOF

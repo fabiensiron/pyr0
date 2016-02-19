@@ -1,0 +1,47 @@
+QEMU			:= qemu-system-i386
+
+PYR0_TARGET		:= pyr0
+
+DEPS			:=
+ALL_PROGS		:=
+PROG			:= pyr0
+CUR_DIR			:=
+OBJS			:=
+LIBS			:=
+PROGSUBDIRS		:= runtime/ core/
+
+PROG_INSTALL		:=
+INSTALL_DIR		:= 
+
+pyr0_CFLAGS		:= -std=c99 -nostdinc -fno-builtin -fno-stack-protector
+pyr0_CFLAGS		+= -Wall -Wextra
+pyr0_CFLAGS		+= -g3 -gdwarf-2
+pyr0_CFLAGS		+= -Icore/include/ -Iruntime/include/
+
+pyr0_ASFLAGS		:= #-Icore/include/
+
+pyr0_LDFLAGS		?= 
+
+include $Omk/prog.mk
+
+.PHONY: all boot
+all: $(PROG)
+
+boot: $(PROG)
+	$(QEMU) -monitor pty -serial stdio -kernel $< -nographic
+
+.PHONY: clean distclean
+clean:
+	$(call run,CLEAN,)
+	rm -f $(DEPS:.d=.o)
+
+distclean: clean
+	$(call run,DISTCLEAN,)
+	rm -f $(DEPS)
+	rm -f $(ALL_PROGS)
+	rm -f Makefile
+
+-include $(DEPS)
+
+include $Omk/run.mk
+include $Omk/rules.mk

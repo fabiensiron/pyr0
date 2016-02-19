@@ -1,19 +1,7 @@
-CC		=gcc
-RM		=rm
-CFLAGS		=-Wall -Wextra -nostdinc -fno-builtin -g3 -gdwarf-2 -m32 -I ../include/
-CFLAGS		+=-fno-stack-protector -std=c99
-SRC		=main.c
-OBJS		= $(SRC:.c=.o)
+CUR_DIR		:= core/init/
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+OBJS		:= main.o
+PROGSUBDIRS	:=
 
-all: $(OBJS)
-
-.PHONY:clean
-clean:
-	$(RM) *.o
-
-.PHONY:distclean
-distclean: clean
+include $Omk/progsubdirs.mk
 

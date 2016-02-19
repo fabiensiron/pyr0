@@ -1,0 +1,6 @@
+* http://www.caravan.net/ec2plus/ : we can use that to make the runtime, c++ would be very easier and can be fun.
+* https://cs263-technology-tutorial.readthedocs.org/en/latest/ : describe the basic of python's bytecode
+* http://aosabook.org/en/500L/a-python-interpreter-written-in-python.html : how to do a simple interpreter
+* https://docs.python.org/2.4/lib/bytecodes.html : /!\ 2.7 bytecode
+* http://document.ihg.uni-duisburg.de/Documentation/Python/lib/node56.html : again bytecode
+* http://pgbovine.net/cpython-internals.htm : basic python internals video
