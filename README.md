@@ -20,7 +20,7 @@ python scripts.
 
 
 ## Usage
-`make boot`
+- `make boot`
 
 
 ## Community
