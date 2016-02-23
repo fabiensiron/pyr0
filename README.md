@@ -15,8 +15,8 @@ python scripts.
 
 ## Build/Install
 
-`./configure`
-`make`
+- `./configure`
+- `make`
 
 
 ## Usage
