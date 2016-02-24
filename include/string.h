@@ -31,7 +31,8 @@
 //#include <sys/cdefs.h>
 //#include <stddef.h>
 //#include <malloc.h>
-#include <atomos/kernel.h>
+# include <atomos/kernel.h>
+# include <atomos/limits.h>
 
 extern void*  memccpy(void *, const void *, int, size_t);
 extern void*  memchr(const void *, int, size_t);

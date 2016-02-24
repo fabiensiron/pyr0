@@ -8,34 +8,71 @@
 #include <string.h>
 
 void* memset (void* p, int c, size_t n) {
-  unsigned char* i = NULL;
-  for (i = p; n > 0; n--, i++)
-    *i = c;
+  char *src = p;
+
+  c = (c & 0xff);
+
+  while (n--)
+    *src++ = c;
 
   return p;
 }
 
-int memcmp (const void* p1, const void* p2, size_t n) {
-  const char* i1 = NULL;
-  const char* i2 = NULL;
+int memcmp(const void *s1, const void *s2, size_t n)
+{
+    const unsigned char*  p1   = s1;
+    const unsigned char*  end1 = p1 + n;
+    const unsigned char*  p2   = s2;
+    int                   d = 0;
 
-  for (i1 = p1, i2 = p2; (*i1 == *i2) && n>0; n--, i1++, i2++)
-    continue;
+    for (;;) {
+        if (d || p1 >= end1) break;
+        d = (int)*p1++ - (int)*p2++;
 
-  return n;
+        if (d || p1 >= end1) break;
+        d = (int)*p1++ - (int)*p2++;
+
+        if (d || p1 >= end1) break;
+        d = (int)*p1++ - (int)*p2++;
+
+        if (d || p1 >= end1) break;
+        d = (int)*p1++ - (int)*p2++;
+    }
+    return d;
 }
 
-void* memcpy (void* p1, const void* p2, size_t n) {
-  char* i1 = NULL;
-  const char* i2 = NULL;
+void* memcpy (void* dst_, const void* src_, size_t n) {
+  const char *src = src_;
+  char *dst = dst_;
 
-  for (i1 = p1, i2 = p2; n>0; n--, i1++, i2++) 
-    *(i1) = *(i2);
+  while (n--)
+    *dst++ = *src++;
 
-  return p1;
+  return dst_;
 }
 
-extern char* strcpy (char* dest, const char* src) {
+void *memmove(void *dst_, const void *src_, size_t n)
+{
+  const char *src = src_;
+  char *dst = dst_;
+
+  if (!n)
+    return dst_;
+
+  if (dst_ <= src_)
+    return memcpy(dst_, src_, n);
+
+  src += n;
+  dst += n;
+
+  while (n--)
+    *--dst = *--src;
+
+  return dst_;
+}
+
+
+char* strcpy (char* dest, const char* src) {
   char* p = NULL;
 
   for (p = dest; *src != '\0'; p++, src++)
@@ -46,7 +83,7 @@ extern char* strcpy (char* dest, const char* src) {
   return dest;
 }
 
-extern int strcmp(const char* str1, const char* str2) {
+int strcmp(const char* str1, const char* str2) {
 
   while (*str1 != '\0' && (*str1++ == *str2++));
   if ((*(unsigned char*)--str1) < (*(unsigned char*)--str2))
@@ -54,10 +91,21 @@ extern int strcmp(const char* str1, const char* str2) {
   return (*(unsigned char*)str1 != *(unsigned char*)str2);
 }
 
-extern size_t strlen (const char* str_) {
-  int output = 0;
-  int i;
-  for (i = 0; str_[i] != '\0'; i++) 
-    ++output;   
-  return output;
+size_t strlen (const char* str_) {
+  const char *s;
+
+  for (s = str_; *s; ++s)
+    ;
+  return (s - str_);
 }
+
+char *strchr(const char *p, int ch)
+{
+  for (;; ++p) {
+    if (*p == ch)
+      return((char *)p);
+    if (!*p)
+      return((char *)NULL);
+  }
+}
+
