@@ -8,7 +8,7 @@
 #include <atomos/string.h>
 
 void* memset (void* p, int c, size_t n) {
-  int* i = NULL;
+  unsigned char* i = NULL;
   for (i = p; n > 0; n--, i++)
     *i = c;
 
