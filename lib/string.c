@@ -5,7 +5,7 @@
  * Description: mem and str operations
  */
 
-#include <atomos/string.h>
+#include <string.h>
 
 void* memset (void* p, int c, size_t n) {
   unsigned char* i = NULL;
@@ -54,7 +54,7 @@ extern int strcmp(const char* str1, const char* str2) {
   return (*(unsigned char*)str1 != *(unsigned char*)str2);
 }
 
-extern int strlen (const char* str_) {
+extern size_t strlen (const char* str_) {
   int output = 0;
   int i;
   for (i = 0; str_[i] != '\0'; i++) 

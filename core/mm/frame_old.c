@@ -6,10 +6,11 @@
  */
 
 # include <atomos/kernel.h>
-# include <atomos/string.h>
 # include <atomos/page.h>
 
 # include <asm/pgtable.h>
+
+# include <string.h>
 
 # define PAGE(addr) (addr >> PAGE_SHIFT)
 # define MAX_RAM (128 * 1024 * 1024) // 128MB

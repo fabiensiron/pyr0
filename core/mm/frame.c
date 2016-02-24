@@ -4,12 +4,14 @@
  *
  * Description: frame (physical pages) management
  */
+#include <atomos/kernel.h>
 #include <atomos/types.h>
-#include <atomos/string.h>
 #include <atomos/mm.h>
 #include <atomos/page.h>
 
 #include <bsd/queue.h>
+
+#include <string.h>
 
 /*
  * frame allocator: a simple array with linked lists elements

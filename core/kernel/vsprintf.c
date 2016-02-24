@@ -6,7 +6,8 @@
 
 # include <atomos/types.h>
 # include <atomos/stdarg.h>
-# include <atomos/string.h>
+
+# include <string.h>
 
 static
 void uitoa(unsigned num, unsigned base, char **buf)

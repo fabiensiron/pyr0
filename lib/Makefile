@@ -1,6 +1,6 @@
 CUR_DIR := lib/
 
-OBJS 	:=
+OBJS 	:= string.o
 
 PROGSUBDIRS	:= arch/
 

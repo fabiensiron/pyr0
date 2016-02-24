@@ -2,6 +2,6 @@ CUR_DIR	:= core/
 
 OBJS :=
 
-PROGSUBDIRS := boot/ init/ kernel/ lib/ mm/
+PROGSUBDIRS := boot/ init/ kernel/ mm/
 
 include $Omk/progsubdirs.mk

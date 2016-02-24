@@ -10,7 +10,6 @@
 #include <atomos/mm.h>
 #include <atomos/kmalloc.h>
 #include <atomos/mman.h>
-#include <atomos/string.h>
 #include <atomos/serial.h>
 #include <atomos/tty.h>
 

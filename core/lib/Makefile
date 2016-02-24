@@ -1,7 +1,0 @@
-CUR_DIR		:= core/lib/
-
-OBJS		:= string.o
-
-PROGSUBDIRS	:=
-
-include $Omk/progsubdirs.mk
