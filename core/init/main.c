@@ -8,6 +8,7 @@
 #include <atomos/kernel.h>
 #include <atomos/console.h>
 #include <atomos/mm.h>
+#include <atomos/kmalloc.h>
 #include <atomos/mman.h>
 #include <atomos/string.h>
 #include <atomos/serial.h>
@@ -54,6 +55,9 @@ void start_kernel(multiboot_info_t *info)
   if (paging_init())
     panic("Fatal error: memory cannot be mapped\n");
 
+  kmalloc_init();
+  printk(KERN_INFO, "kmalloc init ...\n");
+  
   printk(KERN_INFO, "Atomos boot process done\n");
 
   for (;;)

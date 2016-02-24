@@ -1,7 +1,8 @@
 CUR_DIR		:= core/mm/
 
 OBJS		:=	frame.o		\
-			paging.o
+			paging.o	\
+			kmalloc.o
 
 PROGSUBDIRS	:= 
 
