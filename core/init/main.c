@@ -18,6 +18,8 @@
 
 #include "../boot/multiboot.h"
 
+extern void pit_init();
+
 void start_kernel(multiboot_info_t *info)
 {
   unsigned long long int i;
@@ -58,6 +60,8 @@ void start_kernel(multiboot_info_t *info)
   printk(KERN_INFO, "kmalloc init ...\n");
   
   printk(KERN_INFO, "Atomos boot process done\n");
+
+  pit_init();
 
   for (;;)
     ;
