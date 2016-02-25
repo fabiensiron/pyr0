@@ -5,7 +5,7 @@
 #define TP_H
 
 #include <setjmp.h>
-#include <sys/stat.h>
+// #include <sys/stat.h> -> fix tp_load
 #ifndef __USE_ISOC99
 #define __USE_ISOC99
 #endif
