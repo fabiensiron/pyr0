@@ -62,4 +62,33 @@ _bad_2_interrupt:
 	SAVE_ALL
 	ACK_2
 	RESTORE_ALL
+	
+.extern do_IRQ
+	.macro IRQ num chip
+.globl _irq_\num
+_irq_\num:
+	SAVE_ALL
+	ACK_\chip
+	pushl $\num
+	call do_IRQ
+	add $4, %esp
+	RESTORE_ALL
+	iret
+	.endm
 
+	IRQ 0, 1
+	IRQ 1, 1
+	IRQ 2, 1
+	IRQ 3, 1
+	IRQ 4, 1
+	IRQ 5, 1
+	IRQ 6, 1
+	IRQ 7, 1
+	IRQ 8,  2
+	IRQ 9,  2
+	IRQ 10, 2
+	IRQ 11, 2
+	IRQ 12, 2
+	IRQ 13, 2
+	IRQ 14, 2
+	IRQ 15, 2

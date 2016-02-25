@@ -74,5 +74,9 @@ unsigned long get_cr0(void)
 # define sti() __asm__ volatile ("sti": : :"memory")
 # define cli() __asm__ volatile ("cli": : :"memory")
 # define hlt() __asm__ volatile ("hlt\n")
+# define save_flags(x)						\
+  __asm__ volatile ("pushfl\n\t popl %0\n\t":"=g"(x)::"memory")
+# define restore_flags(x) \
+  __asm__ volatile ("pushl %0 \n\t popfl\n\t"::"g"(x):"memory")
 
 #endif /* !_SYSTEM_H_ */
