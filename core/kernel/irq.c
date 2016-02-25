@@ -168,6 +168,8 @@ void do_IRQ(int irq)
   sti();
 }
 
+extern void pit_init();
+
 void init_IRQ(void)
 {
   int i;
@@ -176,4 +178,6 @@ void init_IRQ(void)
 
   for (i = 0; i< 16; i++)
     set_intr_gate(0x20+i, bad_interrupt[i]);
+
+  pit_init();
 }

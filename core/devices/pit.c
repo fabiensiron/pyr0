@@ -30,11 +30,9 @@ void pit_init (void)
   outb(0x40,count & 0x00ff);
   outb(0x40,(count & 0xff00) >> 8);
 
-  printk(KERN_INFO, "pit init !");
+  printk(KERN_INFO, "PIT init !\n");
 
   setup_irq(0, pit_routine);
-  //  set_idt_handler (32 + 0, (t_uint32)pit_wrapper);
-  //  enable_irq_line (0);
 }
 
 unsigned long gettick ()

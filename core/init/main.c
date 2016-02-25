@@ -61,8 +61,6 @@ void start_kernel(multiboot_info_t *info)
   
   printk(KERN_INFO, "Atomos boot process done\n");
 
-  pit_init();
-
   for (;;)
     ;
 }
