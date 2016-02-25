@@ -8,7 +8,7 @@
 #include <asm/io.h>
 
 #include <atomos/kernel.h>
-#include <atomos/irq.h>
+#include <atomos/interrupt.h>
 
 # define INTERNAL_FREQUENCY 1193182
 # define FREQUENCY 100 // Hz
