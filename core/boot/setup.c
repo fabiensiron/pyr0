@@ -58,13 +58,9 @@ void setup_kernel (unsigned long magic, multiboot_info_t *info)
   /* set name to buf */
   boot_module.name = (char *)&boot_module.buf;
 
-  
   memcpy(&boot_module.buf,(void *)(((module_t *)info->mods_addr)->string + sizeof(long)),64);
 
   memcpy((void*)0x4000,(void *)((module_t *)info->mods_addr)->mod_start, PAGE_SIZE);
-
-  //  boot_module.name = (unsigned long)&boot_module.buf;
-  serial_write(1, (char *)boot_module.buf, 10);
 
   u32 nr_frames = frame_allocator_init(info->mem_upper * 1024);
 
