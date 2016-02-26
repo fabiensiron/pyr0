@@ -18,7 +18,9 @@
 
 #include "../boot/multiboot.h"
 
-extern void pit_init();
+extern void start_runtime (u32 p, u32 len, char *name);
+
+extmodule_t boot_module;
 
 void start_kernel(multiboot_info_t *info)
 {
@@ -60,6 +62,11 @@ void start_kernel(multiboot_info_t *info)
   printk(KERN_INFO, "kmalloc init ...\n");
   
   printk(KERN_INFO, "Atomos boot process done\n");
+
+  if (info->mods_count == 0)
+    panic("Nothing to boot, processor halt...\n");
+
+  start_runtime(boot_module.addr, boot_module.len, boot_module.name);
 
   for (;;)
     ;

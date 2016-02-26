@@ -3,7 +3,11 @@
  * Author: Fabien Siron <fabien.siron@epita.fr>
  */
 
-void start_runtime(void)
-{
+#include <atomos/kernel.h>
 
+//#include <tinypy/tp.h>
+
+void start_runtime(u32 p, u32 len, char *name)
+{
+  
 }

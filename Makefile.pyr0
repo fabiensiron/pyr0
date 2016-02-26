@@ -1,6 +1,7 @@
 QEMU			:= qemu-system-i386
 
 PYR0_TARGET		:= pyr0
+PYR0_ROM		:= root/python/hw.py
 
 DEPS			:=
 ALL_PROGS		:=
@@ -28,7 +29,7 @@ include $Omk/prog.mk
 all: $(PROG)
 
 boot: $(PROG)
-	$(QEMU) -monitor pty -serial stdio -kernel $< -nographic
+	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic
 
 .PHONY: clean distclean
 clean:

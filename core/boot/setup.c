@@ -16,7 +16,11 @@
 #include <atomos/mm.h>
 #include <atomos/page.h>
 
+#include <string.h>
+
 #include "multiboot.h"
+
+extern extmodule_t boot_module;
 
 extern void trap_init ();
 extern void init_IRQ ();
@@ -44,6 +48,23 @@ void setup_kernel (unsigned long magic, multiboot_info_t *info)
 
   sti();
   early_printk ("interrupts enabled !\n");
+
+  /* okay, this is a *ugly* hack, but it works if there is only 1 module */
+  
+  boot_module.addr = 0x4000;
+  boot_module.len =
+    ((module_t *)info->mods_addr)->mod_end -
+    ((module_t *)info->mods_addr)->mod_start;
+  /* set name to buf */
+  boot_module.name = (char *)&boot_module.buf;
+
+  
+  memcpy(&boot_module.buf,(void *)(((module_t *)info->mods_addr)->string + sizeof(long)),64);
+
+  memcpy((void*)0x4000,(void *)((module_t *)info->mods_addr)->mod_start, PAGE_SIZE);
+
+  //  boot_module.name = (unsigned long)&boot_module.buf;
+  serial_write(1, (char *)boot_module.buf, 10);
 
   u32 nr_frames = frame_allocator_init(info->mem_upper * 1024);
 
