@@ -15,8 +15,10 @@ void tp_compiler(TP);
 
 tp_obj tp_None = {TP_NONE};
 
+#include "bc.c"
+
 #if TP_COMPILER
-#include <tinypy/bc.c>
+
 void tp_compiler(TP) {
     tp_import(tp,0,"tokenize",tp_tokenize,sizeof(tp_tokenize));
     tp_import(tp,0,"parse",tp_parse,sizeof(tp_parse));

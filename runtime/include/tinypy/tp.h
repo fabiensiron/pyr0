@@ -15,6 +15,7 @@
 #include <stdarg.h>
 #include <math.h>
 #include <time.h>
+#include <unistd.h>
 
 #ifdef __GNUC__
 #define tp_inline __inline__
@@ -375,7 +376,8 @@ tp_inline static tp_obj tp_number(tp_num v) {
 
 tp_inline static void tp_echo(TP,tp_obj e) {
     e = tp_str(tp,e);
-    fwrite(e.string.val,1,e.string.len,stdout);
+    //    fwrite(e.string.val,1,e.string.len,stdout);
+    write(1, e.string.val, e.string.len);
 }
 
 /* Function: tp_string_n

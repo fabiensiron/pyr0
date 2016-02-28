@@ -15,7 +15,7 @@ PROG_INSTALL		:=
 INSTALL_DIR		:= 
 
 pyr0_CFLAGS		:= -std=c99 -nostdinc -fno-builtin -fno-stack-protector
-pyr0_CFLAGS		+= -Wall -Wextra
+pyr0_CFLAGS		+= -Wall -Wextra -Wno-unused
 pyr0_CFLAGS		+= -g3 -gdwarf-2
 pyr0_CFLAGS		+= -Icore/include/ -Iruntime/include/ -Iinclude/
 

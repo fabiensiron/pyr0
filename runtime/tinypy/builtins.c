@@ -122,7 +122,13 @@ tp_obj tp_float(TP) {
     tp_raise(tp_None,tp_string("(tp_float) TypeError: ?"));
 }
 
-
+/* tmp func */
+tp_obj tp_save(TP) {
+  /* TODO */
+  tp_raise(tp_None, tp_string("(tp_save) Not implemented yet"));
+  return tp_None;
+}
+# if 0
 tp_obj tp_save(TP) {
     char fname[256]; tp_cstr(tp,TP_STR(),fname,256);
     tp_obj v = TP_OBJ();
@@ -133,10 +139,12 @@ tp_obj tp_save(TP) {
     fclose(f);
     return tp_None;
 }
-
+# endif
+/* tmp func */
 tp_obj tp_load(TP)
 {
   /* TODO */
+  return tp_None;
 }
 # if 0
 tp_obj tp_load(TP) {
@@ -184,16 +192,32 @@ tp_obj tp_round(TP) {
     return tp_number(_roundf(tp_float(tp).number.val));
 }
 
+/* tmp func */
+tp_obj tp_exists(TP) {
+  tp_raise(tp_None, tp_string("(tp_exists) Not implemented yet"));
+  return tp_None;
+}
+# if 0
 tp_obj tp_exists(TP) {
     char fname[TP_CSTR_LEN]; tp_cstr(tp,TP_STR(),fname,TP_CSTR_LEN);
     struct stat stbuf;
     return tp_number(!stat(fname,&stbuf));
 }
+# endif
+
+# if 0
 tp_obj tp_mtime(TP) {
     char fname[TP_CSTR_LEN]; tp_cstr(tp,TP_STR(),fname,TP_CSTR_LEN);
     struct stat stbuf;
     if (!stat(fname,&stbuf)) { return tp_number(stbuf.st_mtime); }
     tp_raise(tp_None,tp_string("(tp_mtime) IOError: ?"));
+}
+# endif
+
+/* tmp func */
+tp_obj tp_mtime(TP) {
+  tp_raise(tp_None, tp_string("(tp_mtime) Not implemented yet"));
+  return tp_None;
 }
 
 int _tp_lookup_(TP,tp_obj self, tp_obj k, tp_obj *meta, int depth) {

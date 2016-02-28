@@ -24,4 +24,8 @@
 extern int vsprintf(char *str, const char *fmt, va_list ap);
 extern int vsnprintf(char *str, size_t size, const char *fmt, va_list ap);
 
+//extern size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
+//extern size_t fwrite(const void *ptr, size_t size, size_t nmemb,
+//		     FILE *stream);
+
 #endif /*!_STDIO_H_*/
