@@ -52,7 +52,7 @@ void set_gate (void *gate_addr, u8 type, u8 dpl, void *addr)
   set_gate (&idt_table[n], 15, 3, addr)
 
 # define set_intr_gate(n, addr) \
-  set_gate (&idt_table[n], 15, 3, addr)
+  set_gate (&idt_table[n], 14, 0, addr)
 
 # define CR0_PG (1 << 31)
 # define CR0_WP (1 << 16)

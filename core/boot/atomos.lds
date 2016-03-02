@@ -41,7 +41,7 @@ SECTIONS
 		*(.bss)
 		PROVIDE(_ebss = .);
 		*(.stack)
-		. += 0x4000;
+		. += 0x8000;
 	}
 
 	__end_kernel = .;

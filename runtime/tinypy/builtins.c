@@ -124,7 +124,6 @@ tp_obj tp_float(TP) {
 
 /* tmp func */
 tp_obj tp_save(TP) {
-  /* TODO */
   tp_raise(tp_None, tp_string("(tp_save) Not implemented yet"));
   return tp_None;
 }
@@ -141,10 +140,31 @@ tp_obj tp_save(TP) {
 }
 # endif
 /* tmp func */
+extern void *code_p;
+extern long code_l;
+
 tp_obj tp_load(TP)
 {
-  /* TODO */
-  return tp_None;
+  long len;
+  void *code;
+  tp_obj r;
+  char *s;
+
+  /* retrieve l and p */
+  code = code_p;
+  len = code_l;
+  
+  /* check if code NULL or not */
+  if (!code) {
+    tp_raise(tp_None, tp_string("(tp_load) len == 0 or code == NULL"));
+  }
+
+  r = tp_string_t(tp, len);
+  s = r.string.info->s;
+  memcpy(s,code,len);
+  //  write(1,s,len);
+    /* TODO */
+  return tp_track(tp, r);
 }
 # if 0
 tp_obj tp_load(TP) {

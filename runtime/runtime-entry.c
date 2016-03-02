@@ -6,9 +6,20 @@
 #include <atomos/kernel.h>
 #include <stdio.h>
 
-//#include <tinypy/tp.h>
+#include <tinypy/tp.h>
+#include <tinypy/vm.h>
 
-void start_runtime(u32 p, u32 len, char *name)
+void *code_p;
+long code_l;
+
+void start_runtime(void *p, long len, const char *name)
 {
-  printf("hello world!\n");
+  printf("load %s!\n", name);
+  code_p = p;
+  code_l = len;
+
+  /* init tinypy */
+  char *argv[] = {"tinypy","hw.py"};
+  tp_vm *tp = tp_init(2, argv);
+  tp_ez_call(tp,"py2bc","tinypy",tp_None);
 }

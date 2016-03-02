@@ -16,8 +16,9 @@ INSTALL_DIR		:=
 
 pyr0_CFLAGS		:= -std=c99 -nostdinc -fno-builtin -fno-stack-protector
 pyr0_CFLAGS		+= -Wall -Wextra -Wno-unused
-pyr0_CFLAGS		+= -g3 -gdwarf-2
+pyr0_CFLAGS		+= -g3 -gdwarf-2 -ggdb
 pyr0_CFLAGS		+= -Icore/include/ -Iruntime/include/ -Iinclude/
+pyr0_CFLAGS		+= -mno-mmx -mno-sse -mno-sse2 -mno-sse3 -mno-3dnow
 
 pyr0_ASFLAGS		:= #-Icore/include/
 
@@ -30,6 +31,9 @@ all: $(PROG)
 
 boot: $(PROG)
 	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic
+
+debug: $(PROG)
+	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic -s -S
 
 .PHONY: clean distclean
 clean:

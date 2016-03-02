@@ -18,8 +18,5 @@ double pow(double x, double y)
 
 double fabs(double x)
 {
-  double __value = x;
-  __value = (double)((int)x);
-  
-  return __value;       
+  return  x < 0 ? -x : x;
 }

@@ -1,6 +1,6 @@
 #define MAGIC 0x1badb002
 #define FLAGS 0x07
-#define EARLY_STACK_SIZE 0x4000
+#define EARLY_STACK_SIZE 0x8000
 
 	.extern init_early_pagination
 	.extern setup_kernel
@@ -20,7 +20,7 @@ multiboot_header:
 kernel_entry:
 	cli
 	
-	movl $(stack+EARLY_STACK_SIZE), %esp
+	movl $(_ebss+EARLY_STACK_SIZE), %esp
 	movl $0, %ebp
 
 	pushl $0
@@ -37,4 +37,4 @@ loop:
 	hlt
 	jmp loop
 
-.comm stack, EARLY_STACK_SIZE
+//.comm stack, EARLY_STACK_SIZE

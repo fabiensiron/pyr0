@@ -18,7 +18,7 @@
 
 #include "../boot/multiboot.h"
 
-extern void start_runtime (u32 p, u32 len, char *name);
+extern void start_runtime (void *p, long len, char *name);
 
 extmodule_t boot_module;
 
@@ -66,7 +66,7 @@ void start_kernel(multiboot_info_t *info)
   if (info->mods_count == 0)
     panic("Nothing to boot, processor halt...\n");
 
-  start_runtime(boot_module.addr, boot_module.len, boot_module.name);
+  start_runtime((void *)boot_module.addr, (long)boot_module.len, boot_module.name);
 
   for (;;)
     ;
