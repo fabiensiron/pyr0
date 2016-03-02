@@ -22,6 +22,14 @@ python scripts.
 ## Usage
 - `make boot`
 
+or if you want a specific python's script:
+
+- `make boot PYR0_ROM=path_to_python_script.py`
+
+
+## Notes
+There are quite a lot of bugs, but of course, if you find a bug, please just
+open an issue.
 
 ## Community
 
