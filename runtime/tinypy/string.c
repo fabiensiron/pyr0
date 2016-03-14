@@ -46,12 +46,10 @@ tp_obj tp_printf(TP, char const *fmt,...) {
     int l;
     tp_obj r;
     char *s;
-    char h[2];
+    char tmp[80];
     va_list arg;
     va_start(arg, fmt);
-    l = vsnprintf(h, 0, fmt,arg); // h is just because apple vsnprintf need a non null buffer
-    if (!l) // ugly hack because of vsnprintf bug
-      l = 1;
+    l = vsnprintf(tmp, 80, fmt,arg); // tmp is just because apple vsnprintf need a non null buffer
     r = tp_string_t(tp,l);
     s = r.string.info->s;
     va_end(arg);
