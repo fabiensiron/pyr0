@@ -13,6 +13,7 @@ PROGSUBDIRS		:= runtime/ core/ lib/
 
 PROG_INSTALL		:=
 INSTALL_DIR		:= 
+ROOT_DIR		:= root/
 
 pyr0_CFLAGS		:= -std=c99 -nostdinc -fno-builtin -fno-stack-protector
 pyr0_CFLAGS		+= -Wall -Wextra -Wno-unused
@@ -27,18 +28,24 @@ pyr0_LDFLAGS		?=
 include $Omk/prog.mk
 
 .PHONY: all boot
-all: $(PROG)
+all: $(PROG) disk
 
-boot: $(PROG)
+boot: $(PROG) disk
 	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic
 
-debug: $(PROG)
+debug: $(PROG) disk
 	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic -s -S
+
+disk: $(ROOT_DIR)
+	rm -f rootfs.img
+	$(call run,DISK,)
+	genext2fs -B 4096 -d $< -b 256 -N 4096 rootfs.img
 
 .PHONY: clean distclean
 clean:
 	$(call run,CLEAN,)
 	rm -f $(DEPS:.d=.o)
+	rm -f rootfs.img
 
 distclean: clean
 	$(call run,DISTCLEAN,)
