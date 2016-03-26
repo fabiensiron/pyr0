@@ -50,6 +50,8 @@ void setup_kernel (unsigned long magic, multiboot_info_t *info)
   early_printk ("interrupts enabled !\n");
 
   /* okay, this is a *ugly* hack, but it works if there is only 1 module */
+  if (info->mods_count == 0)
+    panic("Nothing to boot, processor halt...\n");
   
   boot_module.addr = 0x4000;
   boot_module.len =
