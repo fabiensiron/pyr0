@@ -44,6 +44,7 @@ distclean: clean
 	$(call run,DISTCLEAN,)
 	rm -f $(DEPS)
 	rm -f $(ALL_PROGS)
+	rm -f rootfs.img
 	rm -f Makefile
 
 -include $(DEPS)
