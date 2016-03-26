@@ -8,6 +8,7 @@ OBJS		:=	irq.o 		\
 			traps.o		\
 			tty.o		\
 			serial.o	\
+			vfs_open.o	\
 			vsprintf.o
 
 PROGSUBDIRS	:=

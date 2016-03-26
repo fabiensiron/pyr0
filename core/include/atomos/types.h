@@ -21,4 +21,6 @@ typedef signed long long   s64;
 typedef u32                size_t;
 typedef s32                ssize_t;
 
+typedef long off_t;
+
 #endif /* !_TYPES_H_ */
