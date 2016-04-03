@@ -20,6 +20,13 @@ python scripts.
 
 
 ## Usage
+
+For interpreter mode:
+
+- `make boot-i`
+
+For file mode:
+
 - `make boot`
 
 or if you want a specific python's script:
