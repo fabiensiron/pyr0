@@ -117,7 +117,7 @@ int setup_irq(unsigned int irq, void (*handler)(void))
   sti();
   restore_flags(flags);
 
-  enable_irq(0);
+  enable_irq(irq);
   
   return 0;
 }
