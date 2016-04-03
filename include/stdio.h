@@ -28,4 +28,6 @@ extern int vsnprintf(char *str, size_t size, const char *fmt, va_list ap);
 //extern size_t fwrite(const void *ptr, size_t size, size_t nmemb,
 //		     FILE *stream);
 
+char *gets(char *s);
+
 #endif /*!_STDIO_H_*/

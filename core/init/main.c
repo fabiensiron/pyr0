@@ -64,9 +64,9 @@ void start_kernel(multiboot_info_t *info)
   printk(KERN_INFO, "Atomos boot process done\n");
 
   if (info->mods_count == 0)
-    panic("Nothing to boot, processor halt...\n");
-
-  start_runtime((void *)boot_module.addr, (long)boot_module.len, boot_module.name);
+    start_runtime(NULL, 0, NULL);
+  else
+    start_runtime((void *)boot_module.addr, (long)boot_module.len, boot_module.name);
 
   for (;;)
     ;

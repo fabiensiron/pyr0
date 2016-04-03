@@ -72,7 +72,10 @@ char serial_getchar(u16 port)
   char c = inb(port);
 
   if (c == 0xd)
-    serial_putchar(COM1, '\n');
+    {
+      //      serial_putchar(COM1, '\n');
+      return '\n';
+    }
 
   return c;
 }

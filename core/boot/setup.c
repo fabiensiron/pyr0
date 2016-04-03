@@ -50,19 +50,21 @@ void setup_kernel (unsigned long magic, multiboot_info_t *info)
   early_printk ("interrupts enabled !\n");
 
   /* okay, this is a *ugly* hack, but it works if there is only 1 module */
-  if (info->mods_count == 0)
-    panic("Nothing to boot, processor halt...\n");
-  
-  boot_module.addr = 0x4000;
-  boot_module.len =
-    ((module_t *)info->mods_addr)->mod_end -
-    ((module_t *)info->mods_addr)->mod_start;
-  /* set name to buf */
-  boot_module.name = (char *)&boot_module.buf;
+  //  if (info->mods_count == 0)
+  //    panic("Nothing to boot, processor halt...\n");
+  if (info->mods_count != 0)
+    {
+      boot_module.addr = 0x4000;
+      boot_module.len =
+	((module_t *)info->mods_addr)->mod_end -
+	((module_t *)info->mods_addr)->mod_start;
+      /* set name to buf */
+      boot_module.name = (char *)&boot_module.buf;
 
-  memcpy(&boot_module.buf,(void *)(((module_t *)info->mods_addr)->string + sizeof(long)),64);
+      memcpy(&boot_module.buf,(void *)(((module_t *)info->mods_addr)->string + sizeof(long)),64);
 
-  memcpy((void*)0x4000,(void *)((module_t *)info->mods_addr)->mod_start, PAGE_SIZE);
+      memcpy((void*)0x4000,(void *)((module_t *)info->mods_addr)->mod_start, PAGE_SIZE);
+    }
 
   u32 nr_frames = frame_allocator_init(info->mem_upper * 1024);
 

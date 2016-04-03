@@ -29,6 +29,9 @@ include $Omk/prog.mk
 .PHONY: all boot
 all: $(PROG)
 
+boot-i: $(PROG)
+	$(QEMU) -monitor pty -serial stdio -kernel $< -nographic
+
 boot: $(PROG)
 	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic
 

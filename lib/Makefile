@@ -7,6 +7,7 @@ OBJS 	:= 	string.o 	\
 		strtod.o	\
 		snprintf.o	\
 		math.o		\
+		gets.o		\
 		toupper_.o
 
 PROGSUBDIRS	:= arch/
