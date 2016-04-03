@@ -25,7 +25,7 @@ For interpreter mode:
 
 - `make boot-i`
 
-For file mode:
+nFor file mode:
 
 - `make boot`
 
@@ -38,6 +38,8 @@ Example: `make boot PYR0_ROM=root/python/prime.py`
 ## Notes
 There are quite a lot of bugs, but of course, if you find a bug, please just
 open an issue.
+
+![alt tag](http://saruta.eu/res/pyr0.png)
 
 ## Community
 
