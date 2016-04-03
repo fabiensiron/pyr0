@@ -2,6 +2,7 @@ CUR_DIR := runtime/
 
 OBJS 	:= runtime-entry.o
 
-PROGSUBDIRS	:= tinypy/
+PROGSUBDIRS	:= 	tinypy/     \
+			modules/
 
 include $Omk/progsubdirs.mk

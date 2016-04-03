@@ -13,6 +13,13 @@
 void *code_p;
 long code_l;
 
+#include <modules/sh.h>
+
+void init_modules(TP)
+{
+  sh_init(tp);
+}
+
 char *interpreter_launch_code = "_INTERPRETER_ = True\n";
 
 /* prelude code */
@@ -52,12 +59,15 @@ void start_interpreter_loop(void)
   code_p = interpreter_launch_code;
   code_l = strlen(interpreter_launch_code);
 
-  /* run prelude */
+  /* run launch */
   tp = tp_init(2, argv);
 
   tp_ez_call(tp,"py2bc", "tinypy", tp_None);
 
-  /* run main loop */
+  /* init modules */
+  init_modules(tp);
+
+  /* run prelude */
 
   globals = tp_dict(tp);
 
@@ -65,8 +75,8 @@ void start_interpreter_loop(void)
 
   printf("%s", header);
 
-  /* main loop */
-  
+  /* run main loop */
+
   while (1)
     {
       printf(">>> ");
