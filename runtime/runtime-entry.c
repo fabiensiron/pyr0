@@ -13,11 +13,15 @@
 void *code_p;
 long code_l;
 
-#include <modules/sh.h>
+#include <modules/modules.h>
 
 void init_modules(TP)
 {
-  sh_init(tp);
+  unsigned i;
+  for(i = 0; modules_init_vector[i]; i++)
+    {
+      modules_init_vector[i](tp);
+    }
 }
 
 char *interpreter_launch_code = "_INTERPRETER_ = True\n";

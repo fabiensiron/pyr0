@@ -26,8 +26,8 @@ pyr0_LDFLAGS		?=
 
 include $Omk/prog.mk
 
-.PHONY: all boot
-all: $(PROG)
+.PHONY: all boot boot-i debug modules_gen
+all: modules_gen $(PROG)
 
 boot-i: $(PROG)
 	$(QEMU) -monitor pty -serial stdio -kernel $< -nographic
@@ -38,6 +38,10 @@ boot: $(PROG)
 debug: $(PROG)
 	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic -s -S
 
+modules_gen:
+	$(call run,MOD_GEN,)
+	./runtime/tools/modules_table_gen.pl
+
 .PHONY: clean distclean
 clean:
 	$(call run,CLEAN,)
@@ -47,6 +51,7 @@ distclean: clean
 	$(call run,DISTCLEAN,)
 	rm -f $(DEPS)
 	rm -f $(ALL_PROGS)
+	rm -f runtime/include/modules/modules.h
 	rm -f Makefile
 
 -include $(DEPS)

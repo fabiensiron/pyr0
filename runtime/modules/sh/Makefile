@@ -1,6 +1,6 @@
 CUR_DIR := runtime/modules/sh/
 
-OBJS 	:=	init.o
+OBJS 	:=	init.o sh.o
 
 PROGSUBDIRS	:=
 
