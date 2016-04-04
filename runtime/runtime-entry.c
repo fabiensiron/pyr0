@@ -40,7 +40,7 @@ char *prelude_code =
   "  print(\"Github pull request feature at https://github.com/Saruta/pyr0.\")\n"
   "\n"
   "def why():\n"
-  "  print(\"Why tinypy?\")\n"
+  "  print(\"Why pyr0?\")\n"
   "  print(\"> why not :-)\")\n"
   "\n";
 
