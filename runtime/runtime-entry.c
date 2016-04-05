@@ -19,9 +19,40 @@ void init_modules(TP)
 {
   unsigned i;
   for(i = 0; modules_init_vector[i]; i++)
-    {
       modules_init_vector[i](tp);
-    }
+}
+
+#include <stdlib.h>
+#include <string.h>
+
+char *sub_interpreter(char *buf, unsigned len_)
+{
+  unsigned len, code_size = 1024;
+  char subbuf[80];
+  char *subbuf_r = malloc(sizeof(char) * code_size);
+  subbuf[0] = '\0';
+
+  strcpy(subbuf_r, buf);
+  len = len_;
+
+  do
+    {
+      printf("... ");
+      gets(subbuf);
+
+      len += strlen(subbuf);
+
+      if (len > code_size)
+	{
+	  subbuf_r = realloc(subbuf_r, code_size + 80);
+	  code_size += 80;
+	}
+      
+      strcat(subbuf_r, subbuf);
+      
+    } while(subbuf[0] != '\0');
+
+  return subbuf_r;
 }
 
 char *interpreter_launch_code = "_INTERPRETER_ = True\n";
@@ -49,15 +80,18 @@ char *prelude_code =
   "\n";
 
 char *header =
-  "Pyr0 0.1 beta (April 2016)\nType \"help\", \"credits\", \"contribute\" or "
+  "Pyr0 0.1 alpha (April 2016)\nType \"help\", \"credits\", \"contribute\" or "
   "\"why\" for more information.\nAuthor: Fabien Siron <fabien.siron@epita.fr>\n";
 
 void start_interpreter_loop(void)
 {
-  char buf[80];
+  char _buf[80];
+  char *buf = _buf;
   tp_vm *tp;
   tp_obj globals;
   char *argv[] = {"tinypy", "_INTERPRETER_"};
+  unsigned char sub_i;
+  unsigned len;
 
   /* set prelude mode */
   code_p = interpreter_launch_code;
@@ -83,13 +117,30 @@ void start_interpreter_loop(void)
 
   while (1)
     {
+      if (sub_i)
+	{
+	  free(buf);
+	  sub_i = 0;
+	  buf = _buf;
+	}
+      
       printf(">>> ");
-
+      
       buf[0] = '\0';
 
       gets(buf);
-      if (strlen(buf) == 0)
+      len = strlen(buf);
+      
+      if (len == 0)
 	continue;
+
+      /* XXX: handle trailing spaces after semi-colon */
+
+      if (buf[len - 1] == ':')
+	{
+	  buf = sub_interpreter(buf, len);
+	  sub_i = 1;
+	}
 
       if (strcmp(buf, "quit()") == 0)
 	goto release;
