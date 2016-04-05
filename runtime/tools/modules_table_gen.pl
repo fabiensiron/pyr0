@@ -14,15 +14,6 @@ sub print_header {
     print($fd $header);
 }
 
-sub compute_include_line {
-    my ($module) = @_;
-    my $module_path;
-
-    $module_path = sprintf("modules/%s.h", lc($module));
-
-    return"#include <".$module_path.">";
-}
-
 sub generate_table {
     my ($filename, $table) = @_;
     my $fd;
@@ -33,9 +24,9 @@ sub generate_table {
     
     print($fd "#ifndef _MODULES_H_\n# define _MODULES_H_\n\n");
 
-    print($fd "#include <tinypy/tp.h>\n");
+    print($fd "#include <tinypy/tp.h>\n\n");
     foreach my $elt (@$table) {
-	print($fd compute_include_line($elt)."\n");
+	printf($fd "extern void %s_init(TP);\n", lc($elt));
     }
 
     print($fd "\n\nvoid (*modules_init_vector[])(tp_vm *) = {\n");
@@ -79,4 +70,4 @@ sub dump_modules {
 }
 
 my $modules = dump_modules("runtime/runtime-config");
-generate_table("runtime/include/modules/modules.h", $modules);
+generate_table("runtime/include/tinypy/modules.h", $modules);

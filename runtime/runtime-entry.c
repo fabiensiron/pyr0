@@ -13,7 +13,7 @@
 void *code_p;
 long code_l;
 
-#include <modules/modules.h>
+#include <tinypy/modules.h>
 
 void init_modules(TP)
 {
