@@ -37,4 +37,6 @@ int printk(int level, const char *fmt, ...);
 
 void panic(const char *s);
 
+void reboot(void);
+
 #endif /* !_KERNEL_H_ */

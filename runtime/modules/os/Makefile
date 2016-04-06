@@ -1,6 +1,6 @@
 CUR_DIR := runtime/modules/os/
 
-OBJS 	:=	init.o
+OBJS 	:=	init.o os.o
 
 PROGSUBDIRS	:=
 

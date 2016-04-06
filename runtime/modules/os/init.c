@@ -10,6 +10,9 @@
 
 #define OS_NAME "pyr0"
 
+tp_obj os_reboot(TP);
+tp_obj os_halt(TP);
+
 void os_init(TP)
 {
   /* module */
@@ -17,6 +20,8 @@ void os_init(TP)
 
   /* methods */
   tp_set(tp, os_mod, tp_string("name"), tp_string(OS_NAME));
+  tp_set(tp, os_mod, tp_string("reboot"), tp_fnc(tp, os_reboot));
+  tp_set(tp, os_mod, tp_string("halt"), tp_fnc(tp, os_halt));
 
   /* special attributes */
   tp_set(tp, os_mod, tp_string("__doc__"),
