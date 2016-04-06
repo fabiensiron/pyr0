@@ -42,6 +42,7 @@ tp_obj tp_string_sub(TP, tp_obj s, int a, int b) {
     return r;
 }
 
+/* supposed to be independant of string len, but doesn't work yet */
 tp_obj tp_printf(TP, char const *fmt,...) {
     int l;
     tp_obj r;
@@ -56,7 +57,25 @@ tp_obj tp_printf(TP, char const *fmt,...) {
     va_start(arg, fmt);
     vsprintf(s,fmt,arg);
     va_end(arg);
+
     return tp_track(tp,r);
+}
+
+/* less than 80 characters printer */
+tp_obj tp_printf_(TP, char const *fmt, ...) {
+   int l;
+   tp_obj r, r2;
+   char *s, *s2;
+   char tmp[80];
+   va_list arg;
+   r = tp_string_t(tp, 80);
+   s = r.string.info->s;
+   
+   va_start(arg, fmt);
+   l = vsnprintf(s, 80, fmt,arg); // tmp is just because apple vsnprintf need a non null buffer
+   va_end(arg);
+   
+   return tp_track(tp,r);
 }
 
 int _tp_str_index(tp_obj s, tp_obj k) {
