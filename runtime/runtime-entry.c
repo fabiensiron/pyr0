@@ -95,6 +95,9 @@ void start_interpreter_loop(void)
   unsigned char sub_i;
   unsigned len;
 
+  /* sadly, the init of the interpreter can be long */
+  printf("Loading runtime interpreter...\n");
+
   /* set prelude mode */
   code_p = interpreter_launch_code;
   code_l = strlen(interpreter_launch_code);
