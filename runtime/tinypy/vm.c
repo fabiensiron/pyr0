@@ -93,12 +93,15 @@ void tp_frame(TP,tp_obj globals,tp_obj code,tp_obj *ret_dest) {
     tp->frames[tp->cur] = f;
 }
 
+extern jmp_buf except_jmp;
+
 void _tp_raise(TP,tp_obj e) {
     /*char *x = 0; x[0]=0;*/
     if (!tp || !tp->jmp) {
 #ifndef CPYTHON_MOD
         printf("\nException:\n"); tp_echo(tp,e); printf("\n");
-        exit(-1);
+	longjmp(except_jmp, 1);
+	//        exit(-1);
 #else
         tp->ex = e;
         longjmp(tp->nextexpr,1);
@@ -135,7 +138,9 @@ void tp_handle(TP) {
     }
 #ifndef CPYTHON_MOD
     tp_print_stack(tp);
-    exit(-1);
+    tp->cur = 0;
+    longjmp(except_jmp, 1);
+    //    exit(-1);
 #else
     longjmp(tp->nextexpr,1);
 #endif

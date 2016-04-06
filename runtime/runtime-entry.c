@@ -5,6 +5,7 @@
 
 #include <atomos/kernel.h>
 #include <stdio.h>
+#include <setjmp.h>
 
 #include <tinypy/tp.h>
 #include <tinypy/dict.h>
@@ -12,6 +13,7 @@
 
 void *code_p;
 long code_l;
+jmp_buf except_jmp;
 
 #include <tinypy/modules.h>
 
@@ -117,6 +119,8 @@ void start_interpreter_loop(void)
 
   while (1)
     {
+      setjmp(except_jmp);
+      
       if (sub_i)
 	{
 	  free(buf);
