@@ -17,5 +17,6 @@ tp_obj tp_chr(TP);
 tp_obj tp_ord(TP);
 tp_obj tp_strip(TP);
 tp_obj tp_replace(TP);
+tp_obj tp_hex(TP);
 
 #endif /*!_TPSTRING_H_*/

@@ -159,6 +159,12 @@ tp_obj tp_ord(TP) {
     return tp_number((unsigned char)s.string.val[0]);
 }
 
+tp_obj tp_hex(TP) {
+  int v = TP_NUM();
+  
+  return tp_printf_(tp, "0x%x", v);
+}
+
 tp_obj tp_strip(TP) {
     tp_obj o = TP_TYPE(TP_STRING);
     char const *v = o.string.val; int l = o.string.len;
