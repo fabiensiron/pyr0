@@ -17,8 +17,9 @@
  * dummy first fit on 4 MB
  */
 
-static void *brk = (void *)0x400000;
-static void *brk_limit = (void *)0x800000;
+void *brk_base = (void *)0x400000;
+static void *brk;
+void *brk_limit = (void *)0x1000000;
 
 void *sbrk(ssize_t inc)
 {
@@ -229,8 +230,9 @@ void kmalloc_init (void)
 {
   unsigned int i;
   void *paddr;
+  brk = brk_base;
   u32 vaddr = (u32)brk;
-  
+
   for (i = 0; i < ((brk_limit - brk) / PAGE_SIZE); i++, vaddr += PAGE_SIZE)
     {
       paddr = frame_get();
