@@ -29,8 +29,8 @@ void init_modules(TP)
 
 char *sub_interpreter(char *buf, unsigned len_)
 {
-  unsigned len, code_size = 1024;
-  char subbuf[80];
+  unsigned len, len__, code_size = 1024;
+  char subbuf[81];
   char *subbuf_r = malloc(sizeof(char) * code_size);
   subbuf[0] = '\0';
 
@@ -42,7 +42,12 @@ char *sub_interpreter(char *buf, unsigned len_)
       printf("... ");
       gets(subbuf);
 
-      len += strlen(subbuf);
+      len__ = strlen(subbuf);
+      len += (len_+1);
+
+      /* add new line char */
+      subbuf[len__] = '\n';
+      subbuf[len__+1] = '\0';
 
       if (len > code_size)
 	{
@@ -52,7 +57,7 @@ char *sub_interpreter(char *buf, unsigned len_)
       
       strcat(subbuf_r, subbuf);
       
-    } while(subbuf[0] != '\0');
+    } while(subbuf[0] != '\n');
 
   return subbuf_r;
 }
@@ -87,7 +92,7 @@ char *header =
 
 void start_interpreter_loop(void)
 {
-  char _buf[80];
+  char _buf[81];
   char *buf = _buf;
   tp_vm *tp;
   tp_obj globals;
@@ -145,7 +150,9 @@ void start_interpreter_loop(void)
 
       if (buf[len - 1] == ':')
 	{
-	  buf = sub_interpreter(buf, len);
+	  buf[len] = '\n';
+	  buf[len+1] = '\0';
+	  buf = sub_interpreter(buf, len+1);
 	  sub_i = 1;
 	}
 
