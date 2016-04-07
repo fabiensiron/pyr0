@@ -1,0 +1,81 @@
+title-text: "Pyr0 Bootable CD"
+title-color: "black"
+message-color: "black"
+message-bg-color: "black"
+desktop-image: "/python-wallpaper.png"
+desktop-color: "#ffffff"
+
++ label {
+    text="Select a boot option or wait for the timeout."
+    width = 100%
+    top = 10%
+    align = center
+    color = black
+}
+
++ label {
+    top = 60%
+    width = 100%
+    align = center
+    color = black
+    text = "This is PYthon's in Ring 0 System (PYR0S) live booting..."
+}
++ label {
+    top = 63%
+    width = 100%
+    align = center
+    color = black
+    text = "Requires a PS/2 keyboard and at least 512MB of RAM."
+}
++ label {
+    top = 66%
+    width = 100%
+    align = center
+    color = black
+    text = "You will be able to use a python's interpreter to manipulate the current system."
+}
++ label {
+    top = 69%
+    width = 100%
+    align = center
+    color = black
+    text = "If video fails, your GPU may not support the necessary 1024x768x32bpp mode."
+}
++ label {
+    top = 77%
+    width = 100%
+    align = center
+    color = black
+    text = "Copyright (c) 2016 Fabien Siron <fabien.siron@epita.fr>"
+}
++ label {
+    top = 80%
+    width = 100%
+    align = center
+    color = black
+    text = "https://github.com/saruta/pyr0"
+}
+
++ boot_menu {
+    left = 20%
+    width = 85%
+    height = 55%
+    top = 15%
+    item_color = "black"
+    selected_item_color = "blue"
+    item_height = 14
+    item_padding = 0
+    item_spacing = 15
+}
+
++ progress_bar {
+    id = "__timeout__"
+    left = 15%
+    width = 70%
+    top = 90%
+    height = 12
+    show_text = true
+    text_color = "0, 0, 255"
+    text = "@TIMEOUT_NOTIFICATION_LONG@"
+}
+

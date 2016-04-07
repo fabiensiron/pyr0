@@ -26,7 +26,7 @@ pyr0_LDFLAGS		?=
 
 include $Omk/prog.mk
 
-.PHONY: all boot boot-i debug modules_gen
+.PHONY: all boot boot-i debug modules_gen iso iso_gen
 all: modules_gen $(PROG)
 
 boot-i: $(PROG)
@@ -37,6 +37,13 @@ boot: $(PROG)
 
 debug: $(PROG)
 	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic -s -S
+
+iso: $(PROG) iso_gen
+	$(QEMU) -monitor pty -serial stdio -vga std -m 512 -cdrom pyr0s.iso -enable-kvm
+
+iso_gen:
+	$(call run,ISO_GEN,)
+	./runtime/tools/make-cdrom.sh
 
 modules_gen:
 	$(call run,MOD_GEN,)
@@ -52,6 +59,8 @@ distclean: clean
 	rm -f $(DEPS)
 	rm -f $(ALL_PROGS)
 	rm -f runtime/include/tinypy/modules.h
+	rm -f root/kernel
+	rm -f pyr0s.iso
 	rm -f Makefile
 
 -include $(DEPS)

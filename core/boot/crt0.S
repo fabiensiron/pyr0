@@ -15,6 +15,11 @@ multiboot_header:
 	.long __begin_kernel
 	.long __end_load
 	.long __end_kernel
+	
+	.long 0x00000000
+	.long 0
+	.long 0
+	.long 32
 
 .global kernel_entry
 kernel_entry:
