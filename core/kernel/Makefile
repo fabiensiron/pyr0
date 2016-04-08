@@ -9,6 +9,7 @@ OBJS		:=	irq.o 		\
 			tty.o		\
 			serial.o	\
 			vsprintf.o	\
+			console.o	\
 			reboot.o
 
 PROGSUBDIRS	:=

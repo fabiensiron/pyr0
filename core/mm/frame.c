@@ -64,7 +64,7 @@ int frame_allocator_init(u32 mem_limit)
     FRAME_DESCR_ARRAY_ADDR +
     PAGE_ALIGN_UP((mem_upper >> PAGE_SHIFT)*sizeof(struct frame_descr));
 
-  printk(KERN_INFO, "%x\n", FRAME_DESCR_ARRAY_ADDR);
+  //  printk(KERN_INFO, "%x\n", FRAME_DESCR_ARRAY_ADDR);
 
   if (k_top >= mem_upper)
     return -1;

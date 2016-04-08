@@ -14,4 +14,8 @@
 void early_console_init (void);
 int early_kdebug (const char *s, size_t length);
 
+/* vga con_init */
+
+void console_init(u32);
+
 #endif /*!_CONSOLE_H_*/

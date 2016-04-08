@@ -72,6 +72,11 @@ typedef struct multiboot_info
   unsigned long mmap_addr;
   unsigned long drives_length;
   unsigned long drives_addr;
+  unsigned long config_table;
+  unsigned long boot_loader_name;
+  unsigned long apm_table;
+  unsigned long vbe_control_info;
+  unsigned long vbe_mode_info;
 } multiboot_info_t;
 
 /* The module structure.  */
@@ -118,6 +123,31 @@ typedef struct drive
   unsigned char drive_port2;
   unsigned char drive_port3;
 } drive_t;
+
+struct  __attribute__ ((packed)) vbe_info_t {
+  u16 attributes;
+  u8  winA, winB;
+  u16 granularity;
+  u16 winsize;
+  u16 segmentA, segmentB;
+  u32 realFctPtr;
+  u16 pitch;
+
+  u16 Xres, Yres;
+  u8  Wchar, Ychar, planes, bpp, banks;
+  u8  memory_model, bank_size, image_pages;
+  u8  reserved0;
+
+  u8  red_mask, red_position;
+  u8  green_mask, green_position;
+  u8  blue_mask, blue_position;
+  u8  rsv_mask, rsv_position;
+  u8  directcolor_attributes;
+
+  u32 physbase;
+  u32 reserved1;
+  u16 reserved2;
+};
 
 void dump_multiboot_info(multiboot_info_t *mbi);
 

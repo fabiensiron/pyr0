@@ -1,41 +1,45 @@
-#define MAGIC 0x1badb002
-#define FLAGS 0x07
 #define EARLY_STACK_SIZE 0x8000
+	.set ALIGN, 1 << 0
+	.set MEMINFO, 1 << 1
+	.set VIDINFO, 1 << 2
+	.set FLAGS, ALIGN | MEMINFO | VIDINFO
+
+	.set MAGIC,  0x1BADB002
+	.set CHECKSUM,  -(MAGIC+FLAGS)
 
 	.extern init_early_pagination
 	.extern setup_kernel
 
 .section .multiboot
 	.align 4
-multiboot_header:
 	.long MAGIC
 	.long FLAGS
-	.long -(MAGIC + FLAGS)
-	.long multiboot_header
-	.long __begin_kernel
-	.long __end_load
-	.long __end_kernel
+	.long CHECKSUM
+	.long 0, 0, 0, 0, 0
 	
 	.long 0x00000000
 	.long 0
 	.long 0
-	.long 32
+	.long 0
+
+.section .text
 
 .global kernel_entry
 kernel_entry:
 	cli
 	
 	movl $(_ebss+EARLY_STACK_SIZE), %esp
+	and $-16, %esp
 	movl $0, %ebp
 
 	pushl $0
 	popf
 
-	push %ebx /* multiboot_info_t */
-	push %eax /* magic */
-
-	lea setup_kernel, %ecx
-	call *%ecx
+	pushl %eax /* multiboot_info_t */
+	pushl %ebx /* magic */
+	
+	call setup_kernel
+	addl $4, %esp
 	
   /* because I'm paranoid */
 loop:
