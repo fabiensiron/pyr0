@@ -23,10 +23,23 @@ struct {
 
 void console_putchar(char n)
 {
-  video_putchar(console_info.x, console_info.y, ' ');
-  video_putchar(console_info.x, console_info.y, n);
-  console_info.y += (console_info.x + 1) / CHAR_PER_LINE;
-  console_info.x = (console_info.x + 1) % CHAR_PER_LINE;
+  /* special char */
+  switch (n)
+    {
+    case '\n':
+      {
+	console_info.y += 1;
+	console_info.x = 0;
+	break;
+      }
+    default:
+      {
+        video_putchar(console_info.x, console_info.y, ' ');
+	video_putchar(console_info.x, console_info.y, n);
+	console_info.y += (console_info.x + 1) / CHAR_PER_LINE;
+	console_info.x = (console_info.x + 1) % CHAR_PER_LINE;
+      }
+    }
 
   if (console_info.y == CHAR_PER_COLUMN)
     {
