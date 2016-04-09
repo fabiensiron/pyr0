@@ -61,7 +61,7 @@ void start_kernel(multiboot_info_t *info)
   //  if (!(info->flags & 0x400))
   //    panic("No video info\n");
 
-  console_init(0);
+  console_init();
 
   kmalloc_init();
   //  printk(KERN_INFO, "kmalloc init ...\n");
