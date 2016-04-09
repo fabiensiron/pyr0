@@ -18,6 +18,6 @@
 
 void video_putchar(int x, int y, char val);
 void video_scroll(unsigned n);
-void video_init(u32 physbase_);
+int video_init(u32 physbase_);
 
 #endif /*!_VIDEO_H_*/

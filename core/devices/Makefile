@@ -1,6 +1,6 @@
 CUR_DIR		:= core/devices/
 
-OBJS		:= pit.o
+OBJS		:= pit.o kbd.o
 
 PROGSUBDIRS	:=
 

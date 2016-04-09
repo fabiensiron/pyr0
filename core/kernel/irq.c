@@ -169,6 +169,7 @@ void do_IRQ(int irq)
 }
 
 extern void pit_init();
+extern void kbd_init();
 
 void init_IRQ(void)
 {
@@ -180,4 +181,5 @@ void init_IRQ(void)
     set_intr_gate(0x20+i, bad_interrupt[i]);
 
   pit_init();
+  kbd_init();
 }

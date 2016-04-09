@@ -8,6 +8,8 @@
 #include <atomos/video.h>
 #include <atomos/console.h>
 
+unsigned char console_is_init = 0;
+
 struct {
   unsigned x;
   unsigned y;
@@ -35,5 +37,8 @@ void console_putchar(char n)
 
 void console_init()
 {
-  video_init(0);
+  if (video_init(0) == -1)
+    return;
+
+  console_is_init = 1;
 }

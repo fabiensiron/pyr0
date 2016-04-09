@@ -84,7 +84,7 @@ void video_scroll(unsigned n)
 }
 
 
-void video_init(u32 physbase_)
+int video_init(u32 physbase_)
 {
   w = CON_WIDTH;
   h = CON_HEIGHT;
@@ -119,7 +119,7 @@ void video_init(u32 physbase_)
     }
 
   printk(KERN_INFO, "Video not found\n");
-  return;
+  return -1;
   
   goto resume;
 
@@ -131,4 +131,5 @@ void video_init(u32 physbase_)
 	  ((u32 *)vid_memory)[x + y * w] = 0xffffffff;
 	}
     }
+  return 0;
 }
