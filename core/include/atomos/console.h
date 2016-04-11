@@ -18,5 +18,6 @@ int early_kdebug (const char *s, size_t length);
 
 void console_init(void);
 void console_putchar(char n);
+size_t console_write(const char *buf, size_t len);
 
 #endif /*!_CONSOLE_H_*/

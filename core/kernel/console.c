@@ -48,6 +48,16 @@ void console_putchar(char n)
     }
 }
 
+size_t console_write(const char *buf, size_t len)
+{
+  unsigned i;
+  
+  for (i = 0; i< len; i++)
+    console_putchar(buf[i]);
+
+  return i;
+}
+
 void console_init()
 {
   if (video_init(0) == -1)

@@ -5,10 +5,13 @@
 
 #include <atomos/kernel.h>
 #include <atomos/serial.h>
+#include <atomos/console.h>
 #include <atomos/tty.h>
 
 #include <string.h>
  
+extern unsigned char console_is_init;
+
 int tty_is_init = 0;
 void rs_write(struct tty*);
 
@@ -121,8 +124,21 @@ void rs_write(struct tty *tty)
 		 tty->write_queue.len);
 }
 
+void con_write(struct tty *tty)
+{
+  if (tty->write_queue.len)
+    console_write(tty->write_queue.buf, tty->write_queue.len);
+}
+
 void tty_init()
 {
   tty_is_init = 1;
-  serial_init();
+  if (!console_is_init)
+    serial_init();
+
+  if (console_is_init)
+    {
+      tty_table[0].write = con_write;
+      tty_table[1].write = con_write;
+    }
 }
