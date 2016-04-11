@@ -18,7 +18,7 @@ s32 last_key = -1;
 extern unsigned char console_is_init;
 extern struct tty_queue *table_list[];
 
-u8 keymap[] = 
+u8 us_keymap[] = 
   {
     0, 0,  // 0x0
     '1','2','3','4','5','6','7','8','9','0', // 0x1
@@ -38,7 +38,7 @@ u8 keymap[] =
     0,0
   };
 
-u8 keymap_cap[] =
+u8 us_keymap_cap[] =
   {
     0, 0,  // 0x0
     '!','@','#','$','%','^','&','*','(',')', // 0x1
@@ -58,8 +58,70 @@ u8 keymap_cap[] =
     0,0
   };
 
+u8 dv_keymap[] = 
+  {
+    0, 0,  // 0x0
+    '1','2','3','4','5','6','7','8','9','0', // 0x1
+    '[',']', '\b', '\t',  // 0x0c
+    '\'',',','.','p','y','f','g','c','r','l', // 0x10
+    '/','=', '\n', 0, // 0x1A
+    'a','o','e','u','i','d','h','t','n', // 0x1e
+    's','-','`', 0,'\\', //0x27
+    ';','q','j','k','x','b','m', // 0x2c
+    'w','v','z', 0,'*', 0,' ', 0, //0x33
+    0,0,0,0,
+    0,0,0,0,
+    0,0,0,0,
+    '7','8','9','-','4','5','6','+', // 0x47
+    '1','2','3','0','.', // 0x4f
+    0,0,0,0,
+    0,0
+  };
+
+u8 dv_keymap_cap[] =
+  {
+    0, 0,  // 0x0
+    '!','@','#','$','%','^','&','*','(',')', // 0x1
+    '{','}', '\b', '\t',  // 0x0c
+    '"','<','>','P','Y','F','G','C','R','L', // 0x10
+    '?','+', '\n', 0, // 0x1A
+    'A','O','E','U','I','D','H','T','N', // 0x1e
+    'S','_','~', 0,'|', //0x27
+    ':','Q','J','K','X','B','M', // 0x2c
+    'W','V','Z', 0,'*', 0,' ', 0, //0x33
+    0,0,0,0,
+    0,0,0,0,
+    0,0,0,0,
+    '7','8','9','-','4','5','6','+', // 0x47
+    '1','2','3','0','.', // 0x4f
+    0,0,0,0,
+    0,0
+  };
+
+static u8 *keymap = us_keymap;
+static u8 *keymap_cap = us_keymap_cap;
+
+void kbd_set_keymap(u8 keymap_ /* 0 for us, 1 for dv */)
+{
+  switch (keymap_)
+    {
+    case 0:
+      {
+	keymap = us_keymap;
+	keymap_cap = us_keymap_cap;
+	break;
+      }
+    case 1:
+      {
+	keymap = dv_keymap;
+	keymap_cap = dv_keymap_cap;
+	break;
+      }
+    }
+}
+
 void kbd_wrapper (void);
-n
+
 void kbd_routine (void)
 {
   static u8  shift_modifier = 0;
