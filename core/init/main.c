@@ -12,6 +12,7 @@
 #include <atomos/mman.h>
 #include <atomos/serial.h>
 #include <atomos/tty.h>
+#include <atomos/cpuinfo.h>
 
 #include <asm/system.h>
 #include <asm/pgtable.h>
@@ -25,13 +26,13 @@ extmodule_t boot_module;
 void start_kernel(multiboot_info_t *info)
 {
   unsigned long long int i;
-  
+
   early_printk("start kernel ...\n");
-  
+
   assert(info->flags & (1 << 6));
 
   memory_map_t *mmap = (void *)info->mmap_addr;
-  
+
   while ((u32)mmap < info->mmap_addr + info->mmap_length)
     {
       if (mmap->type == 2)
@@ -44,16 +45,18 @@ void start_kernel(multiboot_info_t *info)
 	}
       mmap = (memory_map_t *)((u32)mmap + mmap->size + sizeof(u32));
     }
-  
+
   /* mem/paging */
   if (paging_init())
     panic("Fatal error: memory cannot be mapped\n");
-  
+
   console_init();
   tty_init();
 
   kmalloc_init();
-  
+
+  cpuinfo_dump();
+
   printk(KERN_INFO, "Atomos boot process done\n");
 
   if (info->mods_count == 0)
