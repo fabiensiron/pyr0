@@ -1,0 +1,27 @@
+Here is the goal features we want:
+
+Userland
+\ rmodules
+* pyr0.crypto
+* pyr0.boot-repair
+* pyr0.os-installer
+* pyr0.hardware
+* pyr0.network
+* pyr0.as/disas
+* pyr0.forensic
+(* pyr0.embedded)
+
+\ core
+* ls
+* cat
+* mount
+etc...
+/!\ only tmpdir is read/write
+
+\ features
+* jit
+* vfs
+* code rewrite during runtime
+* full text userland
+* dynamic C (maybe c++ or d) modules
+* language based operating system
