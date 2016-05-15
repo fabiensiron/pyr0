@@ -31,27 +31,17 @@ void setup_kernel (multiboot_info_t *info, unsigned long magic)
 
   assert(magic == MULTIBOOT_BOOTLOADER_MAGIC);
 
-  //  early_printk ("\n\nThis is ATOMOS booting pyr0\n");
-  //  early_printk ("boot sequence ...\n");
-
   init_early_pagination ();
-  //  early_printk ("early paging init\n");
   
   cpu_init ();
-  //  early_printk ("cpu init\n");
   
   trap_init ();
-  //  early_printk ("traps init\n");
 
   init_IRQ ();
-  //  early_printk ("irq init\n");
 
   sti();
-  //  early_printk ("interrupts enabled !\n");
 
   /* okay, this is a *ugly* hack, but it works if there is only 1 module */
-  //  if (info->mods_count == 0)
-  //    panic("Nothing to boot, processor halt...\n");
   if (info->mods_count != 0)
     {
       boot_module.addr = 0x4000;
@@ -67,8 +57,6 @@ void setup_kernel (multiboot_info_t *info, unsigned long magic)
     }
 
   u32 nr_frames = frame_allocator_init(info->mem_upper * 1024);
-
-  //  early_printk("Memory init %i frames\n", nr_frames);
 
   //  load_stack_info(); // FIXME
 
