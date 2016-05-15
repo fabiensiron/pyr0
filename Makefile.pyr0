@@ -1,4 +1,5 @@
 QEMU			:= qemu-system-i386
+CMDLINE			:= `cat core/cmdline`
 
 PYR0_TARGET		:= pyr0
 PYR0_ROM		:= root/python/hw.py
@@ -26,28 +27,34 @@ pyr0_LDFLAGS		?=
 
 include $Omk/prog.mk
 
-.PHONY: all boot boot-i debug modules_gen iso iso_gen
-all: modules_gen $(PROG)
+.PHONY: all boot boot-i debug modules_gen cmdline_gen iso iso_gen
+all: pre_gen $(PROG)
 
 boot-i: $(PROG)
-	$(QEMU) -monitor pty -serial stdio -kernel $< -nographic
+	$(QEMU) -monitor pty -serial stdio -kernel $< -nographic -append "$(CMDLINE)"
 
 boot: $(PROG)
-	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic
+	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic -append "$(CMDLINE)"
 
 debug: $(PROG)
-	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic -s -S
+	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic -s -S -append "$(CMDLINE)"
 
 iso: $(PROG) iso_gen
-	$(QEMU) -monitor pty -serial stdio -vga std -m 512 -cdrom pyr0s.iso -enable-kvm
+	$(QEMU) -monitor pty -serial stdio -vga std -m 512 -cdrom pyr0s.iso -enable-kvm -append "$(CMDLINE)"
 
 iso_gen:
 	$(call run,ISO_GEN,)
 	./runtime/tools/make-cdrom.sh
 
+pre_gen: cmdline_gen modules_gen
+
 modules_gen:
 	$(call run,MOD_GEN,)
 	./runtime/tools/modules_table_gen.pl
+
+cmdline_gen:
+	$(call run,CMD_GEN,)
+	./tools/cmdline_table_gen.pl
 
 .PHONY: clean distclean
 clean:
@@ -59,6 +66,8 @@ distclean: clean
 	rm -f $(DEPS)
 	rm -f $(ALL_PROGS)
 	rm -f runtime/include/tinypy/modules.h
+	rm -f core/kernel/cmdline_struct.h
+	rm -f core/include/atomos/cmdline_list.h
 	rm -f root/kernel
 	rm -f pyr0s.iso
 	rm -f Makefile

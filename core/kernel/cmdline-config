@@ -1,0 +1,12 @@
+# arg := type(I, B or S for resp integer, boolean or string)
+ARG_VERSION    := S
+ARG_NAME       := S
+ARG_VERBOSE    := B
+ARG_DEBUG      := B
+ARG_ROOT       := S
+ARG_LOG        := I
+ARG_VIDEO      := S
+ARG_VIDEOSIZE  := S
+ARG_INIT       := S # executed before everything
+ARG_SINGLE     := S # if single
+ARG_MODE       := S # single or interpret(default)

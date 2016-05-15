@@ -8,6 +8,7 @@
 #include <atomos/kernel.h>
 #include <atomos/console.h>
 #include <atomos/serial.h>
+#include <atomos/cmdline.h>
 
 #include <asm/processor.h>
 #include <asm/system.h>
@@ -26,20 +27,23 @@ extern void trap_init ();
 extern void init_IRQ ();
 
 void setup_kernel (multiboot_info_t *info, unsigned long magic)
-{ 
+{
   serial_early_init();
 
   assert(magic == MULTIBOOT_BOOTLOADER_MAGIC);
 
   init_early_pagination ();
-  
+
   cpu_init ();
-  
+
   trap_init ();
 
   init_IRQ ();
 
   sti();
+
+  size_t cmdline_len = strlen((char *)info->cmdline);
+  cmdline_parse((char *)info->cmdline, cmdline_len);
 
   /* okay, this is a *ugly* hack, but it works if there is only 1 module */
   if (info->mods_count != 0)
