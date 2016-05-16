@@ -40,17 +40,17 @@ debug: $(PROG)
 	$(QEMU) -monitor pty -serial stdio -kernel $< -initrd $(PYR0_ROM) -nographic -s -S -append "$(CMDLINE)"
 
 iso: $(PROG) iso_gen
-	$(QEMU) -monitor pty -serial stdio -vga std -m 512 -cdrom pyr0s.iso -enable-kvm -append "$(CMDLINE)"
+	$(QEMU) -monitor pty -serial stdio -vga std -m 512 -cdrom pyr0s.iso -enable-kvm # -append "$(CMDLINE)"
 
 iso_gen:
 	$(call run,ISO_GEN,)
-	./runtime/tools/make-cdrom.sh
+	./tools/make-cdrom.sh
 
 pre_gen: cmdline_gen modules_gen
 
 modules_gen:
 	$(call run,MOD_GEN,)
-	./runtime/tools/modules_table_gen.pl
+	./tools/modules_table_gen.pl
 
 cmdline_gen:
 	$(call run,CMD_GEN,)
