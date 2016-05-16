@@ -17,11 +17,11 @@ sub print_header {
 sub generate_table {
     my ($filename, $table) = @_;
     my $fd;
-    
+
     open($fd, ">", $filename) or die("open: $!");
 
     print_header($fd);
-    
+
     print($fd "#ifndef _MODULES_H_\n# define _MODULES_H_\n\n");
 
     print($fd "#include <tinypy/tp.h>\n\n");
