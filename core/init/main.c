@@ -13,59 +13,63 @@
 #include <atomos/serial.h>
 #include <atomos/tty.h>
 #include <atomos/cpuinfo.h>
+#include <atomos/cmdline.h>
 
 #include <asm/system.h>
 #include <asm/pgtable.h>
 
 #include "../boot/multiboot.h"
 
-extern void start_runtime (void *p, long len, char *name);
-
 extmodule_t boot_module;
 
 void start_kernel(multiboot_info_t *info)
 {
-  unsigned long long int i;
+	unsigned long long int i;
+	struct runtime_opt opts;
 
-  early_printk("start kernel ...\n");
+	early_printk("start kernel ...\n");
 
-  assert(info->flags & (1 << 6));
+	assert(info->flags & (1 << 6));
 
-  memory_map_t *mmap = (void *)info->mmap_addr;
+	memory_map_t *mmap = (void *)info->mmap_addr;
 
-  while ((u32)mmap < info->mmap_addr + info->mmap_length)
-    {
-      if (mmap->type == 2)
+	while ((u32)mmap < info->mmap_addr + info->mmap_length)
 	{
-	  for (i = 0; i < mmap->length_low; i += 0x1000)
-	    {
-	      if (mmap->base_addr_high > 0) continue;
-	      frame_ref_once ((mmap->base_addr_low + i) & PAGE_MASK);
-	    }
+		if (mmap->type == 2)
+		{
+			for (i = 0; i < mmap->length_low; i += 0x1000)
+			{
+				if (mmap->base_addr_high > 0) continue;
+				frame_ref_once ((mmap->base_addr_low + i) & PAGE_MASK);
+			}
+		}
+		mmap = (memory_map_t *)((u32)mmap + mmap->size + sizeof(u32));
 	}
-      mmap = (memory_map_t *)((u32)mmap + mmap->size + sizeof(u32));
-    }
 
-  /* mem/paging */
-  if (paging_init())
-    panic("Fatal error: memory cannot be mapped\n");
+	/* mem/paging */
+	if (paging_init())
+		panic("Fatal error: memory cannot be mapped\n");
 
-  console_init();
-  tty_init();
+	console_init();
+	tty_init();
 
-  kmalloc_init();
+	kmalloc_init();
 
-  cpuinfo_dump();
+	cpuinfo_dump();
 
-  printk(KERN_INFO, "Atomos boot process done\n");
+	cmdline_fill_opts(&opts);
 
-  if (info->mods_count == 0)
-    start_runtime(NULL, 0, NULL);
-  else
-    start_runtime((void *)boot_module.addr, (long)boot_module.len, boot_module.name);
+	printk(KERN_INFO, "Atomos boot process done\n");
 
-  for (;;)
-    ;
+	if (info->mods_count == 0)
+		start_runtime(NULL, 0, NULL, &opts);
+	else
+		start_runtime((void *)boot_module.addr,
+			      (long)boot_module.len,
+			      boot_module.name, &opts);
+
+	for (;;)
+		;
 }
 
 void init(void)

@@ -39,4 +39,13 @@ void panic(const char *s);
 
 void reboot(void);
 
+/* runtime */
+
+struct runtime_opt {
+	char *os_name;
+	char *os_version;
+};
+
+void start_runtime (void *p, long len, char *name, struct runtime_opt *);
+
 #endif /* !_KERNEL_H_ */

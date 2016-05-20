@@ -106,6 +106,11 @@ get_boolean_arg (int var) {
 	return 0;
 }
 
+void cmdline_fill_opts(struct runtime_opt *opts) {
+	opts->os_name    = get_str_arg (ARG_NAME);
+	opts->os_version = get_str_arg (ARG_VERSION);
+}
+
 void cmdline_parse(char *cmdline, size_t cmdline_len)
 {
 	size_t len, offset = 0;
