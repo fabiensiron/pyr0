@@ -80,6 +80,22 @@ save_arg(const char *cmdline, int var, size_t len, size_t total_len) {
 	return local_len;
 }
 
+static inline int
+is_var(char *cmdline, size_t p)
+{
+	return cmdline[p] == '=';
+}
+
+static void
+skip_first(char **cmdline, size_t *offset, size_t len)
+{
+	if (!is_var(*cmdline, len))
+	{
+		*cmdline += (len + 1);
+		*offset += (len + 1);
+	}
+}
+
 char *
 get_str_arg (int var) {
 	if (!mod_param[var].present)
@@ -118,8 +134,7 @@ void cmdline_parse(char *cmdline, size_t cmdline_len)
 
 	/* skip first */
 	len = wlen(cmdline);
-	cmdline += (len + 1);
-	offset += (len + 1);
+	skip_first(&cmdline, &offset, len);
 
 	do {
 		len = lookup_var(cmdline, &var, cmdline_len - offset);
