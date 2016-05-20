@@ -65,26 +65,8 @@ char *sub_interpreter(char *buf, unsigned len_)
 char *interpreter_launch_code = "_INTERPRETER_ = True\n";
 
 /* prelude code */
-char *prelude_code =
-	"def credits():\n"
-	"  print(\"Thanks to Tinypy for the base interpreter, BSDs and Apple for the library, \")\n"
-	"  print(\"and stos project for the build system.\")\n"
-	"  print(\"All the remaining code was made by Fabien Siron (me).\")\n"
-	"  print(\"If you want to contact me, please send me an email: fabien.siron@epita.fr\")\n"
-	"\n"
-	"def help():\n"
-	"  print(\"You probably looking for that because some python's feature doesn't work.\")\n"
-	"  print(\"It's totally normal as tinypy is just an experimental system for the moment.\")\n"
-	"  print(\"So, be patient, or if you want, send me an email at fabien.siron@epita.fr\")\n"
-	"\n"
-	"def contribute():\n"
-	"  print(\"If you want to contribute, it's fairly simple: you have to send patch with\")\n"
-	"  print(\"Github pull request feature at https://github.com/Saruta/pyr0.\")\n"
-	"\n"
-	"def why():\n"
-	"  print(\"Why pyr0?\")\n"
-	"  print(\"> why not :-)\")\n"
-	"\n";
+
+#include "runtime-prologue.hpy"
 
 static
 void print_header(char *name, char *version)
@@ -126,7 +108,7 @@ void start_interpreter_loop(struct runtime_opt *opt)
 
 	globals = tp_dict(tp);
 
-	tp_eval(tp, prelude_code, globals);
+	tp_eval(tp, runtime_prologue_code, globals);
 
 	print_header(opt->os_name, opt->os_version);
 
