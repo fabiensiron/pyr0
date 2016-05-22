@@ -14,6 +14,14 @@ tp_obj os_reboot(TP);
 tp_obj os_halt(TP);
 tp_obj os_loadkeys(TP);
 
+static char *help =
+	"OS routines for pyr0.\n"
+	"\n"
+	"This exports:\n"
+	"\t* os.reboot which reboot the system\n"
+	"\t* os.halt which quits the system\n"
+	"\t* os.loadkeys loads the given keymap in graphical mode (\"dvorak\" or \"us\")\n";
+
 void os_init(TP)
 {
   /* module */
@@ -27,7 +35,7 @@ void os_init(TP)
 
   /* special attributes */
   tp_set(tp, os_mod, tp_string("__doc__"),
-	 tp_string("This module contains the OS routines."));
+	 tp_string(help));
   tp_set(tp, os_mod, tp_string("__name__"), tp_string("os"));
   tp_set(tp, os_mod, tp_string("__file__"), tp_string(__FILE__));
 
