@@ -5,10 +5,10 @@
  * Description: printk and early_printk
  */
 
-#include <atomos/kernel.h>
-#include <atomos/serial.h>
-#include <atomos/tty.h>
-#include <atomos/stdarg.h>
+#include <kernel/kernel.h>
+#include <kernel/serial.h>
+#include <kernel/tty.h>
+#include <kernel/stdarg.h>
 
 extern int vsprintf(char *buf, const char *fmt, va_list args);
 

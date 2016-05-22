@@ -8,9 +8,9 @@
 #ifndef _KERNEL_H_
 # define _KERNEL_H_
 
-# include <atomos/types.h>
-# include <atomos/panic.h>
-# include <atomos/stddef.h>
+# include <kernel/types.h>
+# include <kernel/panic.h>
+# include <kernel/stddef.h>
 
 # include "../../boot/multiboot.h"
 

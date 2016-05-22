@@ -28,7 +28,7 @@
 #ifndef _STDLIB_H_
 #define _STDLIB_H_
 
-#include <atomos/kernel.h>
+#include <kernel/kernel.h>
 
 #include <malloc.h>
 #include <string.h>

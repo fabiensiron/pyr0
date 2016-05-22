@@ -8,8 +8,8 @@
 #include <tinypy/dict.h>
 #include <tinypy/string.h>
 
-#include <atomos/kernel.h>
-#include <atomos/cpuinfo.h>
+#include <kernel/kernel.h>
+#include <kernel/cpuinfo.h>
 
 static inline void
 show_processor(void)

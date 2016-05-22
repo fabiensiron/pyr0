@@ -93,7 +93,7 @@
 #include <sys/null.h>
 #endif
 #if defined(__ATOMOS__)
-#include <atomos/types.h>
+#include <kernel/types.h>
 #endif
 
 /*

@@ -5,17 +5,17 @@
  * Description: mostly arch-dependent setup
  */
 
-#include <atomos/kernel.h>
-#include <atomos/console.h>
-#include <atomos/serial.h>
-#include <atomos/cmdline.h>
+#include <kernel/kernel.h>
+#include <kernel/console.h>
+#include <kernel/serial.h>
+#include <kernel/cmdline.h>
 
 #include <asm/processor.h>
 #include <asm/system.h>
 #include <asm/pgtable.h>
 
-#include <atomos/mm.h>
-#include <atomos/page.h>
+#include <kernel/mm.h>
+#include <kernel/page.h>
 
 #include <string.h>
 

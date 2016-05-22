@@ -9,7 +9,7 @@
 # define _ASM_DESC_H_
 
 /* types about descriptors (aka: asm/desc_defs.h in linux) */
-# include <atomos/types.h>
+# include <kernel/types.h>
 
 struct desc_struct
 {

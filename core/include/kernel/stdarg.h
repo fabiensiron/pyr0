@@ -7,7 +7,7 @@
 #ifndef _STDARG_H_
 # define _STDARG_H_
 
-# include <atomos/stddef.h>
+# include <kernel/stddef.h>
 
 typedef void* va_list;
 

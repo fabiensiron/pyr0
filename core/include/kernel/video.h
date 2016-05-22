@@ -8,7 +8,7 @@
 #ifndef _VIDEO_H_
 # define _VIDEO_H_
 
-# include <atomos/types.h>
+# include <kernel/types.h>
 
 # define CON_WIDTH 1024
 # define CON_HEIGHT 768

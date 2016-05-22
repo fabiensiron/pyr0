@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#include <atomos/tty.h>
+#include <kernel/tty.h>
 
 char *
 gets(char *buf)

@@ -59,7 +59,7 @@
 
 #include <string.h>
 #include <ctype.h>
-#include <atomos/types.h>
+#include <kernel/types.h>
 
 /* Define this as a fall through, HAVE_STDARG_H is probably already set */
 

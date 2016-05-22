@@ -5,15 +5,15 @@
  * Description: setup the operating system (mostly non arch-dependent) and 
  *   spawn the first process (init)
  */
-#include <atomos/kernel.h>
-#include <atomos/console.h>
-#include <atomos/mm.h>
-#include <atomos/kmalloc.h>
-#include <atomos/mman.h>
-#include <atomos/serial.h>
-#include <atomos/tty.h>
-#include <atomos/cpuinfo.h>
-#include <atomos/cmdline.h>
+#include <kernel/kernel.h>
+#include <kernel/console.h>
+#include <kernel/mm.h>
+#include <kernel/kmalloc.h>
+#include <kernel/mman.h>
+#include <kernel/serial.h>
+#include <kernel/tty.h>
+#include <kernel/cpuinfo.h>
+#include <kernel/cmdline.h>
 
 #include <asm/system.h>
 #include <asm/pgtable.h>

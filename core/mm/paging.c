@@ -4,11 +4,11 @@
  *
  * Description: table management, page allocation, page_fault
  */
-#include <atomos/kernel.h>
-#include <atomos/types.h>
-#include <atomos/mm.h>
-#include <atomos/mman.h>
-#include <atomos/console.h>
+#include <kernel/kernel.h>
+#include <kernel/types.h>
+#include <kernel/mm.h>
+#include <kernel/mman.h>
+#include <kernel/console.h>
 
 #include <asm/pgtable.h>
 

@@ -12,7 +12,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <ctype.h>
-#include <atomos/kernel.h>
+#include <kernel/kernel.h>
 //#include <linux/string.h>
 //#include <linux/ctype.h>
 

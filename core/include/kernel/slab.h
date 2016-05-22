@@ -8,8 +8,8 @@
 #ifndef _SLAB_H_
 # define _SLAB_H_
 
-# include <atomos/vmm.h>
-# include <atomos/kernel.h>
+# include <kernel/vmm.h>
+# include <kernel/kernel.h>
 
 struct slab_cache;
 struct slab;

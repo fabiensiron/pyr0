@@ -3,7 +3,7 @@
  * Author: Fabien Siron <fabien.siron@epita.fr>
  */
 
-#include <atomos/kernel.h>
+#include <kernel/kernel.h>
 #include <stdio.h>
 #include <setjmp.h>
 

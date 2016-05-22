@@ -10,7 +10,7 @@
 # include <asm/system.h>
 # include <asm/desc.h>
 
-# include <atomos/kernel.h>
+# include <kernel/kernel.h>
 
 struct gate_desc idt_table[IDT_ENTRIES] = { 0, };
 

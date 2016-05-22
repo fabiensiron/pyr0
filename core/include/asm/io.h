@@ -8,7 +8,7 @@
 #ifndef _IOPORT_H_
 # define _IOPORT_H_
 
-# include <atomos/types.h>
+# include <kernel/types.h>
 
 static inline
 void outb(u16 p, u8 v)

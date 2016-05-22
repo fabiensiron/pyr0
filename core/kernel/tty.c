@@ -3,10 +3,10 @@
  * Author: Fabien Siron <fabien.siron@epita.fr>
  */
 
-#include <atomos/kernel.h>
-#include <atomos/serial.h>
-#include <atomos/console.h>
-#include <atomos/tty.h>
+#include <kernel/kernel.h>
+#include <kernel/serial.h>
+#include <kernel/console.h>
+#include <kernel/tty.h>
 
 #include <string.h>
  

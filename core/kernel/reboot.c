@@ -3,7 +3,7 @@
  * Author: Fabien Siron <fabien.siron@epita.fr>
  *
  */
-#include <atomos/kernel.h>
+#include <kernel/kernel.h>
 
 #include <asm/io.h>
 #include <asm/system.h>

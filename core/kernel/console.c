@@ -5,8 +5,8 @@
  * Description: system console
  */
 
-#include <atomos/video.h>
-#include <atomos/console.h>
+#include <kernel/video.h>
+#include <kernel/console.h>
 
 unsigned char console_is_init = 0;
 

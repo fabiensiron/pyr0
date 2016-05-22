@@ -5,15 +5,15 @@
  * Description: physical contiguous memory allocation (kmalloc)
  */
 
-#include <atomos/kernel.h>
-#include <atomos/mm.h>
-#include <atomos/mman.h>
-#include <atomos/kmalloc.h>
+#include <kernel/kernel.h>
+#include <kernel/mm.h>
+#include <kernel/mman.h>
+#include <kernel/kmalloc.h>
 
 #include <asm/pgtable.h>
 
 /*
- * tmp malloc of atomos/pyr0
+ * tmp malloc of kernel/pyr0
  * dummy first fit on 4 MB
  */
 

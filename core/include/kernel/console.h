@@ -8,7 +8,7 @@
 #ifndef _CONSOLE_H_
 # define _CONSOLE_H_
 
-# include <atomos/types.h>
+# include <kernel/types.h>
 
 /* early stuff */
 void early_console_init (void);

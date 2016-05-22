@@ -120,5 +120,5 @@ sub dump_args {
 }
 
 my $args = dump_args("core/kernel/cmdline-config");
-generate_enum_table("core/include/atomos/cmdline_list.h", $args);
+generate_enum_table("core/include/kernel/cmdline_list.h", $args);
 generate_struct_table("core/kernel/cmdline_struct.h", $args);

@@ -6,9 +6,9 @@
  *   [0x000000-0x400000]
  */
 
-#include <atomos/types.h>
-#include <atomos/mm.h>
-#include <atomos/page.h>
+#include <kernel/types.h>
+#include <kernel/mm.h>
+#include <kernel/page.h>
 
 #include <asm/pgtable.h>
 #include <asm/system.h>

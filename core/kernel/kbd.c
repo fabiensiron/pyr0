@@ -4,10 +4,10 @@
  *
  */
 
-#include <atomos/kernel.h>
-#include <atomos/interrupt.h>
-#include <atomos/console.h>
-#include <atomos/tty.h>
+#include <kernel/kernel.h>
+#include <kernel/interrupt.h>
+#include <kernel/console.h>
+#include <kernel/tty.h>
 
 #include <asm/io.h>
 

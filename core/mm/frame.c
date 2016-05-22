@@ -4,10 +4,10 @@
  *
  * Description: frame (physical pages) management
  */
-#include <atomos/kernel.h>
-#include <atomos/types.h>
-#include <atomos/mm.h>
-#include <atomos/page.h>
+#include <kernel/kernel.h>
+#include <kernel/types.h>
+#include <kernel/mm.h>
+#include <kernel/page.h>
 
 #include <bsd/queue.h>
 

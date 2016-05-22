@@ -8,7 +8,7 @@
 #ifndef _SYSTEM_H_
 # define _SYSTEM_H_
 
-# include <atomos/types.h>
+# include <kernel/types.h>
 # include <asm/segment.h>
 
 # define DEF_SEG(Name)						\

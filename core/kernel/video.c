@@ -5,10 +5,10 @@
  * Description: little svga driver
  */
 
-#include <atomos/kernel.h>
-#include <atomos/mm.h>
-#include <atomos/mman.h>
-#include <atomos/video.h>
+#include <kernel/kernel.h>
+#include <kernel/mm.h>
+#include <kernel/mman.h>
+#include <kernel/video.h>
 
 #include <asm/pgtable.h>
 

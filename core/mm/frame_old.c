@@ -5,8 +5,8 @@
  * Description: physical memory manager
  */
 
-# include <atomos/kernel.h>
-# include <atomos/page.h>
+# include <kernel/kernel.h>
+# include <kernel/page.h>
 
 # include <asm/pgtable.h>
 

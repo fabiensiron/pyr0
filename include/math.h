@@ -17,8 +17,8 @@
 #ifndef _MATH_H_
 #define	_MATH_H_
 
-#include <atomos/kernel.h>
-#include <atomos/limits.h>
+#include <kernel/kernel.h>
+#include <kernel/limits.h>
 
 double	acos(double);
 double	asin(double);

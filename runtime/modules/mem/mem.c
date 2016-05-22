@@ -6,7 +6,7 @@
 #include <tinypy/dict.h>
 #include <tinypy/string.h>
 
-#include <atomos/kernel.h>
+#include <kernel/kernel.h>
 
 extern void *brk_base;
 extern void *brk_limit;

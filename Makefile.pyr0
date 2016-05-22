@@ -72,7 +72,7 @@ distclean: clean
 	rm -f $(ALL_PROGS)
 	rm -f runtime/include/tinypy/modules.h
 	rm -f core/kernel/cmdline_struct.h
-	rm -f core/include/atomos/cmdline_list.h
+	rm -f core/include/kernel/cmdline_list.h
 	rm -f runtime/runtime-prologue.hpy
 	rm -f root/kernel
 	rm -f pyr0s.iso

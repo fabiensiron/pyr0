@@ -5,7 +5,7 @@
  * Description: init the cpu (gdt, idt, tss ...)
  */
 
-#include <atomos/kernel.h>
+#include <kernel/kernel.h>
 #include <asm/segment.h>
 #include <asm/desc.h>
 #include <asm/system.h>

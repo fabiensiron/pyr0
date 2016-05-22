@@ -9,7 +9,7 @@
  */
 
 #include <string.h>
-#include <atomos/cpuinfo.h>
+#include <kernel/cpuinfo.h>
 
 const char *feature_names[] = {
 	"fpu", "vme", "de", "pse", "tsc", "msr", "pae", "mce", "cx8",

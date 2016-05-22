@@ -40,7 +40,7 @@
 #ifndef _CTYPE_H_
 #define _CTYPE_H_
 
-#include <atomos/kernel.h>
+#include <kernel/kernel.h>
 
 #define	_U	0x01
 #define	_L	0x02

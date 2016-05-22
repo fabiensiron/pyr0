@@ -8,7 +8,7 @@
 #ifndef _PROCESSOR_H_
 # define _PROCESSOR_H_
 
-# include <atomos/types.h>
+# include <kernel/types.h>
 # include <asm/system.h>
 
 struct tss

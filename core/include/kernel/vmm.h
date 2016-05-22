@@ -7,8 +7,8 @@
 #ifndef _VMM_H_
 # define _VMM_H_
 
-# include <atomos/slab.h>
-# include <atomos/kernel.h>
+# include <kernel/slab.h>
+# include <kernel/kernel.h>
 
 struct vmm_range;
 

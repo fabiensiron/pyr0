@@ -5,7 +5,7 @@
 #ifndef _TIME_H_
 #define _TIME_H_
 
-#include <atomos/kernel.h>
+#include <kernel/kernel.h>
 
 #define CLOCKS_PER_SEC     1000000
 

@@ -8,8 +8,8 @@
 #ifndef _MM_H_
 # define _MM_H_
 
-# include <atomos/types.h>
-# include <atomos/page.h>
+# include <kernel/types.h>
+# include <kernel/page.h>
 
 # define PDBOOT_ADDR     0x0000
 # define PTBOOT_ADDR     0x1000

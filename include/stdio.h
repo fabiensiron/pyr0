@@ -9,7 +9,7 @@
 # define _STDIO_H_
 
 # include <stdarg.h>
-# include <atomos/kernel.h>
+# include <kernel/kernel.h>
 
 /* int printf(const char *fmt, ...); */
 

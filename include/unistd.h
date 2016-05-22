@@ -5,8 +5,8 @@
 #ifndef _UNISTD_H_
 #define _UNISTD_H_
 
-# include <atomos/kernel.h>
-# include <atomos/tty.h>
+# include <kernel/kernel.h>
+# include <kernel/tty.h>
 
 extern int close(int);
 //extern off_t lseek(int, off_t, int);

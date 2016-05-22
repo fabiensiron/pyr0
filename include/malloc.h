@@ -7,8 +7,8 @@
 #ifndef _MALLOC_H_
 #define _MALLOC_H_
 
-#include <atomos/types.h>
-#include <atomos/kmalloc.h>
+#include <kernel/types.h>
+#include <kernel/kmalloc.h>
 
 static inline void *malloc(size_t s)
 {
