@@ -13,6 +13,15 @@ tp_obj mem_used(TP);
 tp_obj mem_available(TP);
 tp_obj mem_len(TP);
 
+static char *help =
+	"Debug routines for dynamic memory allocation (malloc/free family)\n"
+	"\n"
+	"This exports:\n"
+	"\t* mem.get_brk gives the current brk pointer\n"
+	"\t* mem.used gives how much memory is used\n"
+	"\t* mem.available gives how much memory is available\n"
+	"\t* mem.len gives the memory length\n";
+
 void mem_init(TP)
 {
   /* module */
@@ -26,8 +35,7 @@ void mem_init(TP)
 
   /* special attributes */
   tp_set(tp, mem_mod, tp_string("__doc__"),
-	 tp_string("This module contains debug routines for dynamic"
-		   "memory allocation (malloc/free)."));
+	 tp_string(help));
   tp_set(tp, mem_mod, tp_string("__name__"), tp_string("mem"));
   tp_set(tp, mem_mod, tp_string("__file__"), tp_string(__FILE__));
 
