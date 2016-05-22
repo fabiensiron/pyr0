@@ -3,8 +3,8 @@
  * Author: Fabien Siron <fabien.siron@epita.fr>
  */
 
-#include <atomos/kernel.h>
-#include <atomos/vfs.h>
+#include <kernel/pyr0.h>
+#include <kernel/vfs.h>
 
 static struct inode inode_array[INODE_ARRAY_LEN];
 static struct filedesc fds;

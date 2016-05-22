@@ -13,6 +13,7 @@
 #include <kernel/tty.h>
 #include <kernel/cpuinfo.h>
 #include <kernel/cmdline.h>
+#include <kernel/vfs.h>
 
 #include <asm/system.h>
 #include <asm/pgtable.h>

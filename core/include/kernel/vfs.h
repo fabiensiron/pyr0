@@ -6,7 +6,7 @@
 #ifndef _VFS_H_
 # define _VFS_H_
 
-# include <atomos/kernel.h>
+# include <kernel/pyr0.h>
 
 struct fops;
 struct iops;
