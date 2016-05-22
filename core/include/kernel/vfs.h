@@ -60,7 +60,7 @@ struct filedesc {
 
 struct fs {
 	const char name[32];
-	struct inode root;
+	struct fops fops;
 };
 
 struct vfs {

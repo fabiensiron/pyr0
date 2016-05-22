@@ -31,6 +31,17 @@ int register_fs(struct fs *fs) {
 	return 0;
 }
 
+struct fs *
+find_fs(const char *name) {
+	int i;
+	for (i = 0; i < fs_vector.size; ++i) {
+		if (strcmp(fs_vector.fs[i].name, name) == 0)
+			return &fs_vector.fs[i];
+	}
+
+	return NULL;
+}
+
 void vfs_init(void) {
 	/* instal fds */
 	int i;
