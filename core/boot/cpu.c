@@ -5,7 +5,7 @@
  * Description: init the cpu (gdt, idt, tss ...)
  */
 
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 #include <asm/segment.h>
 #include <asm/desc.h>
 #include <asm/system.h>

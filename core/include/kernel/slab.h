@@ -9,7 +9,7 @@
 # define _SLAB_H_
 
 # include <kernel/vmm.h>
-# include <kernel/kernel.h>
+# include <kernel/pyr0.h>
 
 struct slab_cache;
 struct slab;

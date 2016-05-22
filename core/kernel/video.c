@@ -5,7 +5,7 @@
  * Description: little svga driver
  */
 
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 #include <kernel/mm.h>
 #include <kernel/mman.h>
 #include <kernel/video.h>

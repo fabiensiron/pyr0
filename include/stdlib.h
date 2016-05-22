@@ -28,7 +28,7 @@
 #ifndef _STDLIB_H_
 #define _STDLIB_H_
 
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 
 #include <malloc.h>
 #include <string.h>

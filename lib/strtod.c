@@ -12,7 +12,7 @@
  * RCS: @(#) $Id: strtod.c,v 1.1.1.4 2003/03/06 00:09:04 landonf Exp $
  */
 
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 #include <ctype.h>
 
 #ifndef TRUE

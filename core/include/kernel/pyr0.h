@@ -1,8 +1,8 @@
 /*
- * File: kernel.h
+ * File: pyr0.h
  * Author: Fabien Siron <fabien.siron@epita.fr>
  * 
- * Description: Main kernel header
+ * Description: Main pyr0.header
  */
 
 #ifndef _KERNEL_H_

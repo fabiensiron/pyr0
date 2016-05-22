@@ -5,7 +5,7 @@
  * Description: physical memory manager
  */
 
-# include <kernel/kernel.h>
+# include <kernel/pyr0.h>
 # include <kernel/page.h>
 
 # include <asm/pgtable.h>

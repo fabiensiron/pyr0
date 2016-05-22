@@ -7,7 +7,7 @@
 
 #include <asm/io.h>
 
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 #include <kernel/interrupt.h>
 
 # define INTERNAL_FREQUENCY 1193182

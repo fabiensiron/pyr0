@@ -8,7 +8,7 @@
 #include <tinypy/dict.h>
 #include <tinypy/string.h>
 
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 
 tp_obj os_reboot(TP)
 {

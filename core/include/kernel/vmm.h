@@ -8,7 +8,7 @@
 # define _VMM_H_
 
 # include <kernel/slab.h>
-# include <kernel/kernel.h>
+# include <kernel/pyr0.h>
 
 struct vmm_range;
 

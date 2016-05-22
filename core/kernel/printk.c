@@ -5,7 +5,7 @@
  * Description: printk and early_printk
  */
 
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 #include <kernel/serial.h>
 #include <kernel/tty.h>
 #include <kernel/stdarg.h>

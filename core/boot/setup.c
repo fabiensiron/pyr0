@@ -5,7 +5,7 @@
  * Description: mostly arch-dependent setup
  */
 
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 #include <kernel/console.h>
 #include <kernel/serial.h>
 #include <kernel/cmdline.h>

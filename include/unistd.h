@@ -5,7 +5,7 @@
 #ifndef _UNISTD_H_
 #define _UNISTD_H_
 
-# include <kernel/kernel.h>
+# include <kernel/pyr0.h>
 # include <kernel/tty.h>
 
 extern int close(int);

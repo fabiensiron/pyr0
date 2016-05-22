@@ -17,7 +17,7 @@
 #ifndef _MATH_H_
 #define	_MATH_H_
 
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 #include <kernel/limits.h>
 
 double	acos(double);

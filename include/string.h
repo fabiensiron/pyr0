@@ -31,7 +31,7 @@
 //#include <sys/cdefs.h>
 //#include <stddef.h>
 //#include <malloc.h>
-# include <kernel/kernel.h>
+# include <kernel/pyr0.h>
 # include <kernel/limits.h>
 
 extern void*  memccpy(void *, const void *, int, size_t);

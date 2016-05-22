@@ -9,7 +9,7 @@
 # define _STDIO_H_
 
 # include <stdarg.h>
-# include <kernel/kernel.h>
+# include <kernel/pyr0.h>
 
 /* int printf(const char *fmt, ...); */
 

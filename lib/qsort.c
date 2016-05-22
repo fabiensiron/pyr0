@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 
 static char	*med3(char *, char *, char *, int (*)(const void *, const void *));
 static void	 swapfunc(char *, char *, int, int);

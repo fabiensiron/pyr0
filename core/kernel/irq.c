@@ -12,7 +12,7 @@
 # include <asm/desc.h>
 # include <asm/irq.h>
 
-# include <kernel/kernel.h>
+# include <kernel/pyr0.h>
 
 extern struct gate_desc idt_table[IDT_ENTRIES];
 

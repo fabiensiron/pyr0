@@ -3,7 +3,7 @@
  * Author: Fabien Siron <fabien.siron@epita.fr>
  */
 
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 #include <kernel/serial.h>
 #include <kernel/console.h>
 #include <kernel/tty.h>

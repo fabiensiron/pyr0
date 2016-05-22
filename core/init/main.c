@@ -5,7 +5,7 @@
  * Description: setup the operating system (mostly non arch-dependent) and 
  *   spawn the first process (init)
  */
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 #include <kernel/console.h>
 #include <kernel/mm.h>
 #include <kernel/kmalloc.h>

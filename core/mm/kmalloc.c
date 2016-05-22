@@ -5,7 +5,7 @@
  * Description: physical contiguous memory allocation (kmalloc)
  */
 
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 #include <kernel/mm.h>
 #include <kernel/mman.h>
 #include <kernel/kmalloc.h>

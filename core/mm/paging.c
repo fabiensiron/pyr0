@@ -4,7 +4,7 @@
  *
  * Description: table management, page allocation, page_fault
  */
-#include <kernel/kernel.h>
+#include <kernel/pyr0.h>
 #include <kernel/types.h>
 #include <kernel/mm.h>
 #include <kernel/mman.h>
