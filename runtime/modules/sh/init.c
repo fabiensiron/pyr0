@@ -11,6 +11,13 @@
 extern tp_obj sh_echo(TP);
 extern tp_obj sh_yes(TP);
 
+static char *help =
+	"This module rules the pyr0's shell.\n"
+	"\n"
+	"This exports:\n"
+	"\t* sh.echo echoes the user argument\n"
+	"\t* sh.yes prints indefinitely \"yes\" or the given argument\n";
+
 void sh_init(TP)
 {
   /* module */
@@ -22,7 +29,7 @@ void sh_init(TP)
 
   /* special attributes */
   tp_set(tp, sh_mod, tp_string("__doc__"),
-	 tp_string("This module rules the pyr0s shell."));
+	 tp_string(help));
   tp_set(tp, sh_mod, tp_string("__name__"), tp_string("sh"));
   tp_set(tp, sh_mod, tp_string("__file__"), tp_string(__FILE__));
 
