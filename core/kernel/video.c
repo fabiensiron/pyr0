@@ -35,7 +35,7 @@ static void video_set_point(int x, int y, u32 value)
   *cell = value;
 }
 
-static void _video_putchar(int x, int y, char val, u32 color)
+static void _video_putchar(int x, int y, unsigned char val, u32 color)
 {
   u8 *c = number_font[val];
 
