@@ -15,6 +15,13 @@
 #define M_PI    3.14159265358979323846
 #endif
 
+static char *help =
+	"Math routines of pyr0, equivalent of math module in cpython.\n"
+	"\n"
+	"This exports:\n"
+	"\t* math.pi is the pi constant\n"
+	"\t* math.e is the euler number constant\n";
+
 void math_init(TP)
 {
   /* module */
@@ -31,7 +38,7 @@ void math_init(TP)
 
   /* special attributes */
   tp_set(tp, math_mod, tp_string("__doc__"),
-	 tp_string("This module provides classical mathematical functions."));
+	 tp_string(help));
   tp_set(tp, math_mod, tp_string("__name__"), tp_string("math"));
   tp_set(tp, math_mod, tp_string("__file__"), tp_string(__FILE__));
 
