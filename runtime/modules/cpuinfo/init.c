@@ -17,6 +17,18 @@ tp_obj cpuinfo_stepping(TP);
 tp_obj cpuinfo_flags(TP);
 tp_obj cpuinfo_cpuinfo(TP);
 
+static char *help =
+	"Collection of routines to get cpu information.\n"
+	"\n"
+	"This exports:\n"
+	"\t* cpuinfo.processor prints the processor id (only one is supported, so it's 0)\n"
+	"\t* cpuinfo.vendor_id prints the vendor name\n"
+	"\t* cpuinfo.model prints the model ID\n"
+	"\t* cpuinfo.model_name prints the model name\n"
+	"\t* cpuinfo.stepping prints the processor's stepping\n"
+	"\t* cpuinfo.flags prints the flags processor\n"
+	"\t* cpuinfo.cpuinfo prints all the information above\n";
+
 void cpuinfo_init(TP)
 {
   /* module */
@@ -42,7 +54,7 @@ void cpuinfo_init(TP)
 
   /* special attributes */
   tp_set(tp, cpuinfo_mod, tp_string("__doc__"),
-	 tp_string("This module contains various cpu information."));
+	 tp_string(help));
   tp_set(tp, cpuinfo_mod, tp_string("__name__"), tp_string("cpuinfo"));
   tp_set(tp, cpuinfo_mod, tp_string("__file__"), tp_string(__FILE__));
 
