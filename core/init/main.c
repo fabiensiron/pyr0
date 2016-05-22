@@ -54,6 +54,8 @@ void start_kernel(multiboot_info_t *info)
 
 	kmalloc_init();
 
+	vfs_init();
+
 	cpuinfo_dump();
 
 	cmdline_fill_opts(&opts);
