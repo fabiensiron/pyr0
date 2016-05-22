@@ -8,6 +8,6 @@ PROGSUBDIRS	:=
 
 include $Omk/progsubdirs.mk
 
-pyr0_LDFLAGS	:= $(pyr0_LDFLAGS) -Wl,-T$O$(CUR_DIR)/atomos.lds
+pyr0_LDFLAGS	:= $(pyr0_LDFLAGS) -Wl,-T$O$(CUR_DIR)/pyr0.lds
 
-# pyr0: $O$(CUR_DIR)atomos.lds
+# pyr0: $O$(CUR_DIR)pyr0.lds
