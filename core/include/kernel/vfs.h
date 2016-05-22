@@ -58,9 +58,14 @@ struct filedesc {
 	struct file *files[FD_MAX];
 };
 
+struct fs {
+	const char name[32];
+	struct inode root;
+};
+
 struct vfs {
-	struct inode *root;
-	struct inode *pwd;
+	struct inode root;
+	struct inode pwd;
 };
 
 void vfs_init(void);
