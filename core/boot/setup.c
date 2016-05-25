@@ -28,43 +28,43 @@ extern void init_IRQ ();
 
 void setup_kernel (multiboot_info_t *info, unsigned long magic)
 {
-  serial_early_init();
+	serial_early_init();
 
-  assert(magic == MULTIBOOT_BOOTLOADER_MAGIC);
+	assert(magic == MULTIBOOT_BOOTLOADER_MAGIC);
 
-  init_early_pagination ();
+	init_early_pagination ();
 
-  cpu_init ();
+	cpu_init ();
 
-  trap_init ();
+	trap_init ();
 
-  init_IRQ ();
+	init_IRQ ();
 
-  sti();
+	sti();
 
-  size_t cmdline_len = strlen((char *)info->cmdline);
-  cmdline_parse((char *)info->cmdline, cmdline_len);
+	size_t cmdline_len = strlen((char *)info->cmdline);
+	cmdline_parse((char *)info->cmdline, cmdline_len);
 
-  /* okay, this is a *ugly* hack, but it works if there is only 1 module */
-  if (info->mods_count != 0)
-    {
-      boot_module.addr = 0x4000;
-      boot_module.len =
-	((module_t *)info->mods_addr)->mod_end -
-	((module_t *)info->mods_addr)->mod_start;
-      /* set name to buf */
-      boot_module.name = (char *)&boot_module.buf;
+	/* okay, this is a *ugly* hack, but it works if there is only 1 module */
+	if (info->mods_count != 0)
+	{
+		boot_module.addr = 0x4000;
+		boot_module.len =
+			((module_t *)info->mods_addr)->mod_end -
+			((module_t *)info->mods_addr)->mod_start;
+		/* set name to buf */
+		boot_module.name = (char *)&boot_module.buf;
 
-      memcpy(&boot_module.buf,(void *)(((module_t *)info->mods_addr)->string + sizeof(long)),64);
+		memcpy(&boot_module.buf,(void *)(((module_t *)info->mods_addr)->string + sizeof(long)),64);
 
-      memcpy((void*)0x4000,(void *)((module_t *)info->mods_addr)->mod_start, PAGE_SIZE);
-    }
+		memcpy((void*)0x4000,(void *)((module_t *)info->mods_addr)->mod_start, PAGE_SIZE);
+	}
 
-  u32 nr_frames = frame_allocator_init(info->mem_upper * 1024);
+	u32 nr_frames = frame_allocator_init(info->mem_upper * 1024);
 
-  //  load_stack_info(); // FIXME
+	//  load_stack_info(); // FIXME
 
-  /* NOTE: stack reset, do nothing here */
+	/* NOTE: stack reset, do nothing here */
 
-  return start_kernel (info);
+	return start_kernel (info);
 }

@@ -10,14 +10,14 @@
 
 void reboot(void)
 {
-  u8 good;
-  
-  cli();
+	u8 good;
 
-  while(good & 0x02)
-      good = inb(0x64);
+	cli();
 
-  outb(0x64, 0xfe);
-  
-  hlt();
+	while(good & 0x02)
+		good = inb(0x64);
+
+	outb(0x64, 0xfe);
+
+	hlt();
 }

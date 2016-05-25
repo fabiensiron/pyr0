@@ -12,25 +12,25 @@ static int has_panicked;
 
 void panic(const char *s)
 {
-  if (has_panicked)
-    goto loop;
+	if (has_panicked)
+		goto loop;
 
-  has_panicked = 1;
+	has_panicked = 1;
 
-  cli();
-  
-  if (!tty_is_init)
-    {
-      early_printk("### KERNEL PANIC: ###\n");
-      early_printk(s);
-    }
-  else
-    {
-      printk(KERN_ERR, "### KERNEL PANIC: ###\n");
-      printk(KERN_ERR, s);
-    }
+	cli();
 
- loop:
-  for (;;)
-    ;
+	if (!tty_is_init)
+	{
+		early_printk("### KERNEL PANIC: ###\n");
+		early_printk(s);
+	}
+	else
+	{
+		printk(KERN_ERR, "### KERNEL PANIC: ###\n");
+		printk(KERN_ERR, s);
+	}
+
+loop:
+	for (;;)
+		;
 }
