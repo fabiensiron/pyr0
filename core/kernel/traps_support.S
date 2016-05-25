@@ -1,5 +1,5 @@
 /*
- * File: sys_call.S
+ * File: traps_support.S
  * Author: Fabien Siron <fabien.siron@epita.fr>
  *
  * Description: Syscall entry and interrupt subroutines (ISR)
@@ -7,10 +7,10 @@
 
 	.irp 	id,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
 	.globl _exception_\id
-	.endr	
+	.endr
 
-	
-/* Macros to handle context saving */	
+
+/* Macros to handle context saving */
 	.macro SAVE_ALL
 	pusha
 	pushw %ds
@@ -32,7 +32,7 @@
 	popw %ds
 	popa
 	.endm
-	
+
 
 /* exception isr */
 	.extern debug_trap
@@ -50,7 +50,7 @@ _exception_\id:
 	pushl $\id
 	jmp error_code
 	.endr
-	
+
 _exception_8:
 	jmp 1f
 1:	hlt

@@ -9,8 +9,8 @@ OBJS		:=	cmdline.o	\
 			panic.o		\
 			printk.o	\
 			pit.o		\
-			sys_call.o	\
 			traps.o		\
+			traps_support.o \
 			tty.o		\
 			serial.o	\
 			vsprintf.o	\
