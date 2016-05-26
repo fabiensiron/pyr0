@@ -54,9 +54,9 @@ char *sub_interpreter(char *buf, unsigned len_)
 			subbuf_r = realloc(subbuf_r, code_size + 80);
 			code_size += 80;
 		}
-      
+
 		strcat(subbuf_r, subbuf);
-      
+
 	} while(subbuf[0] != '\n');
 
 	return subbuf_r;
@@ -73,10 +73,10 @@ void print_header(char *name, char *version)
 {
 	/* XXX: add author in cmdline or config.h */
 	printf(
-	"%s %s (April 2016)\nType \"help\", \"credits\", \"contribute\" or "
-	"\"why\" for more information.\n"
-	"Author: Fabien Siron <fabien.siron@epita.fr>\n",
-	name, version);
+		"%s %s (April 2016)\nType \"help\", \"credits\", \"contribute\" or "
+		"\"why\" for more information.\n"
+		"Author: Fabien Siron <fabien.siron@epita.fr>\n",
+		name, version);
 }
 
 void start_interpreter_loop(struct runtime_opt *opt)
@@ -117,21 +117,21 @@ void start_interpreter_loop(struct runtime_opt *opt)
 	while (1)
 	{
 		setjmp(except_jmp);
-      
+
 		if (sub_i)
 		{
 			free(buf);
 			sub_i = 0;
 			buf = _buf;
 		}
-      
+
 		printf(">>> ");
-      
+
 		buf[0] = '\0';
 
 		gets(buf);
 		len = strlen(buf);
-      
+
 		if (len == 0)
 			continue;
 
@@ -159,7 +159,7 @@ release:
 void start_file_loader(void *p, long len, char *name)
 {
 	printf ("load %s!\n", name);
-  
+
 	code_p = p;
 	code_l = len;
 
