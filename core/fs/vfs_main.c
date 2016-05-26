@@ -8,7 +8,6 @@
 
 #include <string.h>
 
-static struct inode inode_array[INODE_ARRAY_LEN];
 static struct filedesc fds;
 static struct vfs vfs;
 

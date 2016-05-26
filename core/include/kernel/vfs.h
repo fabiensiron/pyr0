@@ -15,6 +15,7 @@ struct inode {
 	char name[256];
 	ino_t ino;
 	size_t size;
+	unsigned char present;
 
 	struct inode *first_son;
 	struct inode *next_brother;
