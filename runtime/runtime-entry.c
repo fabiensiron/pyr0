@@ -175,7 +175,8 @@ void start_file_loader(void *p, long len, char *name)
 
 void start_runtime(void *p, long len, char *name, struct runtime_opt *opts)
 {
-	if (p == NULL && len == 0 && name == NULL)
+	if ((p == NULL && len == 0 && name == NULL) ||
+	    strcmp("interp", opts->os_mode) == 0)
 		start_interpreter_loop(opts);
 	else
 	{
