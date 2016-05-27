@@ -10,7 +10,7 @@
 
 static struct inode inode_array[INODE_ARRAY_LEN];
 
-#define IS_INO_PRESENT(x) ((x)->name[0] != '\0')
+#define IS_INO_PRESENT(x) ((x)->present)
 
 struct inode *default_alloc_inode()
 {
