@@ -2,8 +2,7 @@
  * File main.c
  * Author: Fabien Siron <fabien.siron@epita.fr>
  *
- * Description: setup the operating system (mostly non arch-dependent) and 
- *   spawn the first process (init)
+ * Description: setup the operating system (mostly non arch-dependent)
  */
 #include <kernel/pyr0.h>
 #include <kernel/console.h>
@@ -70,8 +69,4 @@ void start_kernel(multiboot_info_t *info)
 
 	for (;;)
 		;
-}
-
-void init(void)
-{
 }
