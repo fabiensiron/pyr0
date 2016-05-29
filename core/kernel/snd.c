@@ -35,6 +35,24 @@ static void nosound() {
 //Make a beep
 void beep() {
 	play_sound(1000);
-	pit_wait(10);
+	pit_wait(100);
 	nosound();
+}
+
+void long_beep() {
+	play_sound(1000);
+	pit_wait(500);
+	nosound();
+}
+
+void sos() {
+	int i;
+	for (i = 0; i < 9; ++i) {
+		if (i >= 3 && i < 6) {
+			long_beep();
+		} else {
+			beep ();
+		}
+		pit_wait(100);
+	}
 }

@@ -7,5 +7,7 @@
 # define _SND_H_
 
 void beep(void);
+void long_beep(void);
+void sos(void);
 
 #endif /*_SND_H_*/
