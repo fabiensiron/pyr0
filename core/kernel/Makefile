@@ -16,7 +16,8 @@ OBJS		:=	cmdline.o	\
 			vsprintf.o	\
 			console.o	\
 			video.o		\
-			reboot.o
+			reboot.o 	\
+			snd.o
 
 PROGSUBDIRS	:=
 
