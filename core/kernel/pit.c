@@ -40,11 +40,10 @@ unsigned long gettick ()
 	return tick*10;
 }
 
-void sleep (u32 duration)
+void pit_wait (u32 duration)
 {
 	unsigned t = gettick ();
 
 	while (gettick () - t <= duration)
 		;
 }
-
