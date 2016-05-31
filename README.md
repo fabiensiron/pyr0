@@ -25,7 +25,7 @@ For interpreter mode:
 
 - `make boot-i`
 
-nFor file mode:
+For file mode:
 
 - `make boot`
 
