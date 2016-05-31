@@ -75,8 +75,10 @@ char serial_getchar(u16 port)
 	{
 		//      serial_putchar(COM1, '\n');
 		return '\n';
+	} else if (c == 127) {
+		return '\b';
 	}
-	
+
 	return c;
 }
 
