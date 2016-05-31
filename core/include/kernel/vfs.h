@@ -70,5 +70,6 @@ struct vfs {
 };
 
 void vfs_init(void);
+void fd_init(void);
 
 #endif /*!_VFS_H_*/

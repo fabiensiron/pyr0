@@ -8,7 +8,6 @@
 
 #include <string.h>
 
-static struct filedesc fds;
 static struct vfs vfs;
 
 # define MAX_FS     7
@@ -44,9 +43,9 @@ find_fs(const char *name) {
 void vfs_init(void) {
 	/* instal fds */
 	int i;
-	for (i = 0; i < FD_MAX; i++) {
-		fds.files[i] = NULL;
-	}
+
+	fd_init();
+
 	memset(&vfs.root, 0, sizeof(vfs.root));
 	memset(&vfs.pwd, 0, sizeof(vfs.pwd));
 }

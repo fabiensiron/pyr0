@@ -37,3 +37,47 @@ void default_init_inode()
 	for (i = 0; i < INODE_ARRAY_LEN; ++i)
 		memset(inode_array, 0, INODE_ARRAY_LEN);
 }
+
+static struct filedesc fds;
+
+static int fd_get_empty() {
+	int i;
+	for (i = 0; i < FD_MAX; ++i) {
+		if (!fds.files[i])
+			break;
+	}
+
+	if (i == FD_MAX)
+		return -1;
+
+	return i;
+}
+
+int fd_file_install (struct file *file) {
+	int fd = fd_get_empty();
+
+	if (fd == -1) return -1;
+
+	fds.files[fd] = file;
+
+	return fd;
+}
+
+struct file *fd_file_get (int fd) {
+	return fds.files[fd];
+}
+
+void fd_file_release (int fd) {
+	struct file *f = fd_file_get(fd);
+
+	/* vfs_close f */
+
+	fds.files[fd] = NULL;
+}
+
+void fd_init () {
+	int i;
+	for (i = 0; i < FD_MAX; i++) {
+		fds.files[i] = NULL;
+	}
+}
