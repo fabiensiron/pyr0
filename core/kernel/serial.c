@@ -76,7 +76,7 @@ char serial_getchar(u16 port)
 		//      serial_putchar(COM1, '\n');
 		return '\n';
 	}
-
+	
 	return c;
 }
 

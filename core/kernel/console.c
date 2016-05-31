@@ -26,6 +26,17 @@ void console_putchar(char n)
 	/* special char */
 	switch (n)
 	{
+	case '\b':
+	{
+		if (console_info.x == 0) {
+			console_info.x = 0;
+			if (console_info.y > 0)
+				console_info.y -= 1;
+		} else {
+			console_info.x -= 1;
+		}
+		break;
+	}
 	case '\n':
 	{
 		console_info.y += 1;
@@ -57,7 +68,7 @@ void console_putchar(char n)
 size_t console_write(const char *buf, size_t len)
 {
 	unsigned i;
-  
+
 	for (i = 0; i< len; i++)
 		console_putchar(buf[i]);
 
