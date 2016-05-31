@@ -11,17 +11,17 @@
 
 tp_obj sh_echo(TP)
 {
-  tp_obj s = TP_TYPE(TP_STRING);
+	tp_obj s = TP_TYPE(TP_STRING);
 
-  return s;
+	return s;
 }
 tp_obj sh_yes(TP)
 {
-  tp_obj s = TP_DEFAULT(tp_string("yes"));
+	tp_obj s = TP_DEFAULT(tp_string("yes"));
 
-  while(1) {
-    printf("%s\n", s.string.val);
-  }
+	while(1) {
+		printf("%s\n", s.string.val);
+	}
 
-  return s;
+	return s;
 }

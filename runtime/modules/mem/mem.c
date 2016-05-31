@@ -15,30 +15,30 @@ extern void *sbrk(ssize_t inc);
 
 tp_obj mem_brk(TP)
 {
-  u32 ret = (u32)sbrk(0);
+	u32 ret = (u32)sbrk(0);
   
-  return tp_number(ret);
+	return tp_number(ret);
 }
 
 tp_obj mem_used(TP)
 {
-  u32 ret = (u32)sbrk(0);
-  ret -= (u32)brk_base;
+	u32 ret = (u32)sbrk(0);
+	ret -= (u32)brk_base;
 
-  return tp_number(ret);
+	return tp_number(ret);
 }
 
 tp_obj mem_available(TP)
 {
-  u32 ret = (u32)sbrk(0);
-  ret = (u32)brk_limit - (u32)ret;
+	u32 ret = (u32)sbrk(0);
+	ret = (u32)brk_limit - (u32)ret;
 
-  return tp_number(ret);
+	return tp_number(ret);
 }
 
 tp_obj mem_len(TP)
 {
-  u32 ret = (u32)brk_limit - (u32)brk_base;
+	u32 ret = (u32)brk_limit - (u32)brk_base;
 
-  return tp_number(ret);
+	return tp_number(ret);
 }

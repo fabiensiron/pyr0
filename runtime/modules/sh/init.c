@@ -20,19 +20,19 @@ static char *help =
 
 void sh_init(TP)
 {
-  /* module */
-  tp_obj sh_mod = tp_dict(tp);
+	/* module */
+	tp_obj sh_mod = tp_dict(tp);
 
-  /* methods */
-  tp_set(tp, sh_mod, tp_string("echo"), tp_fnc(tp, sh_echo));
-  tp_set(tp, sh_mod, tp_string("yes"), tp_fnc(tp, sh_yes));
+	/* methods */
+	tp_set(tp, sh_mod, tp_string("echo"), tp_fnc(tp, sh_echo));
+	tp_set(tp, sh_mod, tp_string("yes"), tp_fnc(tp, sh_yes));
 
-  /* special attributes */
-  tp_set(tp, sh_mod, tp_string("__doc__"),
-	 tp_string(help));
-  tp_set(tp, sh_mod, tp_string("__name__"), tp_string("sh"));
-  tp_set(tp, sh_mod, tp_string("__file__"), tp_string(__FILE__));
+	/* special attributes */
+	tp_set(tp, sh_mod, tp_string("__doc__"),
+	       tp_string(help));
+	tp_set(tp, sh_mod, tp_string("__name__"), tp_string("sh"));
+	tp_set(tp, sh_mod, tp_string("__file__"), tp_string(__FILE__));
 
-  /* bind */
-  tp_set(tp, tp->modules, tp_string("sh"), sh_mod);
+	/* bind */
+	tp_set(tp, tp->modules, tp_string("sh"), sh_mod);
 }

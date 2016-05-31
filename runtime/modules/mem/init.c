@@ -24,21 +24,21 @@ static char *help =
 
 void mem_init(TP)
 {
-  /* module */
-  tp_obj mem_mod = tp_dict(tp);
+	/* module */
+	tp_obj mem_mod = tp_dict(tp);
 
-  /* methods */
-  tp_set(tp, mem_mod, tp_string("get_brk"), tp_fnc(tp, mem_brk));
-  tp_set(tp, mem_mod, tp_string("used"), tp_fnc(tp, mem_used));
-  tp_set(tp, mem_mod, tp_string("available"), tp_fnc(tp, mem_available));
-  tp_set(tp, mem_mod, tp_string("len"), tp_fnc(tp, mem_len));
+	/* methods */
+	tp_set(tp, mem_mod, tp_string("get_brk"), tp_fnc(tp, mem_brk));
+	tp_set(tp, mem_mod, tp_string("used"), tp_fnc(tp, mem_used));
+	tp_set(tp, mem_mod, tp_string("available"), tp_fnc(tp, mem_available));
+	tp_set(tp, mem_mod, tp_string("len"), tp_fnc(tp, mem_len));
 
-  /* special attributes */
-  tp_set(tp, mem_mod, tp_string("__doc__"),
-	 tp_string(help));
-  tp_set(tp, mem_mod, tp_string("__name__"), tp_string("mem"));
-  tp_set(tp, mem_mod, tp_string("__file__"), tp_string(__FILE__));
+	/* special attributes */
+	tp_set(tp, mem_mod, tp_string("__doc__"),
+	       tp_string(help));
+	tp_set(tp, mem_mod, tp_string("__name__"), tp_string("mem"));
+	tp_set(tp, mem_mod, tp_string("__file__"), tp_string(__FILE__));
 
-  /* bind */
-  tp_set(tp, tp->modules, tp_string("mem"), mem_mod);
+	/* bind */
+	tp_set(tp, tp->modules, tp_string("mem"), mem_mod);
 }

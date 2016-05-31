@@ -28,23 +28,23 @@ static char *help =
 
 void os_init(TP)
 {
-  /* module */
-  tp_obj os_mod = tp_dict(tp);
+	/* module */
+	tp_obj os_mod = tp_dict(tp);
 
-  /* methods */
-  tp_set(tp, os_mod, tp_string("name"), tp_string(OS_NAME));
-  tp_set(tp, os_mod, tp_string("reboot"), tp_fnc(tp, os_reboot));
-  tp_set(tp, os_mod, tp_string("halt"), tp_fnc(tp, os_halt));
-  tp_set(tp, os_mod, tp_string("loadkeys"), tp_fnc(tp, os_loadkeys));
-  tp_set(tp, os_mod, tp_string("time"), tp_fnc(tp, os_time));
-  tp_set(tp, os_mod, tp_string("date"), tp_fnc(tp, os_date));
+	/* methods */
+	tp_set(tp, os_mod, tp_string("name"), tp_string(OS_NAME));
+	tp_set(tp, os_mod, tp_string("reboot"), tp_fnc(tp, os_reboot));
+	tp_set(tp, os_mod, tp_string("halt"), tp_fnc(tp, os_halt));
+	tp_set(tp, os_mod, tp_string("loadkeys"), tp_fnc(tp, os_loadkeys));
+	tp_set(tp, os_mod, tp_string("time"), tp_fnc(tp, os_time));
+	tp_set(tp, os_mod, tp_string("date"), tp_fnc(tp, os_date));
 
-  /* special attributes */
-  tp_set(tp, os_mod, tp_string("__doc__"),
-	 tp_string(help));
-  tp_set(tp, os_mod, tp_string("__name__"), tp_string("os"));
-  tp_set(tp, os_mod, tp_string("__file__"), tp_string(__FILE__));
+	/* special attributes */
+	tp_set(tp, os_mod, tp_string("__doc__"),
+	       tp_string(help));
+	tp_set(tp, os_mod, tp_string("__name__"), tp_string("os"));
+	tp_set(tp, os_mod, tp_string("__file__"), tp_string(__FILE__));
 
-  /* bind */
-  tp_set(tp, tp->modules, tp_string("os"), os_mod);
+	/* bind */
+	tp_set(tp, tp->modules, tp_string("os"), os_mod);
 }
