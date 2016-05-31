@@ -175,6 +175,8 @@ void init_IRQ(void)
 {
 	int i;
 
+	pic_init ();
+
 	for (i = 0; i< 16; i++)
 		set_intr_gate(0x20+i, bad_interrupt[i]);
 
