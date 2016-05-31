@@ -1,6 +1,7 @@
 CUR_DIR		:= core/kernel/
 
 OBJS		:=	cmdline.o	\
+			cmos.o		\
 			cpuinfo.o	\
 			cpuid_check.o 	\
 			kbd.o		\

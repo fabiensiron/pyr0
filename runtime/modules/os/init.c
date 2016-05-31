@@ -13,6 +13,8 @@
 tp_obj os_reboot(TP);
 tp_obj os_halt(TP);
 tp_obj os_loadkeys(TP);
+tp_obj os_time(TP);
+tp_obj os_date(TP);
 
 static char *help =
 	"OS routines for pyr0.\n"
@@ -20,7 +22,9 @@ static char *help =
 	"This exports:\n"
 	"\t* os.reboot which reboot the system\n"
 	"\t* os.halt which quits the system\n"
-	"\t* os.loadkeys loads the given keymap in graphical mode (\"dvorak\" or \"us\")\n";
+	"\t* os.loadkeys loads the given keymap in graphical mode (\"dvorak\" or \"us\")\n"
+	"\t* os.date prints the current date.\n"
+	"\t* os.time prints the current time.\n";
 
 void os_init(TP)
 {
@@ -32,6 +36,8 @@ void os_init(TP)
   tp_set(tp, os_mod, tp_string("reboot"), tp_fnc(tp, os_reboot));
   tp_set(tp, os_mod, tp_string("halt"), tp_fnc(tp, os_halt));
   tp_set(tp, os_mod, tp_string("loadkeys"), tp_fnc(tp, os_loadkeys));
+  tp_set(tp, os_mod, tp_string("time"), tp_fnc(tp, os_time));
+  tp_set(tp, os_mod, tp_string("date"), tp_fnc(tp, os_date));
 
   /* special attributes */
   tp_set(tp, os_mod, tp_string("__doc__"),

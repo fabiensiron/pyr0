@@ -49,4 +49,13 @@ struct runtime_opt {
 
 void start_runtime (void *p, long len, char *name, struct runtime_opt *);
 
+/* time */
+struct timeval {
+	u32 tv_sec;
+	u32 tv_usec;
+};
+
+void get_date(u16 *month, u16 *day);
+void get_time(u16 *hours, u16 *minutes, u16 *seconds);
+
 #endif /* !_KERNEL_H_ */
