@@ -13,6 +13,11 @@ Another great idea of this project, is to have a plain-text userland.
 Indeed, there is no binary in the root tree (except kernel :P), only
 python scripts.
 
+## Deps
+
+- qemu (for emulation)
+- libisoburn (for video)
+
 ## Build/Install
 
 - `./configure`
