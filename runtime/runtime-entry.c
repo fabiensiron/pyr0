@@ -79,15 +79,9 @@ void print_header(char *name, char *version)
 		name, version);
 }
 
-void start_interpreter_loop()
+void interpreter_init(tp_vm **tp, tp_obj *globals)
 {
-	char _buf[81];
-	char *buf = _buf;
-	tp_vm *tp;
-	tp_obj globals;
 	char *argv[] = {"tinypy", "_INTERPRETER_"};
-	unsigned char sub_i;
-	unsigned len;
 
 	/* sadly, the init of the interpreter can be long */
 	printf("Loading runtime interpreter...\n");
@@ -97,20 +91,32 @@ void start_interpreter_loop()
 	code_l = strlen(interpreter_launch_code);
 
 	/* run launch */
-	tp = tp_init(2, argv);
+	*tp = tp_init(2, argv);
 
-	tp_ez_call(tp,"py2bc", "tinypy", tp_None);
+	tp_ez_call(*tp,"py2bc", "tinypy", tp_None);
 
 	/* init modules */
-	init_modules(tp);
+	init_modules(*tp);
 
 	/* run prelude */
 
-	globals = tp_dict(tp);
+	*globals = tp_dict(*tp);
 
-	tp_eval(tp, runtime_prologue_code, globals);
+	tp_eval(*tp, runtime_prologue_code, *globals);
 
 	print_header(PYR0CONF_NAME, PYR0CONF_VERSION);
+}
+
+void start_interpreter_loop()
+{
+	char _buf[81];
+	char *buf = _buf;
+	tp_vm *tp;
+	tp_obj globals;
+	unsigned char sub_i;
+	unsigned len;
+
+	interpreter_init(&tp, &globals);
 
 	/* run main loop */
 
