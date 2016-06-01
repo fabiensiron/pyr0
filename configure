@@ -10,6 +10,26 @@ SRCDIR=$(realpath $SRCDIR)
 
 CC="gcc -m32"
 
+CONFIG_PATH=core/include/kernel/config.h
+
+NAME=\""pyr0"\"
+VERSION=\""0.1"\"
+AUTHOR=\""Fabien Siron <fabien.siron@epita.fr>"\"
+ARCH=\""i386"\"
+
+cat <<EOF    > $CONFIG_PATH
+#ifndef _CONFIG_H_
+# define _CONFIG_H_
+
+# define PYR0CONF_NAME $NAME
+# define PYR0CONF_VERSION $VERSION
+# define PYR0CONF_AUTHOR $AUTHOR
+
+# define PYR0CONF_ARCH $ARCH
+
+#endif /*!_CONFIG_H_*/
+EOF
+
 cat <<EOF > Makefile
 ifeq (\$(MAKELEVEL),0)
 # Make is quite dumb, -rR options in MAKEFLAGS are only examined
