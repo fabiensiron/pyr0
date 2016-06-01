@@ -17,6 +17,7 @@ jmp_buf except_jmp;
 
 #include <tinypy/modules.h>
 
+static
 void init_modules(TP)
 {
 	unsigned i;
@@ -27,6 +28,7 @@ void init_modules(TP)
 #include <stdlib.h>
 #include <string.h>
 
+static
 char *sub_interpreter(char *buf, unsigned len_)
 {
 	unsigned len, len__, code_size = 1024;
@@ -62,7 +64,7 @@ char *sub_interpreter(char *buf, unsigned len_)
 	return subbuf_r;
 }
 
-char *interpreter_launch_code = "_INTERPRETER_ = True\n";
+static char *interpreter_launch_code = "_INTERPRETER_ = True\n";
 
 /* prelude code */
 
@@ -79,6 +81,7 @@ void print_header(char *name, char *version, char *author)
 		name, version, author);
 }
 
+static
 void interpreter_init(tp_vm **tp, tp_obj *globals)
 {
 	char *argv[] = {"tinypy", "_INTERPRETER_"};
@@ -107,6 +110,7 @@ void interpreter_init(tp_vm **tp, tp_obj *globals)
 	print_header(PYR0CONF_NAME, PYR0CONF_VERSION, PYR0CONF_AUTHOR);
 }
 
+static
 void start_interpreter_loop()
 {
 	char _buf[81];
@@ -162,6 +166,7 @@ release:
 	tp_deinit(tp);
 }
 
+static
 void start_file_loader(void *p, long len, char *name)
 {
 	printf ("load %s!\n", name);
@@ -179,6 +184,7 @@ void start_file_loader(void *p, long len, char *name)
 
 #include <asm/system.h>
 
+static
 void runtime_cleanup()
 {
 	printf("Exit Tinypy\n");
