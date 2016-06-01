@@ -190,6 +190,7 @@ void start_runtime(void *p, long len, char *name, struct runtime_opt *opts)
 	printf("Exit Tinypy\n");
 	printf("Exit Pyr0\n");
 
+	cli();
 	hlt();
 
 	/* Not reached */
