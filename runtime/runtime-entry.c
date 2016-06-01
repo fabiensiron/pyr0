@@ -110,7 +110,7 @@ void start_interpreter_loop(struct runtime_opt *opt)
 
 	tp_eval(tp, runtime_prologue_code, globals);
 
-	print_header(opt->os_name, opt->os_version);
+	print_header(PYR0CONF_NAME, PYR0CONF_VERSION);
 
 	/* run main loop */
 
