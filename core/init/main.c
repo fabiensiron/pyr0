@@ -58,7 +58,7 @@ void start_kernel(multiboot_info_t *info)
 
 	cmdline_fill_opts(&opts);
 
-	printk(KERN_INFO, "Atomos boot process done\n");
+	printk(KERN_INFO, "Core boot process done\n");
 
 	if (info->mods_count == 0)
 		start_runtime(NULL, 0, NULL, &opts);
