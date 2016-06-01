@@ -111,6 +111,16 @@ void interpreter_init(tp_vm **tp, tp_obj *globals)
 }
 
 static
+char get_last_non_empty_char(char *buf, unsigned len)
+{
+	int i;
+	for (i = len - 1; i == ' ' && i > 1; i--)
+		;
+
+	return buf[i - 1];
+}
+
+static
 void start_interpreter_loop()
 {
 	char _buf[81];
@@ -126,6 +136,7 @@ void start_interpreter_loop()
 
 	while (1)
 	{
+		char c;
 		setjmp(except_jmp);
 
 		if (sub_i)
@@ -145,9 +156,8 @@ void start_interpreter_loop()
 		if (len == 0)
 			continue;
 
-		/* XXX: handle trailing spaces after semi-colon */
-
-		if (buf[len - 1] == ':')
+		c = get_last_non_empty_char(buf, len);
+		if (c == ':')
 		{
 			buf[len] = '\n';
 			buf[len+1] = '\0';
