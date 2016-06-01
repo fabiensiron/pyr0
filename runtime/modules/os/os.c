@@ -69,3 +69,22 @@ tp_obj os_time(TP)
 	return tp_None;
 }
 
+# include <kernel/cmdline.h>
+
+tp_obj os_cmdline(TP)
+{
+	tp_obj cmdline = tp_dict(tp);
+
+	for (int i = 0; i < ARG_NULL; i++) {
+		char *var, *arg;
+		var = get_var(i);
+		arg = get_str_arg(i);
+
+		if (var == NULL || arg == NULL)
+			continue;
+
+		tp_set(tp,cmdline, tp_string(var), tp_string(arg));
+	}
+
+	return cmdline;
+}
