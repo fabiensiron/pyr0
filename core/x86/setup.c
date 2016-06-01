@@ -19,7 +19,7 @@
 
 #include <string.h>
 
-#include "multiboot.h"
+#include "../boot/multiboot.h"
 
 extern extmodule_t boot_module;
 

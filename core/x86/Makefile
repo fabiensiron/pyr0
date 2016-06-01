@@ -1,4 +1,4 @@
-CUR_DIR		:= core/boot/
+CUR_DIR		:= core/x86/
 
 OBJS		:= 	cpu.o 			\
 			crt0.o 			\
