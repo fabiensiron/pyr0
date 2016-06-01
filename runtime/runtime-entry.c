@@ -69,14 +69,14 @@ char *interpreter_launch_code = "_INTERPRETER_ = True\n";
 #include "runtime-prologue.hpy"
 
 static
-void print_header(char *name, char *version)
+void print_header(char *name, char *version, char *author)
 {
 	/* XXX: add author in cmdline or config.h */
 	printf(
 		"%s %s (April 2016)\nType \"help\", \"credits\", \"contribute\" or "
 		"\"why\" for more information.\n"
-		"Author: Fabien Siron <fabien.siron@epita.fr>\n",
-		name, version);
+		"Author: %s\n",
+		name, version, author);
 }
 
 void interpreter_init(tp_vm **tp, tp_obj *globals)
@@ -104,7 +104,7 @@ void interpreter_init(tp_vm **tp, tp_obj *globals)
 
 	tp_eval(*tp, runtime_prologue_code, *globals);
 
-	print_header(PYR0CONF_NAME, PYR0CONF_VERSION);
+	print_header(PYR0CONF_NAME, PYR0CONF_VERSION, PYR0CONF_AUTHOR);
 }
 
 void start_interpreter_loop()
