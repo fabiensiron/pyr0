@@ -97,6 +97,14 @@ skip_first(char **cmdline, size_t *offset, size_t len)
 }
 
 char *
+get_var (int var) {
+	if (!mod_param[var].present)
+		return NULL;
+
+	return mod_param[var].var;
+}
+
+char *
 get_str_arg (int var) {
 	if (!mod_param[var].present)
 		return NULL;

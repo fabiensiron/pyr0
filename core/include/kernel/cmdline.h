@@ -13,4 +13,7 @@
 void cmdline_parse (char *cmdline, size_t cmdline_len);
 void cmdline_fill_opts (struct runtime_opt *opts);
 
+char *get_var(int var);
+char *get_str_arg(int var);
+
 #endif /*!_CMDLINE_H_*/
