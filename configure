@@ -16,6 +16,8 @@ NAME=\""pyr0"\"
 VERSION=\""0.1"\"
 AUTHOR=\""Fabien Siron <fabien.siron@epita.fr>"\"
 ARCH=\""i386"\"
+# VID="text" or VID="vga"
+VID=\""vga"\"
 
 cat <<EOF    > $CONFIG_PATH
 #ifndef _CONFIG_H_
@@ -26,6 +28,8 @@ cat <<EOF    > $CONFIG_PATH
 # define PYR0CONF_AUTHOR $AUTHOR
 
 # define PYR0CONF_ARCH $ARCH
+
+# define PYR0CONF_VIDEO $VID
 
 #endif /*!_CONFIG_H_*/
 EOF
