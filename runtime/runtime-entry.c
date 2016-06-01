@@ -179,6 +179,18 @@ void start_file_loader(void *p, long len, char *name)
 
 #include <asm/system.h>
 
+void runtime_cleanup()
+{
+	printf("Exit Tinypy\n");
+	printf("Exit Pyr0\n");
+
+	cli();
+
+	printf("Exit Core\n");
+
+	hlt();
+}
+
 void start_runtime(void *p, long len, char *name, struct runtime_opt *opts)
 {
 	if ((p == NULL && len == 0 && name == NULL) ||
@@ -193,11 +205,8 @@ void start_runtime(void *p, long len, char *name, struct runtime_opt *opts)
 		else
 			start_file_loader(p, len, name);
 	}
-	printf("Exit Tinypy\n");
-	printf("Exit Pyr0\n");
 
-	cli();
-	hlt();
+	runtime_cleanup();
 
 	/* Not reached */
 }
