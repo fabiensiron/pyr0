@@ -12,9 +12,11 @@
        - x86_64 ?
        - more pyr0 rmodules (pyr0.rspi, pyr0.runtime, pyr0.os-installer...)
 
-* 3.0: - net
+* 3.0..: - net
        - code rewrite during runtime
        - small SMP
        - pull pyr0 rmodules via net?
        - bin modules
        - more pyr0 rmodules (pyr0.net, pyr0.boot-repair)
+       - virtualization
+       - bootloading
