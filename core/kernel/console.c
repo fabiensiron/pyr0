@@ -37,6 +37,11 @@ void console_putchar(char n)
 		}
 		break;
 	}
+	case '\r':
+	{
+		console_info.x = 0;
+		break;
+	};
 	case '\n':
 	{
 		console_info.y += 1;
