@@ -79,7 +79,7 @@ void print_header(char *name, char *version)
 		name, version);
 }
 
-void start_interpreter_loop(struct runtime_opt *opt)
+void start_interpreter_loop()
 {
 	char _buf[81];
 	char *buf = _buf;
@@ -177,7 +177,7 @@ void start_runtime(void *p, long len, char *name, struct runtime_opt *opts)
 {
 	if ((p == NULL && len == 0 && name == NULL) ||
 	    strcmp("interp", opts->os_mode) == 0)
-		start_interpreter_loop(opts);
+		start_interpreter_loop();
 	else
 	{
 		if (p && len == 0)
