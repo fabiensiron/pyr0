@@ -5,7 +5,7 @@ OBJS		:=	cmdline.o	\
 			panic.o		\
 			printk.o	\
 			tty.o		\
-			vsprintf.o
+			vsprintf.o	\
 			vfs_main.o	\
 			vfs_mount.o	\
 			vfs_utils.o
