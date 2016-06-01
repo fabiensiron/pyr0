@@ -1,24 +1,11 @@
 CUR_DIR		:= core/kernel/
 
 OBJS		:=	cmdline.o	\
-			cmos.o		\
-			cpuinfo.o	\
-			cpuid_check.o 	\
-			kbd.o		\
-			irq.o 		\
-			isr.o		\
+			console.o	\
 			panic.o		\
 			printk.o	\
-			pit.o		\
-			traps.o		\
-			traps_support.o \
 			tty.o		\
-			serial.o	\
-			vsprintf.o	\
-			console.o	\
-			video.o		\
-			reboot.o 	\
-			snd.o
+			vsprintf.o
 
 PROGSUBDIRS	:=
 

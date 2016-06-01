@@ -1,9 +1,23 @@
 CUR_DIR		:= core/x86/
 
-OBJS		:= 	cpu.o 			\
+OBJS		:=	cmos.o			\
+			cpu.o 			\
+			cpuid_check.o		\
+			cpuinfo.o		\
 			crt0.o 			\
 			early_pagination.o	\
-			setup.o
+			irq.o			\
+			isr.o			\
+			kbd.o			\
+			pit.o			\
+			reboot.o		\
+			serial.o		\
+			setup.o			\
+			snd.o			\
+			traps.o			\
+			traps_support.o		\
+			video.o
+
 PROGSUBDIRS	:=
 
 include $Omk/progsubdirs.mk
