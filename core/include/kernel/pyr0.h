@@ -45,7 +45,6 @@ void reboot(void);
 
 struct runtime_opt {
 	char *os_name;
-	char *os_version;
 	char *os_mode;
 };
 

@@ -1,5 +1,4 @@
 # arg := type(I, B or S for resp integer, boolean or string)
-ARG_VERSION    := S
 ARG_NAME       := S
 ARG_VERBOSE    := B
 ARG_DEBUG      := B

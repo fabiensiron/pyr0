@@ -124,7 +124,6 @@ get_boolean_arg (int var) {
 
 void cmdline_fill_opts(struct runtime_opt *opts) {
 	opts->os_name    = get_str_arg (ARG_NAME);
-	opts->os_version = get_str_arg (ARG_VERSION);
 	opts->os_mode    = get_str_arg (ARG_MODE);
 }
 
