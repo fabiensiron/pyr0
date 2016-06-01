@@ -1,4 +1,5 @@
 #include <tinypy/list.h>
+#include <tinypy/string.h>
 
 void _tp_list_realloc(TP, _tp_list *self,int len) {
 	if (!len) { len=1; }
@@ -57,6 +58,29 @@ int _tp_list_find(TP,_tp_list *self, tp_obj v) {
 		}
 	}
 	return -1;
+}
+
+tp_obj tp_list_str(TP, _tp_list *self) {
+	int n, len;
+	char buf[512] = "[";
+
+	/* XXX check len */
+	for (n=0; n<self->len; n++) {
+		if (n != 0)
+			strcat(buf,", ");
+		tp_obj elt = self->items[n];
+		tp_obj elt_str= tp_str(tp, elt);
+		if (elt.type == TP_STRING)
+			strcat(buf, "\'");
+		strcat(buf, elt_str.string.val);
+		if (elt.type == TP_STRING)
+			strcat(buf, "\'");
+	}
+	strcat(buf, "]");
+
+	len = strlen(buf);
+
+	return tp_string_copy(tp, buf, len);
 }
 
 tp_obj tp_index(TP) {

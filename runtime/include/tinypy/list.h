@@ -25,5 +25,6 @@ tp_obj tp_list(TP);
 tp_obj tp_list_n(TP,int n,tp_obj *argv);
 int _tp_sort_cmp(tp_obj *a,tp_obj *b);
 tp_obj tp_sort(TP);
+tp_obj tp_list_str(TP, _tp_list *self);
 
 #endif /*!_LIST_H_*/
