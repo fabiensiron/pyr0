@@ -10,7 +10,7 @@ SRCDIR=$(realpath $SRCDIR)
 
 CC="gcc -m32"
 
-CONFIG_PATH=core/include/kernel/config.h
+CONFIG_PATH=include/config.h
 
 NAME=\""pyr0"\"
 VERSION=\""0.1"\"

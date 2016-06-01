@@ -8,7 +8,8 @@
 #ifndef _KERNEL_H_
 # define _KERNEL_H_
 
-# include <kernel/config.h>
+# include <config.h>
+
 # include <kernel/types.h>
 # include <kernel/panic.h>
 # include <kernel/stddef.h>
