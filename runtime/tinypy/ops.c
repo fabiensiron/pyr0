@@ -20,7 +20,8 @@ tp_obj tp_str(TP,tp_obj self) {
 		if ((fabs(v)-fabs((long)v)) < 0.000001) { return tp_printf_(tp,"%ld",(long)v); }
 		return tp_printf_(tp,"%f",v);
 	} else if(type == TP_DICT) {
-		return tp_printf(tp,"<dict 0x%x>",self.dict.val);
+//		return tp_printf(tp,"<dict 0x%x>",self.dict.val);
+		return tp_dict_str(tp, self.dict.val);
 	} else if(type == TP_LIST) {
 //		return tp_printf(tp,"<list 0x%x>",self.list.val);
 		return tp_list_str(tp, self.list.val);

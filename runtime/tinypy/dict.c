@@ -2,6 +2,7 @@
  * Functions for dealing with dictionaries.
  */
 #include <tinypy/dict.h>
+#include <tinypy/string.h>
 
 int tp_lua_hash(void const *v,int l) {
 	int i,step = (l>>5)+1;
@@ -151,6 +152,50 @@ int _tp_dict_next(TP,_tp_dict *self) {
 			return self->cur;
 		}
 	}
+}
+
+tp_obj tp_dict_str(TP,_tp_dict *self) {
+	int len, i, first = 1;
+	char buf[512] = "{";
+	if (!self->len) {
+		tp_raise(tp_None,tp_string("(_tp_dict_str) RuntimeError"));
+	}
+	len = self->len;
+	i = 0;
+
+	while (len > 0)
+	{
+		if (self->items[i].used > 0) {
+			tp_obj elt_key = self->items[i].key;
+			tp_obj elt_val = self->items[i].val;
+			tp_obj elt_key_str = tp_str(tp, elt_key);
+			tp_obj elt_val_str = tp_str(tp, elt_val);
+			if (!first)
+				strcat(buf, ", ");
+			else
+				first = 0;
+
+			if (elt_key.type == TP_STRING)
+				strcat(buf, "\'");
+			strcat(buf, elt_key_str.string.val);
+			if (elt_key.type == TP_STRING)
+				strcat(buf, "\'");
+			strcat(buf, ": ");
+			if (elt_val.type == TP_STRING)
+				strcat(buf, "\'");
+			strcat(buf, elt_val_str.string.val);
+			if (elt_val.type == TP_STRING)
+				strcat(buf, "\'");
+
+			len--;
+		}
+
+		i++;
+	}
+	strcat(buf, "}");
+	len = strlen(buf);
+
+	return tp_string_copy(tp, buf, len);
 }
 
 tp_obj tp_merge(TP) {

@@ -13,5 +13,6 @@ void _tp_dict_del(TP,_tp_dict *self,tp_obj k, const char *error);
 tp_obj tp_dict(TP);
 tp_obj tp_dict_n(TP,int n, tp_obj* argv);
 tp_obj tp_merge(TP);
+tp_obj tp_dict_str(TP,_tp_dict *self);
 
 #endif /*!_DICT_H_*/
