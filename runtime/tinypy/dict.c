@@ -165,6 +165,7 @@ tp_obj tp_dict_str(TP,_tp_dict *self) {
 
 	while (len > 0)
 	{
+		/* XXX fix buf overflow */
 		if (self->items[i].used > 0) {
 			tp_obj elt_key = self->items[i].key;
 			tp_obj elt_val = self->items[i].val;
