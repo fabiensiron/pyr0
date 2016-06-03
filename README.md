@@ -1,5 +1,7 @@
 # Python in ring 0 project (Pyr0)
 
+[![Join the chat at https://gitter.im/Saruta/pyr0](https://badges.gitter.im/Saruta/pyr0.svg)](https://gitter.im/Saruta/pyr0?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Description
 Pyr0 is an attempt to make a python based Operating System,
 it means that we use language feature to provide security
