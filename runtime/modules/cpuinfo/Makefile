@@ -1,6 +1,6 @@
 CUR_DIR := runtime/modules/cpuinfo/
 
-OBJS 	:=	init.o cpuinfo.o
+OBJS 	:=	cpuinfo.o init.o
 
 PROGSUBDIRS	:=
 

@@ -1,15 +1,14 @@
 CUR_DIR := runtime/tinypy/
 
-OBJS 	:=	gc.o		\
-		dict.o  	\
+OBJS 	:=	builtins.o	\
+		dict.o		\
+		gc.o		\
 		list.o		\
 		misc.o		\
 		ops.o		\
 		string.o	\
 		tp.o		\
-		vm.o		\
-		builtins.o
-
+		vm.o
 
 PROGSUBDIRS	:=
 

@@ -1,13 +1,13 @@
 CUR_DIR := lib/
 
-OBJS 	:= 	string.o 	\
-		qsort.o		\
-		strtol.o	\
-		ctype_.o	\
-		strtod.o	\
-		snprintf.o	\
-		math.o		\
+OBJS	:= 	ctype_.o	\
 		gets.o		\
+		math.o		\
+		qsort.o		\
+		snprintf.o	\
+		string.o	\
+		strtod.o	\
+		strtol.o	\
 		toupper_.o
 
 PROGSUBDIRS	:= arch/
