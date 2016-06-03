@@ -40,4 +40,19 @@ u16 inw(u16 p)
   return _v;
 }
 
+static inline
+void outl(u16 p, u32 v)
+{
+  __asm__ volatile("outl %0, %1\n":: "a" (v), "d" (p));
+}
+
+static inline
+u32 inl(u16 p)
+{
+  u32 _v;
+  __asm__ volatile("inl %1, %0\n": "=&a" (_v): "d" (p));
+  
+  return _v;
+}
+
 #endif /*!_IOPORT_H_*/
