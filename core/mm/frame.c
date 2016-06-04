@@ -22,6 +22,8 @@
 
 #define FRAME_DESCR_ARRAY_ADDR PAGE_ALIGN_UP((u32)_end_kernel)
 
+#define MEM_MAX (256 * 1024 * 1024)
+
 struct frame_descr
 {
 	u32 paddr;
@@ -50,6 +52,10 @@ int frame_allocator_init(u32 mem_limit)
 	/* the size of the mem must be aligned */
 	u32 mem_upper = PAGE_ALIGN_DOWN(mem_limit);
 
+	/* limit to 256 MB */
+	if (mem_upper > MEM_MAX)
+		mem_upper = MEM_MAX;
+
 	/* init the lists */
 	LIST_INIT(&free_frames);
 	LIST_INIT(&nonfree_frames);
@@ -75,6 +81,7 @@ int frame_allocator_init(u32 mem_limit)
 
 	/* init array */
 	frame_descr_array = (struct frame_descr*)FRAME_DESCR_ARRAY_ADDR;
+
 
 	for (addr_it = 0, descr_it = frame_descr_array;
 	     addr_it < mem_top;
@@ -103,6 +110,7 @@ int frame_allocator_init(u32 mem_limit)
 			nr_free_frames++;
 		}
 	}
+
 	return nr_free_frames;
 }
 
