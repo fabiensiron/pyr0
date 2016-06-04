@@ -14,18 +14,18 @@
 
 struct desc_ptr idt_descr = { IDT_SIZE - 1, (u32) idt_table};
 
-struct tss tss = { 0 };
+struct tss tss = { 0, };
 
 struct gdt_struct gdt_entries =
 {
 	.gdt =
 	{
-		[GDT_ENTRY_NULL] = { 0 },
+		[GDT_ENTRY_NULL] = { 0, },
 		[GDT_ENTRY_KERNEL_CS] = GDT_ENTRY_INIT(0xc09a, 0, 0xfffff),
 		[GDT_ENTRY_KERNEL_DS] = GDT_ENTRY_INIT(0xc092, 0, 0xfffff),
 		[GDT_ENTRY_USER_CS] = GDT_ENTRY_INIT(0xc0fa, 0, 0xfffff),
 		[GDT_ENTRY_USER_DS] = GDT_ENTRY_INIT(0xc0f2, 0, 0xfffff),
-		[GDT_ENTRY_TSS] = { 0 }
+		[GDT_ENTRY_TSS] = { 0, }
 	}
 };
 
