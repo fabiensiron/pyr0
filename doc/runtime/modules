@@ -1,0 +1,82 @@
+==How to write a pyr0 rmodule==
+
+First, this is almost identical to tinypy module at the moment, but this
+can evolve as pyr0 evolve very fast.
+
+I the minimum module
+Let's say we want a module with only a number inside (42).
+
+void example1_init(TP)
+{
+	/* the module is basically just a tinypy dictionary */
+	tp_obj example1_mod = tp_dict(tp);
+
+	/* let's set the number */
+	tp_set(tp, example1_mod, tp_string("n"), tp_number(42));
+
+	/* let's add it to the modules table */
+	tp_set(tp, tp->modules, tp_string("example1_mod"), example1_mod);
+}
+
+Note: tp_number(42) can be replaced with a string like tp_string("42").
+The type will be string instead of integer of course.
+
+II Metadata
+Pyr0 heavily rely on metadata in his modules to get help or information.
+Here are the basic field that are mandatory in a pyr0 module:
+
+* Module name:
+tp_set(tp, example1_mod, tp_string("__name__"), tp_string("example1"));
+
+* File name:
+tp_set(tp, example1_mod, tp_string("__file__"), tp_string(__FILE__));
+
+* Documentation:
+tp_set(tp, example1_mod, tp_string("__doc__"), tp_string(_doc));
+
+(where _doc must be declared outside the init function with static char *).
+
+Note: _doc format (or help) is quite strict. Take a look at the other
+modules.
+Note2: You can remark that special fields are just classical fields (like in I)
+with "__" before and after.
+
+III Functions
+
+As tp_number and tp_string, functions can be declared with tp_fnc(tp, function).
+Here is the basic prototype:
+
+static tp_obj example1_function1(TP)
+{
+	return /* obj */;
+}
+
+1. Get arguments
+* object
+tp_obj obj = TP_OBJ()
+* specific type
+tp_obj obj = TP_TYPE(/* TP_TYPE */)
+
+With TP_STRING, TP_NUMBER, TP_STRING, TP_DICT, TP_LIST, TP_FNC or TP_DATA.
+
+2. Optional arguments
+tp_obj obj = TP_DEFAULT(tp_None)
+
+3. Default arguments
+tp_obj obj = TP_DEFAULT(/* tp_obj */)
+
+with tp_number(42), tp_str(/*str*/) etc...
+
+4. Syntaxical sugar
+
+TP_NUM() TP_TYPE(TP_NUMBER).number.val
+TP_STR() TP_TYPE(TP_STRING)
+
+V. Tinypy call 
+Example:
+tp_obj params = tp_params_v(tp, /* len */, /* variadic tp_obj params */)
+tp_ez_call(tp, "/* module */", "/* function */", params)
+
+IV Classes
+
+/* XXX todo */
