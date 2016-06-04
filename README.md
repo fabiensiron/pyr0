@@ -43,6 +43,15 @@ or if you want a specific python's script:
 
 Example: `make boot PYR0_ROM=root/python/prime.py`
 
+## Modules available:
+
+- cpuinfo: cpu information
+- math: very light math module (TODO)
+- mem: memory debug module
+- morse: morse sound module (only on real hardware)
+- os: os information
+- sh: shell builtins
+
 ## Notes
 There are quite a lot of bugs, but of course, if you find a bug, please just
 open an issue.
