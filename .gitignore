@@ -2,5 +2,10 @@
 *.o
 *.d
 \#*
-
-include/config.h
+/include/config.h
+/Makefile
+/core/include/kernel/cmdline_list.h
+/core/kernel/cmdline_struct.h
+/pyr0
+/runtime/include/tinypy/modules.h
+/runtime/runtime-prologue.hpy
