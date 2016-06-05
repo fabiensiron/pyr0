@@ -6,14 +6,6 @@
 #define SMBIOS_START			0xf0000
 #define SMBIOS_END			0xfffff
 
-struct smbios_entry {
-	u8	mjr;
-	u8	min;
-	u8	*addr;
-	u16	len;
-	u16	count;
-};
-
 #define SMBIOS_SIGN                     "_SM_"
 #define SMBIOS_SIGN_LEN                  4
 
@@ -114,6 +106,11 @@ struct smbios_sys {
 	u8 sku;
 	u8 family;
 } __attribute__((packed));
+
+struct smbios_entry {
+	struct smbtblhdr hdr;
+	u32 data;
+};
 
 int find_smbios_table(void);
 
