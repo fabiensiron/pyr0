@@ -11,8 +11,8 @@
 #include <string.h>
 
 static struct smbhdr smbhdr;
-static struct smbios_bios smbios_bios;
-static struct smbios_sys smbios_sys;
+static struct smbios_bios *smbios_bios;
+static struct smbios_sys *smbios_sys;
 
 static int
 verify_checksum(unsigned char *mem, int length)
@@ -44,13 +44,13 @@ int dump_smbios_entries()
 		if (smbtblhdr->type == SMBIOS_TYPE_EOT) {
 			break;
 		} else if (smbtblhdr->type == SMBIOS_TYPE_BIOS) {
-			memcpy(&smbios_bios,
-			       addr + sizeof(struct smbtblhdr),
-			       sizeof(struct smbios_bios));
+			smbios_bios =
+				(struct smbios_bios *)
+				(addr + sizeof(struct smbtblhdr));
 		} else if (smbtblhdr->type == SMBIOS_TYPE_SYSTEM) {
-			memcpy(&smbios_sys,
-			       addr + sizeof(struct smbtblhdr),
-			       sizeof(struct smbios_sys));
+			smbios_sys =
+				(struct smbios_sys *)
+				(addr + sizeof(struct smbtblhdr));
 		}
 
 		addr += smbtblhdr->size;
