@@ -1,6 +1,7 @@
 CUR_DIR		:= core/x86/
 
-OBJS		:=	cmos.o			\
+OBJS		:=	bios.o			\
+			cmos.o			\
 			cpu.o 			\
 			cpuid_check.o		\
 			cpuinfo.o		\

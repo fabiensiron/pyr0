@@ -10,6 +10,7 @@
 #include <kernel/serial.h>
 #include <kernel/cmdline.h>
 #include <kernel/snd.h>
+#include <kernel/bios.h>
 
 #include <asm/processor.h>
 #include <asm/system.h>
@@ -44,6 +45,8 @@ void setup_kernel (multiboot_info_t *info, unsigned long magic)
 	sti();
 
 	beep();
+
+	find_smbios_table();
 
 	size_t cmdline_len = strlen((char *)info->cmdline);
 	cmdline_parse((char *)info->cmdline, cmdline_len);
