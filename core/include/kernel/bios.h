@@ -110,6 +110,7 @@ struct smbios_sys {
 struct smbios_entry {
 	struct smbtblhdr hdr;
 	u32 data;
+	u32 strings;
 };
 
 int find_smbios_table(void);

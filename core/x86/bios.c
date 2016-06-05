@@ -46,13 +46,20 @@ int dump_smbios_entries()
 		} else if (smbtblhdr->type == SMBIOS_TYPE_BIOS) {
 			memcpy(&smbios_bios.hdr, addr,
 			       sizeof(struct smbtblhdr));
+
 			smbios_bios.data =
 				(u32) (addr + sizeof(struct smbtblhdr));
+			smbios_bios.strings =
+				(u32) (addr + smbtblhdr->size);
+
 		} else if (smbtblhdr->type == SMBIOS_TYPE_SYSTEM) {
 			memcpy(&smbios_sys.hdr, addr,
 			       sizeof(struct smbtblhdr));
+
 			smbios_sys.data =
 				(u32) (addr + sizeof(struct smbtblhdr));
+			smbios_sys.strings =
+				(u32) (addr + smbtblhdr->size);
 		}
 
 		addr += smbtblhdr->size;
@@ -64,6 +71,31 @@ int dump_smbios_entries()
 	}
 
 	return 0;
+}
+
+char *smbios_get_string(struct smbios_entry *entry, u8 indx, char *dest,
+			size_t len)
+{
+	u8 *addr, *end;
+	int i;
+	char *ret = NULL;
+
+	addr = (u8 *)entry->strings;
+	end = (u8 *)smbhdr.addr + smbhdr.size;
+
+	for (i = 1; addr < end && i < indx && *addr; i++)
+		while(*addr++)
+			;
+
+	if (i == indx) {
+		if (addr + len < end) {
+			ret = dest;
+			memcpy(ret, addr, len);
+			ret[len - 1] = '\0';
+		}
+	}
+
+	return ret;
 }
 
 int find_smbios_table()
