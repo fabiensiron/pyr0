@@ -11,6 +11,8 @@
 #include <string.h>
 
 static struct smbhdr smbhdr;
+static struct smbios_bios smbios_bios;
+static struct smbios_sys smbios_sys;
 
 static int
 verify_checksum(unsigned char *mem, int length)
@@ -23,6 +25,43 @@ verify_checksum(unsigned char *mem, int length)
 	}
 
 	return checksum == 0;
+}
+
+int dump_smbios_entries()
+{
+	unsigned i, tcount = 1;
+	struct smbtblhdr *smbtblhdr;
+	u8 *addr, *end;
+
+	addr = (u8 *)smbhdr.addr;
+	end = (u8 *)smbhdr.addr + smbhdr.size;
+
+	for (;addr + sizeof(struct smbtblhdr) < end &&
+		     tcount <= smbhdr.count; tcount++)
+	{
+		smbtblhdr = (struct smbtblhdr *)addr;
+
+		if (smbtblhdr->type == SMBIOS_TYPE_EOT) {
+			break;
+		} else if (smbtblhdr->type == SMBIOS_TYPE_BIOS) {
+			memcpy(&smbios_bios,
+			       addr + sizeof(struct smbtblhdr),
+			       sizeof(struct smbios_bios));
+		} else if (smbtblhdr->type == SMBIOS_TYPE_SYSTEM) {
+			memcpy(&smbios_sys,
+			       addr + sizeof(struct smbtblhdr),
+			       sizeof(struct smbios_sys));
+		}
+
+		addr += smbtblhdr->size;
+		for(; addr + 1 < end; addr++)
+			if (*addr == 0 && *(addr + 1) == 0)
+				break;
+
+		addr += 2;
+	}
+
+	return 0;
 }
 
 int find_smbios_table()

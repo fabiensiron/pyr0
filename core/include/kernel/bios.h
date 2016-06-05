@@ -89,6 +89,32 @@ struct smbtable {
 #define	SMBIOS_TYPE_INACTIVE		126
 #define	SMBIOS_TYPE_EOT			127
 
+struct smbios_bios {
+	u8 vendor;
+	u8 version;
+	u16 startaddr;
+	u8 release;
+	u8 romsize;
+	u32 char1;
+	u32 char2;
+	u32 charext;
+	u8 major_rel;
+	u8 minor_rel;
+	u8 ecf_major_rel;
+	u8 ecf_minor_rel;
+} __attribute__((packed));
+
+struct smbios_sys {
+	u8 vendor;
+	u8 product;
+	u8 version;
+	u8 serial;
+	u8 uuid[16];
+	u8 wakeup;
+	u8 sku;
+	u8 family;
+} __attribute__((packed));
+
 int find_smbios_table(void);
 
 #endif /* _BIOSVAR_H_ */
