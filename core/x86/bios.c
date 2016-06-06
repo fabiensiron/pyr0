@@ -11,8 +11,8 @@
 #include <string.h>
 
 static struct smbhdr smbhdr;
-static struct smbios_entry smbios_bios;
-static struct smbios_entry smbios_sys;
+struct smbios_entry smbios_bios;
+struct smbios_entry smbios_sys;
 
 static int
 verify_checksum(unsigned char *mem, int length)
@@ -124,3 +124,9 @@ int find_smbios_table()
 	return 0;
 }
 
+int probe_and_dump_smbios() {
+	if (find_smbios_table() == -1)
+		return -1;
+
+	return dump_smbios_entries();
+}

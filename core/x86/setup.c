@@ -46,7 +46,7 @@ void setup_kernel (multiboot_info_t *info, unsigned long magic)
 
 	beep();
 
-	find_smbios_table();
+	probe_and_dump_smbios();
 
 	size_t cmdline_len = strlen((char *)info->cmdline);
 	cmdline_parse((char *)info->cmdline, cmdline_len);

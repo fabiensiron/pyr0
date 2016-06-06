@@ -113,6 +113,12 @@ struct smbios_entry {
 	u32 strings;
 };
 
-int find_smbios_table(void);
+extern struct smbios_entry smbios_bios;
+extern struct smbios_entry smbios_sys;
+
+//int find_smbios_table(void);
+char *smbios_get_string(struct smbios_entry *entry, u8 indx, char *dest,
+	size_t len);
+int probe_and_dump_smbios();
 
 #endif /* _BIOSVAR_H_ */
