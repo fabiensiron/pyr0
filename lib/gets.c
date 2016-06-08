@@ -10,21 +10,20 @@
 
 char		*gets(char *buf)
 {
-  char		c;
-  unsigned	i;
-  char		*s;
+    char	c;
+    unsigned	i;
+    char	*s;
 
-  for (s = buf, i = 0; ((c = tty_getc()) != '\n') && i < 80; i++)
-  {
-    if (c == '\b')
+    for (s = buf, i = 0; ((c = tty_getc()) != '\n') && i < 80; i++)
     {
-      if (i != 0)
-        *s--;
+        if (c == '\b')
+        {
+            if (i != 0)
+                *s--;
+        }
+        else
+            *s++ = c;
     }
-    else
-      *s++ = c;
-  }
-
-  *s = '\0';
-  return (buf);
+    *s = '\0';
+    return (buf);
 }
