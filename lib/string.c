@@ -1,148 +1,156 @@
-/*
- * File: string.c
- * Author: Fabien Siron <fabien.siron@epita.fr>
- *
- * Description: mem and str operations
- */
-
 #include <string.h>
 
-void* memset (void* p, int c, size_t n) {
-	char *src = p;
-
-	c = (c & 0xff);
-
-	while (n--)
-		*src++ = c;
-
-	return p;
-}
-
-int memcmp(const void *s1, const void *s2, size_t n)
+void		*memset(void *p, int c, size_t n)
 {
-	const unsigned char*  p1   = s1;
-	const unsigned char*  end1 = p1 + n;
-	const unsigned char*  p2   = s2;
-	int                   d = 0;
+  char *src = p;
 
-	for (;;) {
-		if (d || p1 >= end1) break;
-		d = (int)*p1++ - (int)*p2++;
-
-		if (d || p1 >= end1) break;
-		d = (int)*p1++ - (int)*p2++;
-
-		if (d || p1 >= end1) break;
-		d = (int)*p1++ - (int)*p2++;
-
-		if (d || p1 >= end1) break;
-		d = (int)*p1++ - (int)*p2++;
-	}
-	return d;
+  c = (c & 0xff);
+  while (n--)
+  {
+    *src = c;
+    (*src)++;
+  }
+  return (p);
 }
 
-void* memcpy (void* dst_, const void* src_, size_t n) {
-	const char *src = src_;
-	char *dst = dst_;
-
-	while (n--)
-		*dst++ = *src++;
-
-	return dst_;
-}
-
-void *memmove(void *dst_, const void *src_, size_t n)
+int			memcmp(const void *s1, const void *s2, size_t n)
 {
-	const char *src = src_;
-	char *dst = dst_;
+  const unsigned char	*p1   = s1;
+  const unsigned char	*end1 = p1 + n;
+  const unsigned char	*p2   = s2;
+  int			d     = 0;
 
-	if (!n)
-		return dst_;
+  for (;;)
+  {
+    if (d || p1 >= end1)
+      break;
+    d = (int)*p1++ - (int)*p2++;
 
-	if (dst_ <= src_)
-		return memcpy(dst_, src_, n);
+    if (d || p1 >= end1)
+      break;
+    d = (int)*p1++ - (int)*p2++;
 
-	src += n;
-	dst += n;
+    if (d || p1 >= end1)
+      break;
+    d = (int)*p1++ - (int)*p2++;
 
-	while (n--)
-		*--dst = *--src;
-
-	return dst_;
+    if (d || p1 >= end1)
+      break;
+    d = (int)*p1++ - (int)*p2++;
+  }
+  return (d);
 }
 
-
-char* strcpy (char* dest, const char* src) {
-	char* p = NULL;
-
-	for (p = dest; *src != '\0'; p++, src++)
-		*p = *src;
-
-	*p = '\0';
-
-	return dest;
-}
-
-int strcmp(const char* str1, const char* str2) {
-
-	while (*str1 != '\0' && (*str1++ == *str2++));
-	if ((*(unsigned char*)--str1) < (*(unsigned char*)--str2))
-		return -1;
-	return (*(unsigned char*)str1 != *(unsigned char*)str2);
-}
-
-size_t strlen (const char* str_) {
-	const char *s;
-
-	for (s = str_; *s; ++s)
-		;
-	return (s - str_);
-}
-
-char *strchr(const char *p, int ch)
+void		*memcpy(void *dst_, const void *src_, size_t n)
 {
-	for (;; ++p) {
-		if (*p == ch)
-			return((char *)p);
-		if (!*p)
-			return((char *)NULL);
-	}
+  const char	*src = src_;
+  char		*dst = dst_;
+
+  while (n--)
+  {
+    *dst = *src;
+    *dst++;
+    *src++;
+  }
+
+  return (dst_);
 }
 
-char *strcat(char *s, const char *append)
+void		*memmove(void *dst_, const void *src_, size_t n)
 {
-	char *save = s;
+  const char	*src = src_;
+  char		*dst = dst_;
 
-	for(;*s;++s)
-		;
+  if (!n)
+    return (dst_);
+  if (dst_ <= src_)
+    return (memcpy(dst_, src_, n));
 
-	while((*s++ = *append++) != '\0')
-		;
+  src += n;
+  dst += n;
 
-	return save;
+  while (n--)
+  {
+    *--dst;
+    *--src;
+    *dst = *src;
+  }
+
+  return (dst_);
 }
 
-char *
-strncpy(char *dest, const char *src, size_t n)
+
+char		*strcpy(char* dest, const char* src)
 {
-	size_t i;
+  char		*p = NULL;
 
-	for (i = 0; i < n && src[i] != '\0'; i++)
-		dest[i] = src[i];
-	for ( ; i < n; i++)
-		dest[i] = '\0';
+  for (p = dest; *src != '\0'; p++, src++)
+    *p = *src;
 
-	return dest;
+  *p = '\0';
+
+  return (dest);
 }
 
-int
-strncmp(const char *s1, const char *s2, size_t n)
+int		strcmp(const char *str1, const char *str2)
 {
-	for ( ; n > 0; s1++, s2++, --n)
-		if (*s1 != *s2)
-			return ((*(unsigned char *)s1 < *(unsigned char *)s2) ? -1 : +1);
-		else if (*s1 == '\0')
-			return 0;
-	return 0;
+  while (*str1 != '\0' && (*str1++ == *str2++));
+
+  if ((*(unsigned char *)--str1) < (*(unsigned char *)--str2))
+    return (-1);
+  return ((*(unsigned char *)str1) != (*(unsigned char *)str2));
+}
+
+size_t		strlen (const char *str_)
+{
+  const char	*s;
+
+  for (s = str_; *s; ++s);
+  return (s - str_);
+}
+
+char		*strchr(const char *p, int ch)
+{
+  for (;; ++p)
+  {
+    if (*p == ch)
+      return ((char *)p);
+    if (!*p)
+      return ((char *)NULL);
+  }
+}
+
+char		*strcat(char *s, const char *append)
+{
+  char		*save = s;
+
+  for (;*s;++s);
+
+  while ((*s++ = *append++) != '\0');
+
+  return (save);
+}
+
+char		*strncpy(char *dest, const char *src, size_t n)
+{
+  size_t	i;
+
+  for (i = 0; i < n && src[i] != '\0'; i++)
+    dest[i] = src[i];
+  for ( ; i < n; i++)
+    dest[i] = '\0';
+
+  return (dest);
+}
+
+int		strncmp(const char *s1, const char *s2, size_t n)
+{
+  for ( ; n > 0; s1++, s2++, --n)
+    if (*s1 != *s2)
+      return ((*(unsigned char *)s1 < *(unsigned char *)s2) ? -1 : +1);
+    else if (*s1 == '\0')
+      return (0);
+
+  return (0);
 }
 
