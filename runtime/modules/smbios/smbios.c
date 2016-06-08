@@ -31,12 +31,29 @@ tp_obj _smbios_bios(TP) {
 	smbios_get_string(&smbios_bios, smbios_tbl->release,
 			  release_date, 80);
 
+	/* XXX implement "not yet implemented" */
 	tp_set(tp, _smbios_bios_obj, tp_string("vendor"),
 	       tp_string(vendor));
 	tp_set(tp, _smbios_bios_obj, tp_string("version"),
 	       tp_string(version));
+	tp_set(tp, _smbios_bios_obj, tp_string("startaddr"),
+	       tp_string("Not implemented yet"));
 	tp_set(tp, _smbios_bios_obj, tp_string("release"),
 	       tp_string(release_date));
+	tp_set(tp, _smbios_bios_obj, tp_string("romsize"),
+	       tp_string("Not implemented yet"));
+	tp_set(tp, _smbios_bios_obj, tp_string("char"),
+	       tp_string("Not implemented yet"));
+	tp_set(tp, _smbios_bios_obj, tp_string("charext"),
+	       tp_string("Not implemented yet"));
+	tp_set(tp, _smbios_bios_obj, tp_string("major_rel"),
+	       tp_string("Not implemented yet"));
+	tp_set(tp, _smbios_bios_obj, tp_string("minor_rel"),
+	       tp_string("Not implemented yet"));
+	tp_set(tp, _smbios_bios_obj, tp_string("ecf_major_rel"),
+	       tp_string("Not implemented yet"));
+	tp_set(tp, _smbios_bios_obj, tp_string("ecf_minor_rel"),
+	       tp_string("Not implemented yet"));
 	tp_set(tp, _smbios_bios_obj, tp_string("__name__"),
 	       tp_string("bios"));
 	tp_set(tp, _smbios_bios_obj, tp_string("__doc__"),
