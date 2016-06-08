@@ -114,10 +114,10 @@ static
 char get_last_non_empty_char(char *buf, unsigned len)
 {
 	int i;
-	for (i = len - 1; i == ' ' && i > 1; i--)
+	for (i = len - 1; buf[i] == ' ' && i > 1; i--)
 		;
 
-	return buf[i - 1];
+	return buf[i];
 }
 
 static
