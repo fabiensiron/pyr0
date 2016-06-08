@@ -13,6 +13,8 @@
 #include <kernel/pyr0.h>
 #include <kernel/bios.h>
 
+/* http://www.dmtf.org/sites/default/files/standards/documents/DSP0119.pdf */
+
 tp_obj _smbios_bios(TP) {
 	struct smbios_bios *smbios_tbl =
 		(struct smbios_bios *)smbios_bios.data;
