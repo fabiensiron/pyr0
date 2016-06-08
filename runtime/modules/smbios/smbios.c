@@ -76,5 +76,53 @@ tp_obj _smbios_sys(TP) {
 	struct smbios_sys *smbios_tbl =
 		(struct smbios_sys *)smbios_sys.data;
 
-	return tp_None;
+	tp_obj _smbios_sys_obj;
+	/* XXX big memory leak: add to gc */
+	char *vendor = malloc(80);
+	char *product = malloc(80);
+	char *version = malloc(80);
+	char *serial = malloc(80);
+
+	_smbios_sys_obj = tp_object(tp);
+
+	smbios_get_string(&smbios_sys, smbios_tbl->vendor,
+			  vendor, 80);
+	smbios_get_string(&smbios_sys, smbios_tbl->product,
+			  product, 80);
+	smbios_get_string(&smbios_sys, smbios_tbl->version,
+			  version, 80);
+	smbios_get_string(&smbios_sys, smbios_tbl->serial,
+			  serial, 80);
+
+	/* XXX implement "not yet implemented" */
+	tp_set(tp, _smbios_sys_obj, tp_string("vendor"),
+	       tp_string(vendor));
+	tp_set(tp, _smbios_sys_obj, tp_string("product"),
+	       tp_string(product));
+	tp_set(tp, _smbios_sys_obj, tp_string("version"),
+	       tp_string(version));
+	tp_set(tp, _smbios_sys_obj, tp_string("serial"),
+	       tp_string(serial));
+	tp_set(tp, _smbios_sys_obj, tp_string("uuid"),
+	       tp_string("Not implemented yet"));
+	tp_set(tp, _smbios_sys_obj, tp_string("wakeup"),
+	       tp_string("Not implemented yet"));
+	tp_set(tp, _smbios_sys_obj, tp_string("sku"),
+	       tp_string("Not implemented yet"));
+	tp_set(tp, _smbios_sys_obj, tp_string("family"),
+	       tp_string("Not implemented yet"));
+
+	tp_set(tp, _smbios_sys_obj, tp_string("__name__"),
+	       tp_string("sys"));
+	tp_set(tp, _smbios_sys_obj, tp_string("__doc__"),
+	       tp_string("\t* sys.vendor\n"
+			 "\t* sys.product\n"
+			 "\t* sys.version\n"
+			 "\t* sys.serial\n"
+			 "\t* sys.uuid\n"
+			 "\t* sys.wakeup\n"
+			 "\t* sys.sku\n"
+			 "\t* sys.family\n"));
+
+	return _smbios_sys_obj;
 }
