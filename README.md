@@ -52,6 +52,11 @@ Example: `make boot PYR0_ROM=root/python/prime.py`
 - os: os information
 - sh: shell builtins
 
+## Real hardware:
+
+To try on real hardware (with usb key or cdrom), just dd the iso:
+- `dd bs=4M if=pyr0s.iso of=/dev/your_device` 
+
 ## Notes
 There are quite a lot of bugs, but of course, if you find a bug, please just
 open an issue.
