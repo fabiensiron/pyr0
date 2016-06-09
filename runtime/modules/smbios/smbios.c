@@ -15,6 +15,25 @@
 
 /* http://www.dmtf.org/sites/default/files/standards/documents/DSP0119.pdf */
 
+tp_obj _smbios_bios__str__(TP) {
+	tp_obj self = TP_OBJ();
+	tp_obj s = tp_string(";\n");
+	tp_obj vendor = tp_get(tp, self, tp_string("vendor"));
+	tp_obj version = tp_get(tp, self, tp_string("version"));
+	tp_obj release_date = tp_get(tp, self, tp_string("release"));
+
+	tp_obj strings = tp_list(tp);
+	tp_params_v(tp, 2, strings, vendor);
+	tp_append(tp);
+	tp_params_v(tp, 2, strings, version);
+	tp_append(tp);
+	tp_params_v(tp, 2, strings, release_date);
+	tp_append(tp);
+	tp_params_v(tp, 2, s, strings);
+
+	return tp_join(tp);
+}
+
 tp_obj _smbios_bios(TP) {
 	struct smbios_bios *smbios_tbl =
 		(struct smbios_bios *)smbios_bios.data;
@@ -58,6 +77,8 @@ tp_obj _smbios_bios(TP) {
 	       tp_string("Not implemented yet"));
 	tp_set(tp, _smbios_bios_obj, tp_string("__name__"),
 	       tp_string("bios"));
+	tp_set(tp, _smbios_bios_obj, tp_string("__str__"),
+	       tp_method(tp, _smbios_bios_obj, _smbios_bios__str__));
 	tp_set(tp, _smbios_bios_obj, tp_string("__doc__"),
 	       tp_string("\t* bios.vendor\n"
 			 "\t* bios.version\n"
