@@ -21,7 +21,21 @@ tp_obj tp_str(TP,tp_obj self) {
 		return tp_printf_(tp,"%f",v);
 	} else if(type == TP_DICT) {
 //		return tp_printf(tp,"<dict 0x%x>",self.dict.val);
-		return tp_dict_str(tp, self.dict.val);
+		if (self.dict.dtype == 1) {
+			return tp_dict_str(tp, self.dict.val);
+		} else if (self.dict.dtype == 2){
+			tp_obj params = tp_params_v(tp, 0);
+			tp->params = params;
+			TP_META_BEGIN(self, "__str__");
+			tp_obj ret = tp_call(tp, meta, params);
+			if (ret.type == TP_STRING)
+				return ret;
+			else
+				tp_raise(tp_None,
+					 tp_string(
+						 "(tp_has) TypeError: returning string required"));
+			TP_META_END;
+		}
 	} else if(type == TP_LIST) {
 //		return tp_printf(tp,"<list 0x%x>",self.list.val);
 		return tp_list_str(tp, self.list.val);
