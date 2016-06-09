@@ -95,6 +95,10 @@ tp_obj tp_join(TP) {
 	int l=0,i;
 	tp_obj r;
 	char *s;
+
+	if (val.type != TP_LIST)
+		tp_raise(tp_None,tp_string("(tp_join) TypeError: required list as arg."));
+
 	for (i=0; i<val.list.val->len; i++) {
 		if (i!=0) { l += delim.string.len; }
 		l += tp_str(tp,val.list.val->items[i]).string.len;
