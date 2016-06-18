@@ -10,6 +10,7 @@ OBJS		:=	bios.o			\
 			irq.o			\
 			isr.o			\
 			kbd.o			\
+			pci.o			\
 			pit.o			\
 			reboot.o		\
 			serial.o		\
