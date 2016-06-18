@@ -45,12 +45,25 @@ Example: `make boot PYR0_ROM=root/python/prime.py`
 
 ## Modules available:
 
-- cpuinfo: cpu information
+### Pyr0 stdlib
+
 - math: very light math module (TODO)
-- mem: memory debug module
-- morse: morse sound module (only on real hardware)
 - os: os information
 - sh: shell builtins
+
+### Hardware information
+
+- cpuinfo: cpu information
+- smbios: various bios information
+- pci: pci devices list
+
+### Debug
+
+- mem: memory debug module
+
+### Misc
+
+- morse: morse sound module (only on real hardware)
 
 ## Real hardware:
 
