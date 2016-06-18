@@ -6,9 +6,11 @@
 #ifndef _PCI_H_
 # define _PCI_H_
 
+typedef int (* pci_hook)(u16 vendor_id, u16 device_id);
+
 const char *pci_vendor_lookup(u16 vendor_id);
 const char *pci_device_lookup(u16 vendor_id, u16 device_id);
 
-void pci_scan(void);
+void pci_scan(pci_hook);
 
 #endif /*_PCI_H_*/

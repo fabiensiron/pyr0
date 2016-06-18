@@ -5,6 +5,7 @@
  */
 
 #include <kernel/pyr0.h>
+#include <kernel/pci.h>
 
 #include <asm/io.h>
 
@@ -12,8 +13,6 @@
 
 #define PCI_ADDRESS 0xCF8
 #define PCI_VALUE   0xCFC
-
-//typedef int (* pci_hook)(u8 bus, u8 device, u8 function, u8 reg);
 
 static inline u32
 make_pci_address(u8 bus, u8 device, u8 function, u8 reg) {
@@ -45,7 +44,7 @@ pci_device_lookup(u16 vendor_id, u16 device_id) {
 }
 
 static void
-pci_scan_slot(u8 bus, u8 slot) {
+pci_scan_slot(pci_hook hook, u8 bus, u8 slot) {
 	u16 vendor_id, device_id;
 	const char *vendor_s, *device_s;
 	u32 ids;
@@ -60,20 +59,22 @@ pci_scan_slot(u8 bus, u8 slot) {
 	vendor_id = ids;
 	device_id = ids >> 16;
 
+	hook(vendor_id, device_id);
+
 	/* XXX add multifunction devices */
 }
 
 void
-pci_scan_bus(u8 bus) {
+pci_scan_bus(pci_hook hook, u8 bus) {
 	unsigned i;
 	for (i = 0; i < 32; ++i) {
-		pci_scan_slot(bus, i);
+		pci_scan_slot(hook, bus, i);
 	}
 }
 
-void pci_scan(void) {
+void pci_scan(pci_hook hook) {
 	unsigned i;
 	for (i = 0; i < 256; ++i) {
-		pci_scan_bus(i);
+		pci_scan_bus(hook, i);
 	}
 }
