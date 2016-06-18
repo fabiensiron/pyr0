@@ -1,0 +1,11 @@
+* close (vfs)
+* dir read (default)
+* lseek (default + vfs) -> vfs: call ops
+* open (vfs) -> vfs: call ops
+* create (vfs) -> /* not for the moment */
+* read (vfs) -> call ops
+* unlink (vfs) -> delete inode or ops delete inode /* not for the moment */
+* write (vfs) -> call ops /* not for the moment */
+
+ramfs:
+ __everything is default__
