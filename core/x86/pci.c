@@ -77,7 +77,3 @@ void pci_scan(void) {
 		pci_scan_bus(i);
 	}
 }
-
-void pci_init(void) {
-	pci_scan();
-}
