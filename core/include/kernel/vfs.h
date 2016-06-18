@@ -11,6 +11,7 @@
 struct fops;
 struct iops;
 
+
 struct inode {
 	char name[256];
 	ino_t ino;
@@ -24,6 +25,21 @@ struct inode {
 	const struct iops *iops;
 
 	void *data;
+};
+
+struct super_ops;
+
+struct super {
+	u32 block_size;
+	struct inode *root;
+	const struct super_ops *ops;
+};
+
+struct super_ops {
+	int (*read_inode)(struct super *, struct inode *);
+	int (*write_inode)(struct inode *);
+	struct inode* (*alloc_inode)(struct super*);
+	void (*delete_inode)(struct inode*);
 };
 
 struct file {
