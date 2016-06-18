@@ -2,6 +2,6 @@ CUR_DIR := runtime/modules/
 
 OBJS 	:=
 
-PROGSUBDIRS	:= cpuinfo/ math/ mem/ morse/ os/ sh/ smbios/
+PROGSUBDIRS	:= cpuinfo/ math/ mem/ morse/ os/ pci/ sh/ smbios/
 
 include $Omk/progsubdirs.mk
