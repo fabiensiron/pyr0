@@ -9,7 +9,6 @@
 #include <kernel/mm.h>
 #include <kernel/kmalloc.h>
 #include <kernel/mman.h>
-#include <kernel/pci.h>
 #include <kernel/serial.h>
 #include <kernel/tty.h>
 #include <kernel/cpuinfo.h>
@@ -59,8 +58,6 @@ void start_kernel(multiboot_info_t *info)
 	vfs_init();
 
 	cpuinfo_dump();
-
-	pci_init();
 
 	cmdline_fill_opts(&opts);
 
