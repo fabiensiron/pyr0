@@ -14,6 +14,7 @@
 #include <kernel/tty.h>
 #include <kernel/cpuinfo.h>
 #include <kernel/cmdline.h>
+#include <kernel/vfs.h>
 
 #include <asm/system.h>
 #include <asm/pgtable.h>
@@ -54,6 +55,8 @@ void start_kernel(multiboot_info_t *info)
 	tty_init();
 
 	kmalloc_init();
+
+	vfs_init();
 
 	cpuinfo_dump();
 
