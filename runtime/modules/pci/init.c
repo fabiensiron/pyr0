@@ -36,7 +36,7 @@ int hook(u16 vendor_id, u16 device_id)
 
 	ids = get_pci_elt(vendor_id, device_id);
 
-	if (ids->ven_s == NULL || ids->dev_s == NULL)
+	if (ids == NULL || ids->ven_s == NULL || ids->dev_s == NULL)
 		return -1;
 
 	if (ids == NULL || (strlen(ids->ven_s) == 0 && strlen(ids->dev_s) == 0))
