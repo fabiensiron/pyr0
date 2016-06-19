@@ -11,17 +11,39 @@
 #include <kernel/pyr0.h>
 #include <kernel/pci.h>
 
+#include "pci_list.h"
+
+struct pci_ids_table *get_pci_elt(u16 vendor_id, u16 device_id) {
+	struct pci_ids_table *it;
+	for (it = pci_ids_table; it->ven_id < 0xffff; ++it) {
+		if (it->ven_id == vendor_id) {
+			if (it->dev_id == 0)
+				return it;
+
+			for (; it->ven_id == vendor_id; ++it) {
+				if (it->dev_id == device_id)
+					return it;
+			}
+		}
+	}
+
+	return NULL;
+}
+
 int hook(u16 vendor_id, u16 device_id)
 {
-	const char *vendor_s, *device_s;
+	struct pci_ids_table *ids;
 
-	vendor_s = pci_vendor_lookup(vendor_id);
-	device_s = pci_device_lookup(vendor_id, device_id);
+	ids = get_pci_elt(vendor_id, device_id);
 
-	if (vendor_s == NULL || device_s == NULL)
+	if (ids->ven_s == NULL || ids->dev_s == NULL)
 		return -1;
 
-	printf("* %s: %s\n", vendor_s, device_s);
+	if (ids == NULL || (strlen(ids->ven_s) == 0 && strlen(ids->dev_s) == 0))
+		printf("* %s: vendor<0x%x> device<0x%x>\n", ids->ven_s,
+		       ids->ven_id, ids->dev_id);
+	else
+		printf("* %s: %s\n", ids->ven_s, ids->dev_s);
 
 	return 0;
 }
