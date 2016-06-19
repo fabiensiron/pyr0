@@ -8,9 +8,6 @@
 
 typedef int (* pci_hook)(u16 vendor_id, u16 device_id);
 
-const char *pci_vendor_lookup(u16 vendor_id);
-const char *pci_device_lookup(u16 vendor_id, u16 device_id);
-
 void pci_scan(pci_hook);
 
 #endif /*_PCI_H_*/

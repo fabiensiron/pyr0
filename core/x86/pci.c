@@ -9,8 +9,6 @@
 
 #include <asm/io.h>
 
-#include <misc/pci_list.h>
-
 #define PCI_ADDRESS 0xCF8
 #define PCI_VALUE   0xCFC
 
@@ -18,29 +16,6 @@ static inline u32
 make_pci_address(u8 bus, u8 device, u8 function, u8 reg) {
 	return 0x80000000 | (bus << 16) | (device << 11) | (function << 8) |
 		reg;
-}
-
-const char *
-pci_vendor_lookup(u16 vendor_id) {
-	unsigned int i;
-	for (i = 0; i < PCI_VENTABLE_LEN; ++i) {
-		if (PciVenTable[i].VenId == vendor_id) {
-			return PciVenTable[i].VenFull;
-		}
-	}
-	return "";
-}
-
-const char *
-pci_device_lookup(u16 vendor_id, u16 device_id) {
-	unsigned int i;
-	for (i = 0; i < PCI_DEVTABLE_LEN; ++i) {
-		if (PciDevTable[i].VenId == vendor_id &&
-			PciDevTable[i].DevId == device_id) {
-			return PciDevTable[i].ChipDesc;
-		}
-	}
-	return "";
 }
 
 static void
