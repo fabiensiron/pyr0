@@ -24,6 +24,7 @@ tp_obj tp_int(TP);
 tp_obj tp_round(TP);
 tp_obj tp_exists(TP);
 tp_obj tp_mtime(TP);
+tp_obj tp_typeof(TP);
 int _tp_lookup(TP,tp_obj self, tp_obj k, tp_obj *meta);
 
 #define TP_META_BEGIN(self,name) \

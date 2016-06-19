@@ -107,6 +107,25 @@ tp_obj tp_istype(TP) {
 	tp_raise(tp_None,tp_string("(is_type) TypeError: ?"));
 }
 
+tp_obj tp_typeof(TP) {
+	/* XXX add "<class 'type'> for type object */
+	tp_obj self = TP_OBJ();
+
+	const char *typeof[] = {
+		[TP_STRING] = "str",
+		[TP_NUMBER] = "int",
+		[TP_DICT] = "dict",
+		[TP_LIST] = "list",
+		[TP_NONE] = "none",
+		[TP_DATA] = "data",
+		[TP_FNC] = "fnc"
+	};
+
+	printf("<class \'%s\'>\n", typeof[self.type]);
+
+	return tp_None;
+}
+
 
 tp_obj tp_float(TP) {
 	tp_obj v = TP_OBJ();
