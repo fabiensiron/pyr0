@@ -20,6 +20,8 @@ python scripts.
 
 - qemu (for emulation)
 - libisoburn (for video)
+- perl (for some scripts required by compilation)
+- gcc/make (for compiling)
 
 ## Build/Install
 
