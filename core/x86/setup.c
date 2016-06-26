@@ -32,6 +32,8 @@ void setup_kernel (multiboot_info_t *info, unsigned long magic)
 {
 	serial_early_init();
 
+	bios_early_init();
+
 	assert(magic == MULTIBOOT_BOOTLOADER_MAGIC);
 
 	init_early_pagination ();

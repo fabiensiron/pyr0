@@ -121,4 +121,7 @@ char *smbios_get_string(struct smbios_entry *entry, u8 indx, char *dest,
 	size_t len);
 int probe_and_dump_smbios();
 
+void bios_early_init();
+u32 bios_get_ebda();
+
 #endif /* _BIOSVAR_H_ */
