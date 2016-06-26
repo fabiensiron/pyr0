@@ -123,5 +123,6 @@ int probe_and_dump_smbios();
 
 void bios_early_init();
 u32 bios_get_ebda();
+u32 bios_get_memtop();
 
 #endif /* _BIOSVAR_H_ */

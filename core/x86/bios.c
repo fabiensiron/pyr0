@@ -15,6 +15,7 @@ struct smbios_entry smbios_bios;
 struct smbios_entry smbios_sys;
 
 u32 ebda_addr;
+u32 mem_top;
 
 static int
 verify_checksum(unsigned char *mem, int length)
@@ -138,10 +139,17 @@ int probe_and_dump_smbios() {
 void bios_early_init()
 {
 #define EBDA_BASE_ADDRESS 0x40E
+#define MEM_TOP 0x413
 	ebda_addr = *((u16 *)EBDA_BASE_ADDRESS) << 4;
+	mem_top = *((u16 *)MEM_TOP) << 10;
 }
 
 u32 bios_get_ebda()
 {
 	return ebda_addr;
+}
+
+u32 bios_get_memtop()
+{
+	return mem_top;
 }
