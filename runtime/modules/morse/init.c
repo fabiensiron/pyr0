@@ -8,11 +8,6 @@
 #include <tinypy/string.h>
 #include <tinypy/misc.h>
 
-tp_obj mem_brk(TP);
-tp_obj mem_used(TP);
-tp_obj mem_available(TP);
-tp_obj mem_len(TP);
-
 tp_obj morse_sos(TP);
 tp_obj morse_say(TP);
 
@@ -35,7 +30,7 @@ void morse_init(TP)
 	/* special attributes */
 	tp_set(tp, morse_mod, tp_string("__doc__"),
 	       tp_string(help));
-	tp_set(tp, morse_mod, tp_string("__name__"), tp_string("mem"));
+	tp_set(tp, morse_mod, tp_string("__name__"), tp_string("morse"));
 	tp_set(tp, morse_mod, tp_string("__file__"), tp_string(__FILE__));
 
 	/* bind */
