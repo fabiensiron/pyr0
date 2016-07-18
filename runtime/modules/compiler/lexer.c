@@ -159,44 +159,47 @@ int getalphanum(const char *src)
 
 	return i;
 }
-#if 0
-int do_xnumber(char *src, enum tokentype *type, unsigned int *num)
+
+int do_xnumber(const char *src, enum tokentype *type, unsigned int *num)
 {
-	unsigned long num = 0;
+	*num = 0;
 	int added = 0;
 	int i = 0;
 
 	while(isxdigit(src[i])) {
 		if (isdigit(src[i]))
 			added = src[i] - '0';
-		switch (src[i]) {
-		case 'a':
-			added = 10;
-			break;
-		case 'b':
-			added = 11;
-			break;
-		case 'c':
-			added = 12;
-			break;
-		case 'd':
-			added = 13;
-			break;
-		case 'e':
-			added = 14;
-			break;
-		case 'f':
-			added = 15;
-			break;
-		default:
-			/* XXX bug */
+		else {
+			switch (src[i]) {
+			case 'a':
+				added = 10;
+				break;
+			case 'b':
+				added = 11;
+				break;
+			case 'c':
+				added = 12;
+				break;
+			case 'd':
+				added = 13;
+				break;
+			case 'e':
+				added = 14;
+				break;
+			case 'f':
+				added = 15;
+				break;
+			default:
+				/* XXX bug */
+				return 0;
+			}
 		}
 		*num = *num * 16 + added;
-		i++
+		i++;
 	}
 	return i;
 }
-#endif
+
 int do_number(const char *src, enum tokentype *type, unsigned int *num)
 {
 	*num = 0;
@@ -350,8 +353,13 @@ int do_tokenize(const char *src, int len)
 			}
 		} else if (isdigit(src[i])) {
 			/* XXX manage xdigits */
-			unsigned int num;
-			int r = do_number(src + i, &type, &num);
+			unsigned int num, r;
+			if ((len -i -1) > 1 && src[i] == '0' && src[i+1] == 'x') {
+				r = do_xnumber(src + i + 2, &type, &num);
+				r += 2;
+			} else {
+				r = do_number(src + i, &type, &num);
+			}
 #ifdef DEBUG_TOKENS
 			printf("<NUM: \"%u\">\n", num);
 #endif
