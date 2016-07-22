@@ -17,11 +17,17 @@
 
 static char *help =
 	"Math routines of pyr0, equivalent of math module in cpython.\n"
+	"As a disclaimer, some trigonometric functions doesn't have good precision, don't rely on them\n"
 	"\n"
 	"This exports:\n"
 	"\t* math.pi is the pi constant\n"
 	"\t* math.e is the euler number constant\n"
-	"\t* math.sin(x) calculates the sine of x(x in radians)\n";
+	"\t* math.sin(x) calculates the sine of x(x in radians)\n"
+	"\t* math.cos(x) calculates the cosine of x(in radians)\n"
+	"\t* math.tan(x) calculates the tangent of x(in radians)\n"
+	"\t* math.ceil(x) returns the smallest integer value greater than or equal to x\n"
+	"\t* math.acos(x) calculates the arcosine of x(x in radians)\n"
+	"\t* math.sqrt(x) calculates the square root of x\n";
 
 tp_obj math_ceil(TP);
 tp_obj math_sqrt(TP);
