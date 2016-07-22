@@ -23,10 +23,15 @@ static char *help =
 	"\t* math.e is the euler number constant\n"
 	"\t* math.sin(x) calculates the sine of x(x in radians)\n";
 
+tp_obj math_ceil(TP);
+tp_obj math_sqrt(TP);
+
 tp_obj math_sin(TP);
 tp_obj math_cos(TP);
 tp_obj math_tan(TP);
 tp_obj math_exp(TP);
+
+tp_obj math_acos(TP);
 
 void math_init(TP)
 {
@@ -34,10 +39,13 @@ void math_init(TP)
 	tp_obj math_mod = tp_dict(tp);
 
 	/* methods */
+	tp_set(tp, math_mod, tp_string("ceil"), tp_fnc(tp, math_ceil));
+	tp_set(tp, math_mod, tp_string("sqrt"), tp_fnc(tp, math_sqrt));
 	tp_set(tp, math_mod, tp_string("sin"), tp_fnc(tp, math_sin));
 	tp_set(tp, math_mod, tp_string("cos"), tp_fnc(tp, math_cos));
 	tp_set(tp, math_mod, tp_string("tan"), tp_fnc(tp, math_tan));
 	tp_set(tp, math_mod, tp_string("exp"), tp_fnc(tp, math_exp));
+	tp_set(tp, math_mod, tp_string("acos"), tp_fnc(tp, math_acos));
 
 	/*
 	 * XXX: okay both method cannot be printed because linux kernel vsprintf

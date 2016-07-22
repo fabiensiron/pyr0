@@ -43,3 +43,27 @@ tp_obj math_exp(TP)
 	r = exp(x);
 	return (tp_number(r));
 }
+
+tp_obj math_ceil(TP)
+{
+	double x = TP_NUM();
+	double r = 0.0;
+	r = ceil(x);
+	return (tp_number(r));
+}
+
+tp_obj math_sqrt(TP)
+{
+	double x = TP_NUM();
+	double r = 0.0;
+	r = sqrt(x);
+	return (tp_number(r));
+}
+
+tp_obj math_acos(TP)
+{
+	double x = TP_NUM();
+	double r = 0.0;
+	r = acos(x);
+	return (tp_number(r));
+}
