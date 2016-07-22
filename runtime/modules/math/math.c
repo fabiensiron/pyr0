@@ -12,12 +12,58 @@
 
 #include <math.h>
 
-extern double sin(double num);
-
 tp_obj math_sin(TP)
 {
 	double x = TP_NUM();
 	double r = 0.0;
 	r = sin(x);
+	return (tp_number(r));
+}
+
+tp_obj math_cos(TP)
+{
+	double x = TP_NUM();
+	double r = 0.0;
+	r = cos(x);
+	return (tp_number(r));
+}
+
+tp_obj math_tan(TP)
+{
+	double x = TP_NUM();
+	double r = 0.0;
+	r = tan(x);
+	return (tp_number(r));
+}
+
+tp_obj math_exp(TP)
+{
+	double x = TP_NUM();
+	double r = 0.0;
+	r = exp(x);
+	return (tp_number(r));
+}
+
+tp_obj math_ceil(TP)
+{
+	double x = TP_NUM();
+	double r = 0.0;
+	r = ceil(x);
+	return (tp_number(r));
+}
+
+tp_obj math_sqrt(TP)
+{
+	double x = TP_NUM();
+	double r = 0.0;
+	r = sqrt(x);
+	return (tp_number(r));
+}
+
+tp_obj math_acos(TP)
+{
+	double x = TP_NUM();
+	double r = 0.0;
+	r = acos(x);
 	return (tp_number(r));
 }
