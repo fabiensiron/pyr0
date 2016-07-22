@@ -1,6 +1,6 @@
 CUR_DIR := runtime/modules/math/
 
-OBJS 	:=	init.o
+OBJS 	:=	init.o math.o
 
 PROGSUBDIRS	:=
 

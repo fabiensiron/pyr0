@@ -20,7 +20,10 @@ static char *help =
 	"\n"
 	"This exports:\n"
 	"\t* math.pi is the pi constant\n"
-	"\t* math.e is the euler number constant\n";
+	"\t* math.e is the euler number constant\n"
+	"\t* math.sin(x) calculates the sine of x(x in radians)\n";
+
+tp_obj math_sin(TP);
 
 void math_init(TP)
 {
@@ -28,8 +31,9 @@ void math_init(TP)
 	tp_obj math_mod = tp_dict(tp);
 
 	/* methods */
-  
-	/* 
+	tp_set(tp, math_mod, tp_string("sin"), tp_fnc(tp, math_sin));
+
+	/*
 	 * XXX: okay both method cannot be printed because linux kernel vsprintf
 	 * does not support floating point numbers.
 	 */
