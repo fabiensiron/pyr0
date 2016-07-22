@@ -24,6 +24,9 @@ static char *help =
 	"\t* math.sin(x) calculates the sine of x(x in radians)\n";
 
 tp_obj math_sin(TP);
+tp_obj math_cos(TP);
+tp_obj math_tan(TP);
+tp_obj math_exp(TP);
 
 void math_init(TP)
 {
@@ -32,6 +35,9 @@ void math_init(TP)
 
 	/* methods */
 	tp_set(tp, math_mod, tp_string("sin"), tp_fnc(tp, math_sin));
+	tp_set(tp, math_mod, tp_string("cos"), tp_fnc(tp, math_cos));
+	tp_set(tp, math_mod, tp_string("tan"), tp_fnc(tp, math_tan));
+	tp_set(tp, math_mod, tp_string("exp"), tp_fnc(tp, math_exp));
 
 	/*
 	 * XXX: okay both method cannot be printed because linux kernel vsprintf

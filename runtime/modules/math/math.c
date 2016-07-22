@@ -12,12 +12,34 @@
 
 #include <math.h>
 
-extern double sin(double num);
-
 tp_obj math_sin(TP)
 {
 	double x = TP_NUM();
 	double r = 0.0;
 	r = sin(x);
+	return (tp_number(r));
+}
+
+tp_obj math_cos(TP)
+{
+	double x = TP_NUM();
+	double r = 0.0;
+	r = cos(x);
+	return (tp_number(r));
+}
+
+tp_obj math_tan(TP)
+{
+	double x = TP_NUM();
+	double r = 0.0;
+	r = tan(x);
+	return (tp_number(r));
+}
+
+tp_obj math_exp(TP)
+{
+	double x = TP_NUM();
+	double r = 0.0;
+	r = exp(x);
 	return (tp_number(r));
 }
