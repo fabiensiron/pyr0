@@ -3,6 +3,10 @@
  * Author: Luna Mendes <lkmnds@gmail.com>
  */
 
+
+#include <kernel/pyr0.h>
+#include <kernel/cmos.h>
+
 #include <tinypy/tp.h>
 #include <tinypy/dict.h>
 #include <tinypy/string.h>

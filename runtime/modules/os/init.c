@@ -3,6 +3,9 @@
  * Author: Fabien Siron <fabien.siron@epita.fr>
  */
 
+#include <kernel/pyr0.h>
+#include <kernel/cmos.h>
+
 #include <tinypy/tp.h>
 #include <tinypy/dict.h>
 #include <tinypy/string.h>
